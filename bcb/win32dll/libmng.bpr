@@ -93,9 +93,9 @@ AutoIncBuild=1
 MajorVer=1
 MinorVer=0
 Release=8
-Build=1118
+Build=1120
 Debug=0
-PreRelease=1
+PreRelease=0
 Special=0
 Private=0
 DLL=1
@@ -105,13 +105,13 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=G. Juyn
 FileDescription=libmng - THE MNG library
-FileVersion=1.0.8.1118
+FileVersion=1.0.8.1120
 InternalName=libmng
 LegalCopyright=Copyright © 2000-2004 G. Juyn
 LegalTrademarks=
 OriginalFilename=libmng.dll
 ProductName=libmng
-ProductVersion=1.0.8-beta1
+ProductVersion=1.0.8
 Comments=
 
 [HistoryLists\hlIncludePath]
