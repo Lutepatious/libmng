@@ -899,6 +899,8 @@ function  mng_putchunk_idat       (    hHandle            : mng_handle;
                                        iRawlen            : mng_uint32;
                                        pRawdata           : mng_ptr      ) : mng_retcode; stdcall;
 
+function  mng_putchunk_iend       (    hHandle            : mng_handle   ) : mng_retcode; stdcall;
+
 function  mng_putchunk_trns       (    hHandle            : mng_handle;
                                        bEmpty             : mng_bool;
                                        bGlobal            : mng_bool;
@@ -1012,6 +1014,8 @@ function  mng_putchunk_mhdr       (    hHandle            : mng_handle;
                                        iFramecount        : mng_uint32;
                                        iPlaytime          : mng_uint32;
                                        iSimplicity        : mng_uint32   ) : mng_retcode; stdcall;
+
+function  mng_putchunk_mend       (    hHandle            : mng_handle   ) : mng_retcode; stdcall;
 
 function  mng_putchunk_loop       (    hHandle            : mng_handle;
                                        iLevel             : mng_uint8;
@@ -1658,6 +1662,7 @@ function  mng_getchunk_unknown;    external mngdll;
 function  mng_putchunk_ihdr;       external mngdll;
 function  mng_putchunk_plte;       external mngdll;
 function  mng_putchunk_idat;       external mngdll;
+function  mng_putchunk_iend;       external mngdll;
 function  mng_putchunk_trns;       external mngdll;
 function  mng_putchunk_gama;       external mngdll;
 function  mng_putchunk_chrm;       external mngdll;
@@ -1673,6 +1678,7 @@ function  mng_putchunk_splt;       external mngdll;
 function  mng_putchunk_hist;       external mngdll;
 function  mng_putchunk_time;       external mngdll;
 function  mng_putchunk_mhdr;       external mngdll;
+function  mng_putchunk_mend;       external mngdll;
 function  mng_putchunk_loop;       external mngdll;
 function  mng_putchunk_endl;       external mngdll;
 function  mng_putchunk_defi;       external mngdll;

@@ -14,7 +14,7 @@ uses
 {*                                                                          *}
 {*  project   : libmng                                                      *}
 {*  file      : main.pas                  copyright (c) 2000 G.Juyn         *}
-{*  version   : 0.9.1                                                       *}
+{*  version   : 0.9.3                                                       *}
 {*                                                                          *}
 {*  purpose   : Main form for mngview application                           *}
 {*                                                                          *}
@@ -56,6 +56,9 @@ uses
 {*              - changed to accomodate MNG_NEEDTIMERWAIT returncode        *}
 {*              0.9.1 - 07/10/2000 - G.Juyn                                 *}
 {*              - changed to use suspension-mode                            *}
+{*                                                                          *}
+{*              0.9.3 - 09/11/2000 - G.Juyn                                 *}
+{*              - removed some tesst-stuff                                  *}
 {*                                                                          *}
 {****************************************************************************}
 
@@ -109,14 +112,11 @@ type
     OFFile        : TFileStream;       { input stream }
     IFHandle      : mng_handle;        { the libray handle }
     OFBitmap      : TBitmap;           { drawing canvas }
-{$IFDEF TEST_RGB8_A8}
-    OFAlpha       : pointer;
-{$ENDIF}     
     BFCancelled   : boolean;           { <esc> or app-exit }
 
     IFTicks       : cardinal;          { used to fake slow connections }
     IFBytes       : cardinal;
-    IFBytesPerSec : cardinal;
+    IFBytesPerSec : integer;
 
     procedure MNGerror (SHMsg : string);
 
@@ -228,8 +228,8 @@ begin
       if IHBytesPerSec > 0 then
       begin
         IHTicks       := Windows.GetTickCount;
-        IHByte1       := (IHTicks - IFTicks) * IHBytesPerSec;
-        IHByte2       := (IFBytes + iBuflen) * 1000;
+        IHByte1       := round (((IHTicks - IFTicks) / 1000) * IHBytesPerSec);
+        IHByte2       := (IFBytes + iBuflen);
 
         if ((IHByte2 - IHByte1) div IHBytesPerSec) > 10 then
           Windows.Sleep ((IHByte2 - IHByte1) div IHBytesPerSec);
@@ -277,18 +277,9 @@ begin                                  { get a fix on our form }
     OFBitmap.Canvas.Pen.Style   := psSolid;
     OFBitmap.Canvas.FrameRect (OFBitmap.Canvas.ClipRect);
 
-{$IFDEF TEST_RGB8_A8}
-    if OFAlpha = nil then
-      GetMem (OFAlpha, iWidth);
-{$ENDIF}
-
     OFImage.Picture.Assign (OFBitmap); { make sure it gets out there }
                                        { tell the library we want funny windows-bgr}
-{$IFDEF TEST_RGB8_A8}
-    if mng_set_canvasstyle (hHandle, MNG_CANVAS_RGB8_A8) <> 0 then
-{$ELSE}
     if mng_set_canvasstyle (hHandle, MNG_CANVAS_BGR8) <> 0 then
-{$ENDIF}
       MNGerror ('libmng reported an error setting the canvas style');
 
   end;
@@ -310,22 +301,6 @@ begin                                  { get a fix on our form }
                                        { easy with these bitmap objects ! }
   Result := OHForm.OFBitmap.ScanLine [iLinenr];
 end;
-
-{****************************************************************************}
-
-{$IFDEF TEST_RGB8_A8}
-{$F+}
-function GetAlphaLine (hHandle : mng_handle;
-                       iLinenr : mng_uint32) : mng_ptr; stdcall;
-{$F-}
-
-var OHForm : TMainForm;
-
-begin                                  { get a fix on our form }
-  OHForm := TMainForm (mng_get_userdata (hHandle));
-  Result := OHForm.OFAlpha;
-end;
-{$ENDIF}
 
 {****************************************************************************}
 
@@ -381,19 +356,16 @@ procedure TMainForm.FormCreate(Sender: TObject);
 var   SHProfileName          : array [0 .. MAX_PATH + 100] of char;
       IHRed, IHGreen, IHBlue : word;
 
-begin
-  OFBitmap      := TBitmap.Create;     { initialize }
-  IFBytesPerSec := 10000000;
-  OFFile        := nil;
-{$IFDEF TEST_RGB8_A8}
-  OFAlpha       := nil;
-{$ENDIF}
+begin                                  { initialize }
+  OFBitmap                := TBitmap.Create;
+  IFBytesPerSec           := 10000000;
+  OFFile                  := nil;
 
   OFOpenDialog.Initialdir := '';
   OFBitmap.HandleType     := bmDIB;    { make it a 24-bit DIB }
   OFBitmap.PixelFormat    := pf24bit;
-{* B002 *]                             { try to locate the "standard" sRGB profile }
-  SHProfileName := 'sRGB Color Space Profile.ICM';
+                                       { try to locate the "standard" sRGB profile }
+  SHProfileName           := 'sRGB Color Space Profile.ICM';
 
   if not FileExists (StrPas (@SHProfileName)) then
   begin
@@ -403,7 +375,6 @@ begin
     Windows.Postmessage (handle, WM_Close, 0, 0);
     Exit;
   end;
-{* B002 *}
                                        { now initialize the library }
   IFHandle := mng_initialize (mng_ptr(self), Memalloc, Memfree, nil);
 
@@ -416,8 +387,8 @@ begin
   end;
                                        { no need to store chunk-info ! }
   mng_set_storechunks    (IFHandle, MNG_FALSE);
-                                       { use suspension-buffer }
-  mng_set_suspensionmode (IFHandle, MNG_TRUE);
+                                       { do not use suspension-buffer }
+  mng_set_suspensionmode (IFHandle, MNG_FALSE);
                                        { supply it with the sRGB profile }
   if (mng_set_srgb            (IFHandle, true          ) <> MNG_NOERROR) or
      (mng_set_outputprofile   (IFHandle, @SHProfileName) <> MNG_NOERROR) then
@@ -433,9 +404,6 @@ begin
      (mng_setcb_readdata      (IFHandle, Readdata     ) <> MNG_NOERROR) or
      (mng_setcb_processheader (IFHandle, ProcessHeader) <> MNG_NOERROR) or
      (mng_setcb_getcanvasline (IFHandle, GetCanvasLine) <> MNG_NOERROR) or
-{$IFDEF TEST_RGB8_A8}
-     (mng_setcb_getalphaline  (IFHandle, GetAlphaLine ) <> MNG_NOERROR) or
-{$ENDIF}
      (mng_setcb_refresh       (IFHandle, ImageRefresh ) <> MNG_NOERROR) or
      (mng_setcb_gettickcount  (IFHandle, GetTickCount ) <> MNG_NOERROR) or
      (mng_setcb_settimer      (IFHandle, SetTimer     ) <> MNG_NOERROR) then
