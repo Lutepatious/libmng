@@ -1,0 +1,247 @@
+# ---------------------------------------------------------------------------
+!if !$d(BCB)
+BCB = $(MAKEDIR)\..
+!endif
+
+# ---------------------------------------------------------------------------
+# IDE SECTION
+# ---------------------------------------------------------------------------
+# The following section of the project makefile is managed by the BCB IDE.
+# It is recommended to use the IDE to change any of the values in this
+# section.
+# ---------------------------------------------------------------------------
+
+VERSION = BCB.03
+# ---------------------------------------------------------------------------
+PROJECT = libmng.dll
+OBJFILES = ..\..\..\obj\libmng.obj ..\..\..\obj\mng_hlapi.obj \
+  ..\..\..\obj\mng_callback_xs.obj ..\..\..\obj\mng_prop_xs.obj \
+  ..\..\..\obj\mng_chunk_xs.obj ..\..\..\obj\mng_object_prc.obj \
+  ..\..\..\obj\mng_chunk_prc.obj ..\..\..\obj\mng_chunk_io.obj \
+  ..\..\..\obj\mng_read.obj ..\..\..\obj\mng_write.obj \
+  ..\..\..\obj\mng_display.obj ..\..\..\obj\mng_dither.obj \
+  ..\..\..\obj\mng_pixels.obj ..\..\..\obj\mng_filter.obj \
+  ..\..\..\obj\mng_error.obj ..\..\..\obj\mng_trace.obj ..\..\..\obj\mng_cms.obj \
+  ..\..\..\obj\mng_zlib.obj ..\..\..\obj\mng_jpeg.obj ..\..\..\obj\adler32.obj \
+  ..\..\..\obj\compress.obj ..\..\..\obj\crc32.obj ..\..\..\obj\deflate.obj \
+  ..\..\..\obj\infblock.obj ..\..\..\obj\infcodes.obj ..\..\..\obj\inffast.obj \
+  ..\..\..\obj\inflate.obj ..\..\..\obj\inftrees.obj ..\..\..\obj\infutil.obj \
+  ..\..\..\obj\trees.obj ..\..\..\obj\uncompr.obj ..\..\..\obj\zutil.obj \
+  ..\..\..\obj\jquant2.obj ..\..\..\obj\jcapistd.obj ..\..\..\obj\jccoefct.obj \
+  ..\..\..\obj\jccolor.obj ..\..\..\obj\jcdctmgr.obj ..\..\..\obj\jchuff.obj \
+  ..\..\..\obj\jcinit.obj ..\..\..\obj\jcmainct.obj ..\..\..\obj\jcmarker.obj \
+  ..\..\..\obj\jcmaster.obj ..\..\..\obj\jcomapi.obj ..\..\..\obj\jcparam.obj \
+  ..\..\..\obj\jcphuff.obj ..\..\..\obj\jcprepct.obj ..\..\..\obj\jcsample.obj \
+  ..\..\..\obj\jctrans.obj ..\..\..\obj\jdapistd.obj ..\..\..\obj\jdatadst.obj \
+  ..\..\..\obj\jdatasrc.obj ..\..\..\obj\jdcoefct.obj ..\..\..\obj\jdcolor.obj \
+  ..\..\..\obj\jddctmgr.obj ..\..\..\obj\jdhuff.obj ..\..\..\obj\jdinput.obj \
+  ..\..\..\obj\jdmainct.obj ..\..\..\obj\jdmarker.obj ..\..\..\obj\jdmaster.obj \
+  ..\..\..\obj\jdmerge.obj ..\..\..\obj\jdphuff.obj ..\..\..\obj\jdpostct.obj \
+  ..\..\..\obj\jdsample.obj ..\..\..\obj\jdtrans.obj ..\..\..\obj\jerror.obj \
+  ..\..\..\obj\jfdctflt.obj ..\..\..\obj\jfdctfst.obj ..\..\..\obj\jfdctint.obj \
+  ..\..\..\obj\jidctflt.obj ..\..\..\obj\jidctfst.obj ..\..\..\obj\jidctint.obj \
+  ..\..\..\obj\jidctred.obj ..\..\..\obj\jmemmgr.obj ..\..\..\obj\jmemnobs.obj \
+  ..\..\..\obj\jquant1.obj ..\..\..\obj\jcapimin.obj ..\..\..\obj\jutils.obj \
+  ..\..\..\obj\jdapimin.obj
+RESFILES = libmng.res
+RESDEPEN = $(RESFILES)
+LIBFILES = ..\..\..\lcms\lib\bc\lcmsstat.lib
+LIBRARIES = VCL35.lib
+SPARELIBS = VCL35.lib
+PACKAGES = vclx35.bpi VCL35.bpi vcldb35.bpi vcldbx35.bpi bcbsmp35.bpi dclocx35.bpi \
+  Qrpt35.bpi
+DEFFILE = ..\libmng.def
+# ---------------------------------------------------------------------------
+PATHCPP = .;..\..;..\..\..\zlib;..\..\..\jpgsrc6b
+PATHASM = .;
+PATHPAS = .;
+PATHRC = .;
+DEBUGLIBPATH = $(BCB)\lib\debug
+RELEASELIBPATH = $(BCB)\lib\release
+# ---------------------------------------------------------------------------
+CFLAG1 = -WD -O2 -Hc -w-par -k -y -v -vi -c -tWD
+CFLAG2 = -D_NO_VCL;MNG_SUPPORT_FULL;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_FULL_CMS;MNG_STORE_CHUNKS;MNG_SUPPORT_TRACE \
+  -I..\..\..\libmng;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\include;$(BCB)\include;$(BCB)\bin \
+  -H=$(BCB)\lib\vcl35.csm
+CFLAG3 = -wuse -wucp -wstv -wstu -wsig -wpin -wnod -wnak -wdef -wcln -wbbf -wasm -wamp \
+  -wamb -Tkh30000 -ff -5
+PFLAGS = -D_NO_VCL;MNG_SUPPORT_FULL;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_FULL_CMS;MNG_STORE_CHUNKS;MNG_SUPPORT_TRACE \
+  -N2..\..\..\obj -N0..\..\..\obj \
+  -U..\..\..\libmng;..\..\..\jpgsrc6b;..\..\..\zlib;$(BCB)\lib;$(BCB)\bin;$(DEBUGLIBPATH) \
+  -I..\..\..\libmng;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\include;$(BCB)\include;$(BCB)\bin \
+  -H -W -$Y -$W -$O- -v -JPHN -M
+RFLAGS = -D_NO_VCL;MNG_SUPPORT_FULL;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_FULL_CMS;MNG_STORE_CHUNKS;MNG_SUPPORT_TRACE \
+  -i..\..\..\libmng;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\include;$(BCB)\include;$(BCB)\bin
+AFLAGS = /i..\..\..\libmng /i..\..\..\zlib /i..\..\..\jpgsrc6b /i..\..\..\lcms\include \
+  /i$(BCB)\include /i$(BCB)\bin /d_NO_VCL /dMNG_SUPPORT_FULL /dMNG_SUPPORT_IJG6B \
+  /dMNG_SUPPORT_JPEG8 /dMNG_SUPPORT_READ /dMNG_SUPPORT_WRITE \
+  /dMNG_SUPPORT_DISPLAY /dMNG_ACCESS_CHUNKS /dMNG_FULL_CMS /dMNG_STORE_CHUNKS \
+  /dMNG_SUPPORT_TRACE /mx /w2 /zd
+LFLAGS = -L..\..\..\libmng;..\..\..\jpgsrc6b;..\..\..\zlib;$(BCB)\lib;$(BCB)\bin;$(DEBUGLIBPATH) \
+  -aa -Tpd -x -Gn -Gi -wdef -wdpl -v
+IFLAGS =
+# ---------------------------------------------------------------------------
+ALLOBJ = c0d32.obj $(OBJFILES)
+ALLRES = $(RESFILES)
+ALLLIB = $(LIBFILES)  import32.lib cw32mt.lib
+# ---------------------------------------------------------------------------
+!ifdef IDEOPTIONS
+
+[Version Info]
+IncludeVerInfo=1
+AutoIncBuild=1
+MajorVer=0
+MinorVer=5
+Release=0
+Build=229
+Debug=1
+PreRelease=1
+Special=0
+Private=0
+DLL=1
+Locale=1033
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=
+FileDescription=libmng - THE MNG library
+FileVersion=0.5.0.229
+InternalName=libmng
+LegalCopyright=Copyright 2000 G.Juyn
+LegalTrademarks=
+OriginalFilename=libmng.dll
+ProductName=libmng
+ProductVersion=0.5.0
+Comments=Developer-release
+
+[HistoryLists\hlIncludePath]
+Count=6
+Item0=..\..\..\libmng;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\include;$(BCB)\include;$(BCB)\bin
+Item1=..\..\..\..\jpgsrc6b;..\..\..\..\lcms\include;..\..\..\..\lcms\source;..\..\..\..\zlib;..\..\..\..\libmng;$(BCB)\include;$(BCB)\bin
+Item2=..\..\..\..\lcms\include;..\..\..\..\lcms\source;..\..\..\..\zlib;..\..\..\..\libmng;$(BCB)\include;$(BCB)\bin
+Item3=..\..\..\..\zlib;..\..\..\..\libmng;$(BCB)\include;$(BCB)\bin
+Item4=..\..\libmng;$(BCB)\include;$(BCB)\bin
+Item5=..\..\libmng;$(BCB)\include
+
+[HistoryLists\hlLibraryPath]
+Count=6
+Item0=..\..\..\libmng;..\..\..\jpgsrc6b;..\..\..\zlib;$(BCB)\lib;$(BCB)\bin
+Item1=..\..\..\..\jpgsrc6b;..\..\..\..\lcms\source;..\..\..\..\zlib;..\..\..\..\libmng;$(BCB)\lib;$(BCB)\bin
+Item2=..\..\..\..\lcms\source;..\..\..\..\zlib;..\..\..\..\libmng;$(BCB)\lib;$(BCB)\bin
+Item3=..\..\..\..\zlib;..\..\..\..\libmng;$(BCB)\lib;$(BCB)\bin
+Item4=..\..\libmng;$(BCB)\lib;$(BCB)\bin
+Item5=..\..\libmng;$(BCB)\lib
+
+[HistoryLists\hlDebugSourcePath]
+Count=4
+Item0=..\..\..\jpgsrc6b;..\..\..\lcms\source;..\..\..\zlib;..\..\..\libmng
+Item1=..\..\..\..\jpgsrc6b;..\..\..\..\lcms\source;..\..\..\..\zlib;..\..\..\..\libmng
+Item2=..\..\..\..\libmng
+Item3=..\..\libmng
+
+[HistoryLists\hlConditionals]
+Count=7
+Item0=_NO_VCL;MNG_SUPPORT_FULL;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_FULL_CMS;MNG_STORE_CHUNKS;MNG_SUPPORT_TRACE
+Item1=_NO_VCL;MNG_SUPPORT_FULL;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_FULL_CMS
+Item2=_NO_VCL;MNG_SUPPORT_FULL;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8
+Item3=_NO_VCL
+Item4=_NO_VCL;MNG_DLL
+Item5=_NO_VCL;MNG_USE_STDCALL
+Item6=_NO_VCL;MNG_STDCALL
+
+[HistoryLists\hlIntOutputDir]
+Count=2
+Item0=..\..\..\obj
+Item1=..\..\..\..\obj
+
+[HistoryLists\hlHostApplication]
+Count=5
+Item0=D:\Triple-T\Software\mnglib3t\libmng\bcb\win32dll\mngview.exe
+Item1=D:\Triple-T\Software\mnglib3t\libmng\bcb\win32dll\mngdump.exe
+Item2=D:\Triple-T\Software\mnglib3t\libmng\samples\bcb\win32dll\mngview.exe
+Item3=D:\Triple-T\Software\mnglib3t\libmng\samples\bcb\win32dll\mngdump.exe
+Item4=D:\Triple-T\Software\mnglib3t\libmng\samples\Delphi3\mngdump\mngdump.exe
+
+[Debugging]
+DebugSourceDirs=..\..\..\jpgsrc6b;..\..\..\lcms\source;..\..\..\zlib;..\..\..\libmng
+
+[Parameters]
+RunParams=
+HostApplication=D:\Triple-T\Software\mnglib3t\libmng\bcb\win32dll\mngview.exe
+
+!endif
+
+# ---------------------------------------------------------------------------
+# MAKE SECTION
+# ---------------------------------------------------------------------------
+# This section of the project file is not used by the BCB IDE.  It is for
+# the benefit of building from the command-line using the MAKE utility.
+# ---------------------------------------------------------------------------
+
+.autodepend
+# ---------------------------------------------------------------------------
+!if !$d(BCC32)
+BCC32 = bcc32
+!endif
+
+!if !$d(DCC32)
+DCC32 = dcc32
+!endif
+
+!if !$d(TASM32)
+TASM32 = tasm32
+!endif
+
+!if !$d(LINKER)
+LINKER = ilink32
+!endif
+
+!if !$d(BRCC32)
+BRCC32 = brcc32
+!endif
+# ---------------------------------------------------------------------------
+!if $d(PATHCPP)
+.PATH.CPP = $(PATHCPP)
+.PATH.C   = $(PATHCPP)
+!endif
+
+!if $d(PATHPAS)
+.PATH.PAS = $(PATHPAS)
+!endif
+
+!if $d(PATHASM)
+.PATH.ASM = $(PATHASM)
+!endif
+
+!if $d(PATHRC)
+.PATH.RC  = $(PATHRC)
+!endif
+# ---------------------------------------------------------------------------
+$(PROJECT): $(OBJFILES) $(RESDEPEN) $(DEFFILE)
+    $(BCB)\BIN\$(LINKER) @&&!
+    $(LFLAGS) +
+    $(ALLOBJ), +
+    $(PROJECT),, +
+    $(ALLLIB), +
+    $(DEFFILE), +
+    $(ALLRES)
+!
+# ---------------------------------------------------------------------------
+.pas.hpp:
+    $(BCB)\BIN\$(DCC32) $(PFLAGS) {$< }
+
+.pas.obj:
+    $(BCB)\BIN\$(DCC32) $(PFLAGS) {$< }
+
+.cpp.obj:
+    $(BCB)\BIN\$(BCC32) $(CFLAG1) $(CFLAG2) $(CFLAG3) -n$(@D) {$< }
+
+.c.obj:
+    $(BCB)\BIN\$(BCC32) $(CFLAG1) $(CFLAG2) $(CFLAG3) -n$(@D) {$< }
+
+.asm.obj:
+    $(BCB)\BIN\$(TASM32) $(AFLAGS) $<, $@
+
+.rc.res:
+    $(BCB)\BIN\$(BRCC32) $(RFLAGS) -fo$@ $<
+# ---------------------------------------------------------------------------
