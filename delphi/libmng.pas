@@ -92,6 +92,8 @@ unit libmng;
 {*              - added libmng errorcode constants                          *}
 {*              0.9.1 - 07/10/2000 - G.Juyn                                 *}
 {*              - added new libmng functions                                *}
+{*              0.9.1 - 07/19/2000 - G.Juyn                                 *}
+{*              - fixed several type definitions                            *}
 {*                                                                          *}
 {****************************************************************************}
 
@@ -127,18 +129,18 @@ type  mng_uint32     = cardinal;
       mng_uint8p     = ^mng_uint8;
       mng_chunkidp   = ^mng_chunkid;
 
-      mng_palette8e  = record                    { 8-bit palette element }
+      mng_palette8e  = packed record             { 8-bit palette element }
                          iRed   : mng_uint8;
                          iGreen : mng_uint8;
                          iBlue  : mng_uint8;
                        end;
 
-      mng_palette8   = array [0 .. 255] of mng_palette8e;
+      mng_palette8   = packed array [0 .. 255] of mng_palette8e;
 
-      mng_uint8arr   = array [0 .. 255] of mng_uint8;
-      mng_uint8arr4  = array [0 ..   3] of mng_uint8;
-      mng_uint16arr  = array [0 .. 255] of mng_uint16;
-      mng_uint32arr2 = array [0 ..   1] of mng_uint32;
+      mng_uint8arr   = packed array [0 .. 255] of mng_uint8;
+      mng_uint8arr4  = packed array [0 ..   3] of mng_uint8;
+      mng_uint16arr  = packed array [0 .. 255] of mng_uint16;
+      mng_uint32arr2 = packed array [0 ..   1] of mng_uint32;
 
 {****************************************************************************}
 
