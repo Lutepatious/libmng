@@ -89,8 +89,8 @@ IncludeVerInfo=1
 AutoIncBuild=1
 MajorVer=0
 MinorVer=9
-Release=0
-Build=453
+Release=1
+Build=455
 Debug=0
 PreRelease=1
 Special=0
@@ -102,13 +102,13 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=
 FileDescription=libmng - THE MNG library
-FileVersion=0.9.0.453
+FileVersion=0.9.1.455
 InternalName=libmng
 LegalCopyright=Copyright 2000 G.Juyn
 LegalTrademarks=
 OriginalFilename=libmng.dll
 ProductName=libmng
-ProductVersion=0.9.0
+ProductVersion=0.9.1
 Comments=Developer-beta1
 
 [HistoryLists\hlIncludePath]
