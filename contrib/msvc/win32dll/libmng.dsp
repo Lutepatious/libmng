@@ -90,159 +90,75 @@ LINK32=link.exe
 # PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
 # Begin Source File
 
-SOURCE=..\..\libmng.h
+SOURCE=..\..\..\libmng_callback_xs.c
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\libmng_callback_xs.c
+SOURCE=..\..\..\libmng_chunk_io.c
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\libmng_chunk_io.c
+SOURCE=..\..\..\libmng_chunk_prc.c
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\libmng_chunk_io.h
+SOURCE=..\..\..\libmng_chunk_xs.c
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\libmng_chunk_prc.c
+SOURCE=..\..\..\libmng_cms.c
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\libmng_chunk_prc.h
+SOURCE=..\..\..\libmng_display.c
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\libmng_chunk_xs.c
+SOURCE=..\..\..\libmng_dither.c
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\libmng_chunks.h
+SOURCE=..\..\..\libmng_error.c
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\libmng_cms.c
+SOURCE=..\..\..\libmng_filter.c
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\libmng_cms.h
+SOURCE=..\..\..\libmng_hlapi.c
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\libmng_conf.h
+SOURCE=..\..\..\libmng_jpeg.c
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\libmng_data.h
+SOURCE=..\..\..\libmng_object_prc.c
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\libmng_display.c
+SOURCE=..\..\..\libmng_pixels.c
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\libmng_display.h
+SOURCE=..\..\..\libmng_prop_xs.c
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\libmng_dither.c
+SOURCE=..\..\..\libmng_read.c
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\libmng_dither.h
+SOURCE=..\..\..\libmng_trace.c
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\libmng_error.c
+SOURCE=..\..\..\libmng_write.c
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\libmng_error.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\libmng_filter.c
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\libmng_filter.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\libmng_hlapi.c
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\libmng_jpeg.c
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\libmng_jpeg.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\libmng_memory.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\libmng_object_prc.c
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\libmng_object_prc.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\libmng_objects.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\libmng_pixels.c
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\libmng_pixels.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\libmng_prop_xs.c
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\libmng_read.c
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\libmng_read.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\libmng_trace.c
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\libmng_trace.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\libmng_types.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\libmng_write.c
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\libmng_write.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\libmng_zlib.c
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\libmng_zlib.h
+SOURCE=..\..\..\libmng_zlib.c
 # End Source File
 # End Group
 # Begin Group "jpeg"
@@ -250,239 +166,187 @@ SOURCE=..\..\libmng_zlib.h
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE=.\jpeg\jcapimin.c
+SOURCE=..\..\..\..\jpgsrc6b\jcapimin.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jcapistd.c
+SOURCE=..\..\..\..\jpgsrc6b\jcapistd.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jccoefct.c
+SOURCE=..\..\..\..\jpgsrc6b\jccoefct.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jccolor.c
+SOURCE=..\..\..\..\jpgsrc6b\jccolor.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jcdctmgr.c
+SOURCE=..\..\..\..\jpgsrc6b\jcdctmgr.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jchuff.c
+SOURCE=..\..\..\..\jpgsrc6b\jchuff.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jchuff.h
+SOURCE=..\..\..\..\jpgsrc6b\jcinit.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jcinit.c
+SOURCE=..\..\..\..\jpgsrc6b\jcmainct.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jcmainct.c
+SOURCE=..\..\..\..\jpgsrc6b\jcmarker.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jcmarker.c
+SOURCE=..\..\..\..\jpgsrc6b\jcmaster.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jcmaster.c
+SOURCE=..\..\..\..\jpgsrc6b\jcomapi.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jcomapi.c
+SOURCE=..\..\..\..\jpgsrc6b\jcparam.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jconfig.h
+SOURCE=..\..\..\..\jpgsrc6b\jcphuff.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jcparam.c
+SOURCE=..\..\..\..\jpgsrc6b\jcprepct.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jcphuff.c
+SOURCE=..\..\..\..\jpgsrc6b\jcsample.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jcprepct.c
+SOURCE=..\..\..\..\jpgsrc6b\jctrans.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jcsample.c
+SOURCE=..\..\..\..\jpgsrc6b\jdapimin.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jctrans.c
+SOURCE=..\..\..\..\jpgsrc6b\jdapistd.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jdapimin.c
+SOURCE=..\..\..\..\jpgsrc6b\jdatadst.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jdapistd.c
+SOURCE=..\..\..\..\jpgsrc6b\jdatasrc.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jdatadst.c
+SOURCE=..\..\..\..\jpgsrc6b\jdcoefct.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jdatasrc.c
+SOURCE=..\..\..\..\jpgsrc6b\jdcolor.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jdcoefct.c
+SOURCE=..\..\..\..\jpgsrc6b\jddctmgr.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jdcolor.c
+SOURCE=..\..\..\..\jpgsrc6b\jdhuff.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jdct.h
+SOURCE=..\..\..\..\jpgsrc6b\jdinput.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jddctmgr.c
+SOURCE=..\..\..\..\jpgsrc6b\jdmainct.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jdhuff.c
+SOURCE=..\..\..\..\jpgsrc6b\jdmarker.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jdhuff.h
+SOURCE=..\..\..\..\jpgsrc6b\jdmaster.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jdinput.c
+SOURCE=..\..\..\..\jpgsrc6b\jdmerge.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jdmainct.c
+SOURCE=..\..\..\..\jpgsrc6b\jdphuff.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jdmarker.c
+SOURCE=..\..\..\..\jpgsrc6b\jdpostct.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jdmaster.c
+SOURCE=..\..\..\..\jpgsrc6b\jdsample.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jdmerge.c
+SOURCE=..\..\..\..\jpgsrc6b\jdtrans.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jdphuff.c
+SOURCE=..\..\..\..\jpgsrc6b\jerror.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jdpostct.c
+SOURCE=..\..\..\..\jpgsrc6b\jfdctflt.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jdsample.c
+SOURCE=..\..\..\..\jpgsrc6b\jfdctfst.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jdtrans.c
+SOURCE=..\..\..\..\jpgsrc6b\jfdctint.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jerror.c
+SOURCE=..\..\..\..\jpgsrc6b\jidctflt.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jerror.h
+SOURCE=..\..\..\..\jpgsrc6b\jidctfst.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jfdctflt.c
+SOURCE=..\..\..\..\jpgsrc6b\jidctint.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jfdctfst.c
+SOURCE=..\..\..\..\jpgsrc6b\jidctred.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jfdctint.c
+SOURCE=..\..\..\..\jpgsrc6b\jmemmgr.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jidctflt.c
+SOURCE=..\..\..\..\jpgsrc6b\jmemnobs.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jidctfst.c
+SOURCE=..\..\..\..\jpgsrc6b\jquant1.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jidctint.c
+SOURCE=..\..\..\..\jpgsrc6b\jquant2.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\jpeg\jidctred.c
-# End Source File
-# Begin Source File
-
-SOURCE=.\jpeg\jinclude.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\jpeg\jmemmgr.c
-# End Source File
-# Begin Source File
-
-SOURCE=.\jpeg\jmemnobs.c
-# End Source File
-# Begin Source File
-
-SOURCE=.\jpeg\jmemsys.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\jpeg\jmorecfg.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\jpeg\jpegint.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\jpeg\jpeglib.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\jpeg\jquant1.c
-# End Source File
-# Begin Source File
-
-SOURCE=.\jpeg\jquant2.c
-# End Source File
-# Begin Source File
-
-SOURCE=.\jpeg\jutils.c
-# End Source File
-# Begin Source File
-
-SOURCE=.\jpeg\jversion.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\jpeg\transupp.c
-# End Source File
-# Begin Source File
-
-SOURCE=.\jpeg\transupp.h
+SOURCE=..\..\..\..\jpgsrc6b\jutils.c
 # End Source File
 # End Group
 # Begin Group "lcms"
@@ -490,67 +354,55 @@ SOURCE=.\jpeg\transupp.h
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE=.\lcms\source\CMSCNVRT.C
+SOURCE=..\..\..\..\lcms\source\CMSCNVRT.C
 # End Source File
 # Begin Source File
 
-SOURCE=.\lcms\source\CMSERR.C
+SOURCE=..\..\..\..\lcms\source\CMSERR.C
 # End Source File
 # Begin Source File
 
-SOURCE=.\lcms\source\CMSGAMMA.C
+SOURCE=..\..\..\..\lcms\source\CMSGAMMA.C
 # End Source File
 # Begin Source File
 
-SOURCE=.\lcms\source\CMSGMT.C
+SOURCE=..\..\..\..\lcms\source\CMSGMT.C
 # End Source File
 # Begin Source File
 
-SOURCE=.\lcms\source\cmsintrp.c
+SOURCE=..\..\..\..\lcms\source\cmsintrp.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\lcms\source\cmsio1.c
+SOURCE=..\..\..\..\lcms\source\cmsio1.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\lcms\source\CMSLUT.C
+SOURCE=..\..\..\..\lcms\source\CMSLUT.C
 # End Source File
 # Begin Source File
 
-SOURCE=.\lcms\source\CMSMATSH.C
+SOURCE=..\..\..\..\lcms\source\CMSMATSH.C
 # End Source File
 # Begin Source File
 
-SOURCE=.\lcms\source\cmsmtrx.c
+SOURCE=..\..\..\..\lcms\source\cmsmtrx.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\lcms\source\CMSPACK.C
+SOURCE=..\..\..\..\lcms\source\CMSPACK.C
 # End Source File
 # Begin Source File
 
-SOURCE=.\lcms\source\cmspcs.c
+SOURCE=..\..\..\..\lcms\source\cmspcs.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\lcms\source\CMSWTPNT.C
+SOURCE=..\..\..\..\lcms\source\CMSWTPNT.C
 # End Source File
 # Begin Source File
 
-SOURCE=.\lcms\source\cmsxform.c
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\..\lcms\include\icc34.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\lcms\include\icc34.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\lcms\include\lcms.h
+SOURCE=..\..\..\..\lcms\source\cmsxform.c
 # End Source File
 # End Group
 # Begin Group "zlib"
@@ -558,87 +410,55 @@ SOURCE=.\lcms\include\lcms.h
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE=.\zlib\adler32.c
+SOURCE=..\..\..\..\zlib\adler32.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\zlib\deflate.c
+SOURCE=..\..\..\..\zlib\compress.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\zlib\deflate.h
+SOURCE=..\..\..\..\zlib\crc32.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\zlib\infblock.c
+SOURCE=..\..\..\..\zlib\deflate.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\zlib\infblock.h
+SOURCE=..\..\..\..\zlib\infblock.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\zlib\infcodes.c
+SOURCE=..\..\..\..\zlib\infcodes.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\zlib\infcodes.h
+SOURCE=..\..\..\..\zlib\inffast.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\zlib\inffast.c
+SOURCE=..\..\..\..\zlib\inflate.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\zlib\inffast.h
+SOURCE=..\..\..\..\zlib\inftrees.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\zlib\inffixed.h
+SOURCE=..\..\..\..\zlib\infutil.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\zlib\inflate.c
+SOURCE=..\..\..\..\zlib\trees.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\zlib\inftrees.c
+SOURCE=..\..\..\..\zlib\uncompr.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\zlib\inftrees.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\zlib\infutil.c
-# End Source File
-# Begin Source File
-
-SOURCE=.\zlib\infutil.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\zlib\trees.c
-# End Source File
-# Begin Source File
-
-SOURCE=.\zlib\trees.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\zlib\zconf.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\zlib\zlib.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\zlib\zutil.c
-# End Source File
-# Begin Source File
-
-SOURCE=.\zlib\zutil.h
+SOURCE=..\..\..\..\zlib\zutil.c
 # End Source File
 # End Group
 # End Target

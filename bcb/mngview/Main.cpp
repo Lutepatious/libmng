@@ -11,7 +11,7 @@
 {*                                                                          *}
 {*  project   : libmng                                                      *}
 {*  file      : main.pas                  copyright (c) 2000 G.Juyn         *}
-{*  version   : 0.9.1                                                       *}
+{*  version   : 1.0.0                                                       *}
 {*                                                                          *}
 {*  purpose   : Main form for mngview application                           *}
 {*                                                                          *}
