@@ -45,7 +45,7 @@ OBJFILES = ..\..\..\obj\libmng.obj ..\..\..\obj\libmng_hlapi.obj \
   ..\..\..\obj\jcapimin.obj ..\..\..\obj\jutils.obj ..\..\..\obj\jdapimin.obj
 RESFILES = libmng.res
 RESDEPEN = $(RESFILES)
-LIBFILES = ..\..\..\lcms\lib\bc\lcmsstat.lib
+LIBFILES = ..\..\..\lcms\Projects\Bcc-5.5-static\lcmsstat.lib
 LIBRARIES = VCL35.lib
 SPARELIBS = VCL35.lib
 PACKAGES = vclx35.bpi VCL35.bpi vcldb35.bpi vcldbx35.bpi bcbsmp35.bpi dclocx35.bpi \
@@ -59,23 +59,25 @@ PATHRC = .;
 DEBUGLIBPATH = $(BCB)\lib\debug
 RELEASELIBPATH = $(BCB)\lib\release
 # ---------------------------------------------------------------------------
-CFLAG1 = -WD -O2 -Hc -w -k- -vi -w-par -c -tWD
-CFLAG2 = -D_NO_VCL;MNG_BUILD_DLL;MNG_FULL_CMS;ZLIB_DLL \
-  -I..\..\..\libmng;..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\include;$(BCB)\include;$(BCB)\bin \
+CFLAG1 = -WD -O2 -Hc -w -d -k- -vi -w-par -c -tWD
+CFLAG2 = -D_NO_VCL;MNG_BUILD_DLL;MNG_FULL_CMS;MNG_STRICT_ANSI;MNG_CHECK_BAD_ICCP;ZLIB_DLL \
+  -I..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\include;..\..\..\lcms\src;$(BCB)\include;$(BCB)\bin \
   -H=$(BCB)\lib\vcl35.csm
-CFLAG3 = -Tkh30000 -ff -5 -wuse -wucp -wstv -wstu -wsig -wpin -wnod -wnak -wdef -wcln \
+CFLAG3 = -Tkh30000 -ff -pr -wuse -wucp -wstv -wstu -wsig -wpin -wnod -wnak -wdef -wcln \
   -wbbf -wasm -wamp -wamb
-PFLAGS = -D_NO_VCL;MNG_BUILD_DLL;MNG_FULL_CMS;ZLIB_DLL -N2..\..\..\obj -N0..\..\..\obj \
-  -U..\..\..\libmng;..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;$(BCB)\lib;$(BCB)\bin;$(DEBUGLIBPATH) \
-  -I..\..\..\libmng;..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\include;$(BCB)\include;$(BCB)\bin \
+PFLAGS = -D_NO_VCL;MNG_BUILD_DLL;MNG_FULL_CMS;MNG_STRICT_ANSI;MNG_CHECK_BAD_ICCP;ZLIB_DLL \
+  -N2..\..\..\obj -N0..\..\..\obj \
+  -U..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\include;..\..\..\lcms\src;$(BCB)\lib;$(BCB)\bin;$(RELEASELIBPATH) \
+  -I..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\include;..\..\..\lcms\src;$(BCB)\include;$(BCB)\bin \
   -H -W -$L- -$D- -v -JPHN -M
-RFLAGS = -D_NO_VCL;MNG_BUILD_DLL;MNG_FULL_CMS;ZLIB_DLL \
-  -i..\..\..\libmng;..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\include;$(BCB)\include;$(BCB)\bin
-AFLAGS = /i..\..\..\libmng /i..\..\..\libmng-devel /i..\..\..\zlib /i..\..\..\jpgsrc6b \
-  /i..\..\..\lcms\include /i$(BCB)\include /i$(BCB)\bin /d_NO_VCL /dMNG_BUILD_DLL \
-  /dMNG_FULL_CMS /dZLIB_DLL /mx /w2 /zd
-LFLAGS = -L..\..\..\libmng;..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;$(BCB)\lib;$(BCB)\bin;$(DEBUGLIBPATH) \
-  -H:0x1000000 -Hc:0x10000 -aa -Tpd -x -Gn -Gi -wdef -wdpl
+RFLAGS = -D_NO_VCL;MNG_BUILD_DLL;MNG_FULL_CMS;MNG_STRICT_ANSI;MNG_CHECK_BAD_ICCP;ZLIB_DLL \
+  -i..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\include;..\..\..\lcms\src;$(BCB)\include;$(BCB)\bin
+AFLAGS = /i..\..\..\libmng-devel /i..\..\..\zlib /i..\..\..\jpgsrc6b \
+  /i..\..\..\lcms\include /i..\..\..\lcms\src /i$(BCB)\include /i$(BCB)\bin \
+  /d_NO_VCL /dMNG_BUILD_DLL /dMNG_FULL_CMS /dMNG_STRICT_ANSI /dMNG_CHECK_BAD_ICCP \
+  /dZLIB_DLL /mx /w2 /zd
+LFLAGS = -L..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\include;..\..\..\lcms\src;$(BCB)\lib;$(BCB)\bin;$(RELEASELIBPATH) \
+  -H:0x1000000 -Hc:0x10000 -B:0x60000000 -aa -Tpd -x -Gn -Gi -wdpl -d
 IFLAGS =
 # ---------------------------------------------------------------------------
 ALLOBJ = c0d32.obj $(OBJFILES)
@@ -89,10 +91,10 @@ IncludeVerInfo=1
 AutoIncBuild=1
 MajorVer=1
 MinorVer=0
-Release=0
-Build=661
+Release=5
+Build=883
 Debug=0
-PreRelease=0
+PreRelease=1
 Special=0
 Private=0
 DLL=1
@@ -102,72 +104,88 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=
 FileDescription=libmng - THE MNG library
-FileVersion=1.0.0.661
+FileVersion=1.0.5.883
 InternalName=libmng
-LegalCopyright=Copyright 2000 G.Juyn
+LegalCopyright=Copyright 2000-2002 G.Juyn
 LegalTrademarks=
 OriginalFilename=libmng.dll
 ProductName=libmng
-ProductVersion=1.0.0
-Comments=First public release
+ProductVersion=1.0.5-b1
+Comments=beta-1
+
+[Excluded Packages]
+C:\Program Files\Borland\CBuilder3\Bin\DbX35.bpl=(untitled)
 
 [HistoryLists\hlIncludePath]
-Count=8
-Item0=..\..\..\libmng;..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\include;$(BCB)\include;$(BCB)\bin
-Item1=..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\include;$(BCB)\include;$(BCB)\bin
-Item2=..\..\..\libmng;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\include;$(BCB)\include;$(BCB)\bin
-Item3=..\..\..\..\jpgsrc6b;..\..\..\..\lcms\include;..\..\..\..\lcms\source;..\..\..\..\zlib;..\..\..\..\libmng;$(BCB)\include;$(BCB)\bin
-Item4=..\..\..\..\lcms\include;..\..\..\..\lcms\source;..\..\..\..\zlib;..\..\..\..\libmng;$(BCB)\include;$(BCB)\bin
-Item5=..\..\..\..\zlib;..\..\..\..\libmng;$(BCB)\include;$(BCB)\bin
-Item6=..\..\libmng;$(BCB)\include;$(BCB)\bin
-Item7=..\..\libmng;$(BCB)\include
+Count=11
+Item0=..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\include;..\..\..\lcms\src;$(BCB)\include;$(BCB)\bin
+Item1=c:\program files\borland\cbuilder3\projects;..\..\..\libmng;..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\include;..\..\..\lcms\src;$(BCB)\include;$(BCB)\bin
+Item2=..\..\..\libmng;..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\include;..\..\..\lcms\src;$(BCB)\include;$(BCB)\bin
+Item3=..\..\..\libmng;..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\include;$(BCB)\include;$(BCB)\bin
+Item4=..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\include;$(BCB)\include;$(BCB)\bin
+Item5=..\..\..\libmng;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\include;$(BCB)\include;$(BCB)\bin
+Item6=..\..\..\..\jpgsrc6b;..\..\..\..\lcms\include;..\..\..\..\lcms\source;..\..\..\..\zlib;..\..\..\..\libmng;$(BCB)\include;$(BCB)\bin
+Item7=..\..\..\..\lcms\include;..\..\..\..\lcms\source;..\..\..\..\zlib;..\..\..\..\libmng;$(BCB)\include;$(BCB)\bin
+Item8=..\..\..\..\zlib;..\..\..\..\libmng;$(BCB)\include;$(BCB)\bin
+Item9=..\..\libmng;$(BCB)\include;$(BCB)\bin
+Item10=..\..\libmng;$(BCB)\include
 
 [HistoryLists\hlLibraryPath]
-Count=8
-Item0=..\..\..\libmng;..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;$(BCB)\lib;$(BCB)\bin
-Item1=..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;$(BCB)\lib;$(BCB)\bin
-Item2=..\..\..\libmng;..\..\..\jpgsrc6b;..\..\..\zlib;$(BCB)\lib;$(BCB)\bin
-Item3=..\..\..\..\jpgsrc6b;..\..\..\..\lcms\source;..\..\..\..\zlib;..\..\..\..\libmng;$(BCB)\lib;$(BCB)\bin
-Item4=..\..\..\..\lcms\source;..\..\..\..\zlib;..\..\..\..\libmng;$(BCB)\lib;$(BCB)\bin
-Item5=..\..\..\..\zlib;..\..\..\..\libmng;$(BCB)\lib;$(BCB)\bin
-Item6=..\..\libmng;$(BCB)\lib;$(BCB)\bin
-Item7=..\..\libmng;$(BCB)\lib
+Count=11
+Item0=..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\include;..\..\..\lcms\src;$(BCB)\lib;$(BCB)\bin
+Item1=c:\program files\borland\cbuilder3\projects;..\..\..\lcms\src;..\..\..\libmng;..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;$(BCB)\lib;$(BCB)\bin
+Item2=..\..\..\lcms\src;..\..\..\libmng;..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;$(BCB)\lib;$(BCB)\bin
+Item3=..\..\..\libmng;..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;$(BCB)\lib;$(BCB)\bin
+Item4=..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;$(BCB)\lib;$(BCB)\bin
+Item5=..\..\..\libmng;..\..\..\jpgsrc6b;..\..\..\zlib;$(BCB)\lib;$(BCB)\bin
+Item6=..\..\..\..\jpgsrc6b;..\..\..\..\lcms\source;..\..\..\..\zlib;..\..\..\..\libmng;$(BCB)\lib;$(BCB)\bin
+Item7=..\..\..\..\lcms\source;..\..\..\..\zlib;..\..\..\..\libmng;$(BCB)\lib;$(BCB)\bin
+Item8=..\..\..\..\zlib;..\..\..\..\libmng;$(BCB)\lib;$(BCB)\bin
+Item9=..\..\libmng;$(BCB)\lib;$(BCB)\bin
+Item10=..\..\libmng;$(BCB)\lib
 
 [HistoryLists\hlDebugSourcePath]
-Count=5
-Item0=..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\source
-Item1=..\..\..\jpgsrc6b;..\..\..\lcms\source;..\..\..\zlib;..\..\..\libmng
-Item2=..\..\..\..\jpgsrc6b;..\..\..\..\lcms\source;..\..\..\..\zlib;..\..\..\..\libmng
-Item3=..\..\..\..\libmng
-Item4=..\..\libmng
+Count=7
+Item0=..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\src
+Item1=..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\source;..\..\..\lcms\src
+Item2=..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\source
+Item3=..\..\..\jpgsrc6b;..\..\..\lcms\source;..\..\..\zlib;..\..\..\libmng
+Item4=..\..\..\..\jpgsrc6b;..\..\..\..\lcms\source;..\..\..\..\zlib;..\..\..\..\libmng
+Item5=..\..\..\..\libmng
+Item6=..\..\libmng
 
 [HistoryLists\hlConditionals]
-Count=25
-Item0=_NO_VCL;MNG_BUILD_DLL;MNG_FULL_CMS;ZLIB_DLL
-Item1=_NO_VCL;MNG_BUILD_DLL;MNG_FULL_CMS;ZLIB_DLL;MNG_SUPPORT_TRACE
-Item2=_NO_VCL;MNG_BUILD_DLL;MNG_FULL_CMS;ZLIB_DLL;LCMS_DLL
-Item3=_NO_VCL;MNG_BUILD_DLL;MNG_FULL_CMS
-Item4=_NO_VCL;MNG_BUILD_DLL;MNG_SUPPORT_FULL;MNG_FULL_CMS;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_STORE_CHUNKS;MNG_ACCESS_CHUNKS;MNG_SUPPORT_TRACE;MNG_ERROR_TELLTALE;MNG_TRACE_TELLTALE
-Item5=_NO_VCL;MNG_BUILD_DLL;MNG_SUPPORT_FULL;MNG_FULL_CMS;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_STORE_CHUNKS;MNG_ACCESS_CHUNKS;MNG_SUPPORT_TRACE
-Item6=_NO_VCL;MNG_BUILD_DLL;MNG_SUPPORT_FULL;MNG_FULL_CMS;XMNG_GAMMA_ONLY;XMNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_STORE_CHUNKS;MNG_ACCESS_CHUNKS;MNG_SUPPORT_TRACE
-Item7=_NO_VCL;MNG_BUILD_DLL;MNG_SUPPORT_FULL;MNG_FULL_CMS;XMNG_GAMMA_ONLY;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_STORE_CHUNKS;MNG_ACCESS_CHUNKS;MNG_SUPPORT_TRACE
-Item8=_NO_VCL;MNG_BUILD_DLL;MNG_SUPPORT_FULL;XMNG_FULL_CMS;MNG_GAMMA_ONLY;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_STORE_CHUNKS;MNG_ACCESS_CHUNKS;MNG_SUPPORT_TRACE
-Item9=_NO_VCL;MNG_BUILD_DLL;MNG_SUPPORT_FULL;MNG_FULL_CMS;XMNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_STORE_CHUNKS;MNG_ACCESS_CHUNKS;MNG_SUPPORT_TRACE
-Item10=_NO_VCL;MNG_SUPPORT_FULL;XMNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_FULL_CMS;MNG_STORE_CHUNKS;MNG_SUPPORT_TRACE;MNG_BUILD_DLL
-Item11=_NO_VCL;MNG_SUPPORT_FULL;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_FULL_CMS;MNG_STORE_CHUNKS;MNG_SUPPORT_TRACE;MNG_BUILD_DLL
-Item12=_NO_VCL;MNG_SUPPORT_FULL;XMNG_SUPPORT_IJG6B;XMNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_FULL_CMS;MNG_STORE_CHUNKS;MNG_SUPPORT_TRACE;MNG_BUILD_DLL
-Item13=_NO_VCL;MNG_SUPPORT_FULL;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_FULL_CMS;MNG_STORE_CHUNKS;MNG_SUPPORT_TRACE;MNG_BUILD_DLL;MNG_USE_SETJMP
-Item14=_NO_VCL;MNG_SUPPORT_FULL;XMNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;XMNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_FULL_CMS;MNG_STORE_CHUNKS;MNG_SUPPORT_TRACE;MNG_BUILD_DLL
-Item15=_NO_VCL;MNG_SUPPORT_FULL;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;XMNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_FULL_CMS;MNG_STORE_CHUNKS;MNG_SUPPORT_TRACE;MNG_BUILD_DLL
-Item16=_NO_VCL;MNG_SUPPORT_FULL;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_FULL_CMS;MNG_STORE_CHUNKS;MNG_SUPPORT_TRACE;MNG_BUILD_DLL;MNG_ALWAYS_DELAY
-Item17=_NO_VCL;MNG_SUPPORT_FULL;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_APP_CMS;MNG_STORE_CHUNKS;MNG_SUPPORT_TRACE;MNG_BUILD_DLL
-Item18=_NO_VCL;MNG_SUPPORT_FULL;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_FULL_CMS;MNG_STORE_CHUNKS;MNG_SUPPORT_TRACE
-Item19=_NO_VCL;MNG_SUPPORT_FULL;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_FULL_CMS
-Item20=_NO_VCL;MNG_SUPPORT_FULL;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8
-Item21=_NO_VCL
-Item22=_NO_VCL;MNG_DLL
-Item23=_NO_VCL;MNG_USE_STDCALL
-Item24=_NO_VCL;MNG_STDCALL
+Count=30
+Item0=_NO_VCL;MNG_BUILD_DLL;MNG_FULL_CMS;MNG_STRICT_ANSI;MNG_CHECK_BAD_ICCP;ZLIB_DLL
+Item1=_NO_VCL;MNG_BUILD_DLL;MNG_FULL_CMS;ZLIB_DLL;MNG_STRICT_ANSI
+Item2=_NO_VCL;MNG_BUILD_DLL;MNG_FULL_CMS;ZLIB_DLL;MNG_STRICT_ANSI;LCMS_DLL
+Item3=_NO_VCL;MNG_BUILD_DLL;MNG_FULL_CMS;ZLIB_DLL;MNG_STRICT_ANSI;MNG_SUPPORT_TRACE
+Item4=_NO_VCL;MNG_BUILD_DLL;MNG_FULL_CMS;ZLIB_DLL;MNG_STRICT_ANSI;MNG_TRACE
+Item5=_NO_VCL;MNG_BUILD_DLL;MNG_FULL_CMS;ZLIB_DLL
+Item6=_NO_VCL;MNG_BUILD_DLL;MNG_FULL_CMS;ZLIB_DLL;MNG_SUPPORT_TRACE;MNG_FILTER192;MNG_FILTER193
+Item7=_NO_VCL;MNG_BUILD_DLL;MNG_FULL_CMS;ZLIB_DLL;MNG_SUPPORT_TRACE
+Item8=_NO_VCL;MNG_BUILD_DLL;MNG_FULL_CMS;ZLIB_DLL;FILTER193
+Item9=_NO_VCL;MNG_BUILD_DLL;MNG_FULL_CMS;ZLIB_DLL;MNG_SUPPORT_TRACE;MNG_TRACE_TELLTALE
+Item10=_NO_VCL;MNG_BUILD_DLL;MNG_FULL_CMS;ZLIB_DLL;LCMS_DLL
+Item11=_NO_VCL;MNG_BUILD_DLL;MNG_FULL_CMS
+Item12=_NO_VCL;MNG_BUILD_DLL;MNG_SUPPORT_FULL;MNG_FULL_CMS;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_STORE_CHUNKS;MNG_ACCESS_CHUNKS;MNG_SUPPORT_TRACE;MNG_ERROR_TELLTALE;MNG_TRACE_TELLTALE
+Item13=_NO_VCL;MNG_BUILD_DLL;MNG_SUPPORT_FULL;MNG_FULL_CMS;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_STORE_CHUNKS;MNG_ACCESS_CHUNKS;MNG_SUPPORT_TRACE
+Item14=_NO_VCL;MNG_BUILD_DLL;MNG_SUPPORT_FULL;MNG_FULL_CMS;XMNG_GAMMA_ONLY;XMNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_STORE_CHUNKS;MNG_ACCESS_CHUNKS;MNG_SUPPORT_TRACE
+Item15=_NO_VCL;MNG_BUILD_DLL;MNG_SUPPORT_FULL;MNG_FULL_CMS;XMNG_GAMMA_ONLY;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_STORE_CHUNKS;MNG_ACCESS_CHUNKS;MNG_SUPPORT_TRACE
+Item16=_NO_VCL;MNG_BUILD_DLL;MNG_SUPPORT_FULL;XMNG_FULL_CMS;MNG_GAMMA_ONLY;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_STORE_CHUNKS;MNG_ACCESS_CHUNKS;MNG_SUPPORT_TRACE
+Item17=_NO_VCL;MNG_BUILD_DLL;MNG_SUPPORT_FULL;MNG_FULL_CMS;XMNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_STORE_CHUNKS;MNG_ACCESS_CHUNKS;MNG_SUPPORT_TRACE
+Item18=_NO_VCL;MNG_SUPPORT_FULL;XMNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_FULL_CMS;MNG_STORE_CHUNKS;MNG_SUPPORT_TRACE;MNG_BUILD_DLL
+Item19=_NO_VCL;MNG_SUPPORT_FULL;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_FULL_CMS;MNG_STORE_CHUNKS;MNG_SUPPORT_TRACE;MNG_BUILD_DLL
+Item20=_NO_VCL;MNG_SUPPORT_FULL;XMNG_SUPPORT_IJG6B;XMNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_FULL_CMS;MNG_STORE_CHUNKS;MNG_SUPPORT_TRACE;MNG_BUILD_DLL
+Item21=_NO_VCL;MNG_SUPPORT_FULL;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_FULL_CMS;MNG_STORE_CHUNKS;MNG_SUPPORT_TRACE;MNG_BUILD_DLL;MNG_USE_SETJMP
+Item22=_NO_VCL;MNG_SUPPORT_FULL;XMNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;XMNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_FULL_CMS;MNG_STORE_CHUNKS;MNG_SUPPORT_TRACE;MNG_BUILD_DLL
+Item23=_NO_VCL;MNG_SUPPORT_FULL;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;XMNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_FULL_CMS;MNG_STORE_CHUNKS;MNG_SUPPORT_TRACE;MNG_BUILD_DLL
+Item24=_NO_VCL;MNG_SUPPORT_FULL;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_FULL_CMS;MNG_STORE_CHUNKS;MNG_SUPPORT_TRACE;MNG_BUILD_DLL;MNG_ALWAYS_DELAY
+Item25=_NO_VCL;MNG_SUPPORT_FULL;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_APP_CMS;MNG_STORE_CHUNKS;MNG_SUPPORT_TRACE;MNG_BUILD_DLL
+Item26=_NO_VCL;MNG_SUPPORT_FULL;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_FULL_CMS;MNG_STORE_CHUNKS;MNG_SUPPORT_TRACE
+Item27=_NO_VCL;MNG_SUPPORT_FULL;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_FULL_CMS
+Item28=_NO_VCL;MNG_SUPPORT_FULL;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8
+Item29=_NO_VCL
 
 [HistoryLists\hlIntOutputDir]
 Count=2
@@ -175,27 +193,31 @@ Item0=..\..\..\obj
 Item1=..\..\..\..\obj
 
 [HistoryLists\hlHostApplication]
-Count=13
+Count=16
 Item0=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngview.exe
-Item1=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\SlowView.exe
-Item2=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\eMNGma.exe
-Item3=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\Bin\eMNGma.exe
-Item4=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngdump.exe
-Item5=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngpromo.exe
-Item6=D:\Triple-T\Software\mnglib3t\libmng\bcb\win32dll\mngdump.exe
-Item7=D:\Triple-T\Software\mnglib3t\libmng\bcb\win32dll\mngview.exe
-Item8=D:\Triple-T\Software\mnglib3t\libmng\bcb\win32dll\bogus.exe
-Item9=D:\Triple-T\Software\mnglib3t\libmng\bcb\win32dll\mngtree.exe
-Item10=D:\Triple-T\Software\mnglib3t\libmng\samples\bcb\win32dll\mngview.exe
-Item11=D:\Triple-T\Software\mnglib3t\libmng\samples\bcb\win32dll\mngdump.exe
-Item12=D:\Triple-T\Software\mnglib3t\libmng\samples\Delphi3\mngdump\mngdump.exe
+Item1=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngdump.exe
+Item2=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngrepair.exe
+Item3=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\Test_lz.exe
+Item4=D:\Triple-T\Software\LossyPNG\Bin\Test_lz.exe
+Item5=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\eMNGma.exe
+Item6=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\SlowView.exe
+Item7=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\Bin\eMNGma.exe
+Item8=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngpromo.exe
+Item9=D:\Triple-T\Software\mnglib3t\libmng\bcb\win32dll\mngdump.exe
+Item10=D:\Triple-T\Software\mnglib3t\libmng\bcb\win32dll\mngview.exe
+Item11=D:\Triple-T\Software\mnglib3t\libmng\bcb\win32dll\bogus.exe
+Item12=D:\Triple-T\Software\mnglib3t\libmng\bcb\win32dll\mngtree.exe
+Item13=D:\Triple-T\Software\mnglib3t\libmng\samples\bcb\win32dll\mngview.exe
+Item14=D:\Triple-T\Software\mnglib3t\libmng\samples\bcb\win32dll\mngdump.exe
+Item15=D:\Triple-T\Software\mnglib3t\libmng\samples\Delphi3\mngdump\mngdump.exe
 
 [HistoryLists\hlRunParameters]
-Count=1
-Item0=usflag-lc-d63.mng
+Count=2
+Item0=roilion02.mng roilion02-fixed.mng
+Item1=usflag-lc-d63.mng
 
 [Debugging]
-DebugSourceDirs=..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\source
+DebugSourceDirs=..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\src
 
 [Parameters]
 RunParams=

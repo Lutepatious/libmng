@@ -59,7 +59,7 @@ AutoIncBuild=1
 MajorVer=0
 MinorVer=9
 Release=0
-Build=12
+Build=13
 Debug=1
 PreRelease=1
 Special=0
@@ -71,7 +71,7 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=
 FileDescription=Executable (Console)
-FileVersion=0.9.0.12
+FileVersion=0.9.0.13
 InternalName=mngtree
 LegalCopyright=copyright (c) 2000 G.Juyn
 LegalTrademarks=
@@ -99,14 +99,15 @@ Item0=_NO_VCL;MNG_SUPPORT_READ;MNG_ACCESS_CHUNKS;MNG_STORE_CHUNKS;MNG_NO_CMS;MNG
 Item1=_NO_VCL;MNG_SUPPORT_READ;MNG_ACCESS_CHUNKS;MNG_STORE_CHUNKS;MNG_NO_CMS
 
 [HistoryLists\hlRunParameters]
-Count=1
-Item0=usflag-lc-d63.mng
+Count=2
+Item0=dutch.mng
+Item1=usflag-lc-d63.mng
 
 [Debugging]
 DebugSourceDirs=
 
 [Parameters]
-RunParams=usflag-lc-d63.mng
+RunParams=dutch.mng
 HostApplication=
 
 !endif

@@ -11,7 +11,7 @@
 {*                                                                          *}
 {*  project   : libmng                                                      *}
 {*  file      : main.pas                  copyright (c) 2000 G.Juyn         *}
-{*  version   : 1.0.0                                                       *}
+{*  version   : 1.0.1                                                       *}
 {*                                                                          *}
 {*  purpose   : Main form for mngview application                           *}
 {*                                                                          *}
@@ -59,6 +59,9 @@
 {*              - changed to accomodate MNG_NEEDTIMERWAIT returncode        *}
 {*              0.9.1 - 07/10/2000 - G.Juyn                                 *}
 {*              - changed to use suspension-mode                            *}
+{*                                                                          *}
+{*              1.0.1 - 05/02/2000 - G.Juyn                                 *}
+{*              - removed loading of default sRGB profile (auto in libmng)  *}
 {*                                                                          *}
 {****************************************************************************/
 
@@ -297,23 +300,6 @@ mng_uint16      IHRed, IHGreen, IHBlue; /* word */
   OFBitmap->HandleType     = bmDIB;    /* make it a 24-bit DIB */
   OFBitmap->PixelFormat    = pf24bit;
 
-  /* try to locate the "standard" sRGB profile */
-  SHProfileName = "sRGB Color Space Profile.ICM";
-
-  if( _NOT_ FileExists( SHProfileName ) )
-  {
-    MessageDlg ("Standard sRGB profile not found!"\
-                "\n"\
-                "File \'" + SHProfileName + "\' missing"\
-                "\n\n"\
-                "Program aborted",
-                mtError,
-                TMsgDlgButtons() << mbOK,
-                0);
-    PostMessage( Handle, WM_CLOSE, 0, 0);
-    return; // was Exit
-  }
-
   /* now initialize the library */
   IFHandle = mng_initialize( mng_ptr(this), Memalloc, Memfree, _NIL_ );
 
@@ -332,20 +318,6 @@ mng_uint16      IHRed, IHGreen, IHBlue; /* word */
 
   /* use suspension-buffer */
   mng_set_suspensionmode( IFHandle, MNG_TRUE );
-
-  /* supply it with the sRGB profile */
-  if(
-  (mng_set_srgb( IFHandle, true          ) != MNG_NOERROR) _OR_
-  (mng_set_outputprofile( IFHandle, SHProfileName.c_str() ) != MNG_NOERROR)
-     )
-  {
-    MNGerror ("libmng reported an error setting the CMS conditions!"\
-              "\n"\
-              "Program aborted"
-    );
-    PostMessage( Handle, WM_CLOSE, 0, 0 );
-    return; // was Exit
-  }
 
   /* set all the callbacks */
   if(

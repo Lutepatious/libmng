@@ -2,7 +2,7 @@
 /* *                                                                        * */
 /* * COPYRIGHT NOTICE:                                                      * */
 /* *                                                                        * */
-/* * Copyright (c) 2000 Gerard Juyn (gerard@libmng.com)                     * */
+/* * Copyright (c) 2000-2002 Gerard Juyn (gerard@libmng.com)                * */
 /* * [You may insert additional notices after this sentence if you modify   * */
 /* *  this source]                                                          * */
 /* *                                                                        * */
@@ -41,8 +41,8 @@
 /* ************************************************************************** */
 /* *                                                                        * */
 /* * project   : libmng                                                     * */
-/* * file      : libmng.cpp                copyright (c) 2000 G.Juyn        * */
-/* * version   : 0.5.1                                                      * */
+/* * file      : libmng.cpp                copyright (c) 2000-2002 G.Juyn   * */
+/* * version   : 1.0.5                                                      * */
 /* *                                                                        * */
 /* * purpose   : generic dll project assembly file                          * */
 /* *                                                                        * */
@@ -54,6 +54,9 @@
 /* *                                                                        * */
 /* * changes   : 0.5.1 - 05/14/2000 - G.Juyn                                * */
 /* *             - added this block                                         * */
+/* *                                                                        * */
+/* *             1.0.5 - 08/20/2000 - G.Juyn                                * */
+/* *             - version-number & copyright                               * */
 /* *                                                                        * */
 /* ************************************************************************** */
 
@@ -95,7 +98,6 @@ USEUNIT("..\..\..\zlib\infutil.c");
 USEUNIT("..\..\..\zlib\trees.c");
 USEUNIT("..\..\..\zlib\uncompr.c");
 USEUNIT("..\..\..\zlib\zutil.c");
-USELIB("..\..\..\lcms\lib\bc\lcmsstat.lib");
 USEUNIT("..\..\..\jpgsrc6b\jquant2.c");
 USEUNIT("..\..\..\jpgsrc6b\jcapistd.c");
 USEUNIT("..\..\..\jpgsrc6b\jccoefct.c");
@@ -142,6 +144,7 @@ USEUNIT("..\..\..\jpgsrc6b\jquant1.c");
 USEUNIT("..\..\..\jpgsrc6b\jcapimin.c");
 USEUNIT("..\..\..\jpgsrc6b\jutils.c");
 USEUNIT("..\..\..\jpgsrc6b\jdapimin.c");
+USELIB("..\..\..\lcms\Projects\Bcc-5.5-static\lcmsstat.lib");
 //---------------------------------------------------------------------------
 #pragma argsused
 int WINAPI DllEntryPoint(HINSTANCE hinst, unsigned long reason, void*)
