@@ -90,7 +90,7 @@ AutoIncBuild=1
 MajorVer=0
 MinorVer=9
 Release=3
-Build=575
+Build=580
 Debug=0
 PreRelease=1
 Special=0
@@ -102,7 +102,7 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=
 FileDescription=libmng - THE MNG library
-FileVersion=0.9.3.575
+FileVersion=0.9.3.580
 InternalName=libmng
 LegalCopyright=Copyright 2000 G.Juyn
 LegalTrademarks=
@@ -174,18 +174,19 @@ Item0=..\..\..\obj
 Item1=..\..\..\..\obj
 
 [HistoryLists\hlHostApplication]
-Count=11
+Count=12
 Item0=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngview.exe
 Item1=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\eMNGma.exe
-Item2=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngdump.exe
-Item3=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngpromo.exe
-Item4=D:\Triple-T\Software\mnglib3t\libmng\bcb\win32dll\mngdump.exe
-Item5=D:\Triple-T\Software\mnglib3t\libmng\bcb\win32dll\mngview.exe
-Item6=D:\Triple-T\Software\mnglib3t\libmng\bcb\win32dll\bogus.exe
-Item7=D:\Triple-T\Software\mnglib3t\libmng\bcb\win32dll\mngtree.exe
-Item8=D:\Triple-T\Software\mnglib3t\libmng\samples\bcb\win32dll\mngview.exe
-Item9=D:\Triple-T\Software\mnglib3t\libmng\samples\bcb\win32dll\mngdump.exe
-Item10=D:\Triple-T\Software\mnglib3t\libmng\samples\Delphi3\mngdump\mngdump.exe
+Item2=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\Bin\eMNGma.exe
+Item3=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngdump.exe
+Item4=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngpromo.exe
+Item5=D:\Triple-T\Software\mnglib3t\libmng\bcb\win32dll\mngdump.exe
+Item6=D:\Triple-T\Software\mnglib3t\libmng\bcb\win32dll\mngview.exe
+Item7=D:\Triple-T\Software\mnglib3t\libmng\bcb\win32dll\bogus.exe
+Item8=D:\Triple-T\Software\mnglib3t\libmng\bcb\win32dll\mngtree.exe
+Item9=D:\Triple-T\Software\mnglib3t\libmng\samples\bcb\win32dll\mngview.exe
+Item10=D:\Triple-T\Software\mnglib3t\libmng\samples\bcb\win32dll\mngdump.exe
+Item11=D:\Triple-T\Software\mnglib3t\libmng\samples\Delphi3\mngdump\mngdump.exe
 
 [HistoryLists\hlRunParameters]
 Count=1
