@@ -38,6 +38,8 @@ uses
 {*                                                                          *}
 {*              0.5.3 - 06/16/2000 - G.Juyn                                 *}
 {*              - removed processmessages call from refresh callback        *}
+{*              0.5.3 - 06/17/2000 - G.Juyn                                 *}
+{*              - switched "storechunks" off                                *}
 {*                                                                          *}
 {****************************************************************************}
 
@@ -396,6 +398,8 @@ begin
     Windows.Postmessage (handle, WM_Close, 0, 0);
     Exit;
   end;
+                                       { no need to store chunk-info ! }
+  mng_set_storechunks (IFHandle, MNG_FALSE);
                                        { supply it with the sRGB profile }
   if (mng_set_srgb            (IFHandle, true          ) <> 0) or
      (mng_set_outputprofile   (IFHandle, @SHProfileName) <> 0) then

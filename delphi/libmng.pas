@@ -44,7 +44,7 @@ unit libmng;
 {*                                                                          *}
 {*  project   : libmng                                                      *}
 {*  file      : libmng.pas                copyright (c) 2000 G.Juyn         *}
-{*  version   : 0.5.1                                                       *}
+{*  version   : 0.5.3                                                       *}
 {*                                                                          *}
 {*  purpose   : libmng.dll wrapper unit                                     *}
 {*                                                                          *}
@@ -71,6 +71,12 @@ unit libmng;
 {*              - removed error- & trace-strings since they are now         *}
 {*                provided by the library                                   *}
 {*                                                                          *}
+{*              0.5.3 - 06/21/2000 - G.Juyn                                 *}
+{*              - fixed definition of imagetype                             *}
+{*              - added definition of speedtype                             *}
+{*              - added get/set speed parameter                             *}
+{*              - added get imagelevel parameter                            *}
+{*                                                                          *}
 {****************************************************************************}
 
 interface
@@ -95,7 +101,8 @@ type  mng_uint32     = cardinal;
       mng_retcode    = mng_int32;
       mng_chunkid    = mng_uint32;
 
-      mng_imgtype    = (it_unknown, it_png, it_jng, it_mng);
+      mng_imgtype    = (mng_it_unknown, mng_it_png, mng_it_jng, mng_it_mng);
+      mng_speedtype  = (mng_st_normal, mng_st_fast, mng_st_slow, mng_st_slowest);
 
       mng_uint32p    = ^mng_uint32;
       mng_uint16p    = ^mng_uint16;
@@ -364,6 +371,9 @@ function  mng_set_maxcanvassize   (    hHandle      : mng_handle;
                                        iMaxwidth    : mng_uint32;
                                        iMaxheight   : mng_uint32       ) : mng_retcode;       stdcall;
 
+function  mng_set_speed           (    hHandle      : mng_handle;
+                                       iSpeed       : mng_speedtype    ) : mng_retcode;       stdcall;
+
 {****************************************************************************}
 
 function  mng_get_userdata        (    hHandle      : mng_handle       ) : mng_int32;         stdcall;
@@ -396,6 +406,9 @@ function  mng_get_srgb            (    hHandle      : mng_handle       ) : mng_b
 
 function  mng_get_maxcanvaswidth  (    hHandle      : mng_handle       ) : mng_uint32;        stdcall;
 function  mng_get_maxcanvasheight (    hHandle      : mng_handle       ) : mng_uint32;        stdcall;
+
+function  mng_get_speed           (    hHandle      : mng_handle       ) : mng_speedtype;     stdcall;
+function  mng_get_imagelevel      (    hHandle      : mng_handle       ) : mng_uint32;        stdcall;
 
 {****************************************************************************}
 
@@ -1386,6 +1399,8 @@ function mng_set_maxcanvaswidth;   external mngdll;
 function mng_set_maxcanvasheight;  external mngdll;
 function mng_set_maxcanvassize;    external mngdll;
 
+function mng_set_speed;            external mngdll;
+
 {****************************************************************************}
 
 function  mng_get_userdata;        external mngdll;
@@ -1418,6 +1433,9 @@ function  mng_get_srgb;            external mngdll;
 
 function  mng_get_maxcanvaswidth;  external mngdll;
 function  mng_get_maxcanvasheight; external mngdll;
+
+function  mng_get_speed;           external mngdll;
+function  mng_get_imagelevel;      external mngdll;
 
 {****************************************************************************}
 

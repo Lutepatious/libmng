@@ -75,7 +75,7 @@ AFLAGS = /i..\..\..\libmng /i..\..\..\libmng-devel /i..\..\..\zlib /i..\..\..\jp
   /i..\..\..\lcms\include /i$(BCB)\include /i$(BCB)\bin /d_NO_VCL /dMNG_BUILD_DLL \
   /dMNG_FULL_CMS /mx /w2 /zd
 LFLAGS = -L..\..\..\libmng;..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;$(BCB)\lib;$(BCB)\bin;$(DEBUGLIBPATH) \
-  -aa -Tpd -x -Gn -Gi -wdef -wdpl
+  -H:0x1000000 -Hc:0x10000 -aa -Tpd -x -Gn -Gi -wdef -wdpl
 IFLAGS =
 # ---------------------------------------------------------------------------
 ALLOBJ = c0d32.obj $(OBJFILES)
@@ -90,7 +90,7 @@ AutoIncBuild=1
 MajorVer=0
 MinorVer=5
 Release=3
-Build=401
+Build=425
 Debug=0
 PreRelease=1
 Special=0
@@ -102,7 +102,7 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=
 FileDescription=libmng - THE MNG library
-FileVersion=0.5.3.401
+FileVersion=0.5.3.425
 InternalName=libmng
 LegalCopyright=Copyright 2000 G.Juyn
 LegalTrademarks=
