@@ -17,32 +17,32 @@ PROJECT = libmng.dll
 OBJFILES = ..\..\..\obj\libmng.obj ..\..\..\obj\libmng_hlapi.obj \
   ..\..\..\obj\libmng_callback_xs.obj ..\..\..\obj\libmng_prop_xs.obj \
   ..\..\..\obj\libmng_chunk_xs.obj ..\..\..\obj\libmng_object_prc.obj \
-  ..\..\..\obj\libmng_chunk_prc.obj ..\..\..\obj\libmng_chunk_io.obj \
-  ..\..\..\obj\libmng_read.obj ..\..\..\obj\libmng_write.obj \
-  ..\..\..\obj\libmng_display.obj ..\..\..\obj\libmng_dither.obj \
-  ..\..\..\obj\libmng_pixels.obj ..\..\..\obj\libmng_filter.obj \
-  ..\..\..\obj\libmng_error.obj ..\..\..\obj\libmng_trace.obj \
-  ..\..\..\obj\libmng_cms.obj ..\..\..\obj\libmng_zlib.obj \
-  ..\..\..\obj\libmng_jpeg.obj ..\..\..\obj\adler32.obj ..\..\..\obj\compress.obj \
-  ..\..\..\obj\crc32.obj ..\..\..\obj\deflate.obj ..\..\..\obj\inffast.obj \
-  ..\..\..\obj\inflate.obj ..\..\..\obj\inftrees.obj ..\..\..\obj\trees.obj \
-  ..\..\..\obj\uncompr.obj ..\..\..\obj\zutil.obj ..\..\..\obj\jquant2.obj \
-  ..\..\..\obj\jcapistd.obj ..\..\..\obj\jccoefct.obj ..\..\..\obj\jccolor.obj \
-  ..\..\..\obj\jcdctmgr.obj ..\..\..\obj\jchuff.obj ..\..\..\obj\jcinit.obj \
-  ..\..\..\obj\jcmainct.obj ..\..\..\obj\jcmarker.obj ..\..\..\obj\jcmaster.obj \
-  ..\..\..\obj\jcomapi.obj ..\..\..\obj\jcparam.obj ..\..\..\obj\jcphuff.obj \
-  ..\..\..\obj\jcprepct.obj ..\..\..\obj\jcsample.obj ..\..\..\obj\jctrans.obj \
-  ..\..\..\obj\jdapistd.obj ..\..\..\obj\jdatadst.obj ..\..\..\obj\jdatasrc.obj \
-  ..\..\..\obj\jdcoefct.obj ..\..\..\obj\jdcolor.obj ..\..\..\obj\jddctmgr.obj \
-  ..\..\..\obj\jdhuff.obj ..\..\..\obj\jdinput.obj ..\..\..\obj\jdmainct.obj \
-  ..\..\..\obj\jdmarker.obj ..\..\..\obj\jdmaster.obj ..\..\..\obj\jdmerge.obj \
-  ..\..\..\obj\jdphuff.obj ..\..\..\obj\jdpostct.obj ..\..\..\obj\jdsample.obj \
-  ..\..\..\obj\jdtrans.obj ..\..\..\obj\jerror.obj ..\..\..\obj\jfdctflt.obj \
-  ..\..\..\obj\jfdctfst.obj ..\..\..\obj\jfdctint.obj ..\..\..\obj\jidctflt.obj \
-  ..\..\..\obj\jidctfst.obj ..\..\..\obj\jidctint.obj ..\..\..\obj\jidctred.obj \
-  ..\..\..\obj\jmemmgr.obj ..\..\..\obj\jmemnobs.obj ..\..\..\obj\jquant1.obj \
-  ..\..\..\obj\jcapimin.obj ..\..\..\obj\jutils.obj ..\..\..\obj\jdapimin.obj \
-  ..\..\..\obj\libmng_chunk_descr.obj
+  ..\..\..\obj\libmng_chunk_descr.obj ..\..\..\obj\libmng_chunk_prc.obj \
+  ..\..\..\obj\libmng_chunk_io.obj ..\..\..\obj\libmng_read.obj \
+  ..\..\..\obj\libmng_write.obj ..\..\..\obj\libmng_display.obj \
+  ..\..\..\obj\libmng_dither.obj ..\..\..\obj\libmng_pixels.obj \
+  ..\..\..\obj\libmng_filter.obj ..\..\..\obj\libmng_error.obj \
+  ..\..\..\obj\libmng_trace.obj ..\..\..\obj\libmng_cms.obj \
+  ..\..\..\obj\libmng_zlib.obj ..\..\..\obj\libmng_jpeg.obj \
+  ..\..\..\obj\adler32.obj ..\..\..\obj\compress.obj ..\..\..\obj\crc32.obj \
+  ..\..\..\obj\deflate.obj ..\..\..\obj\inffast.obj ..\..\..\obj\inflate.obj \
+  ..\..\..\obj\inftrees.obj ..\..\..\obj\trees.obj ..\..\..\obj\uncompr.obj \
+  ..\..\..\obj\zutil.obj ..\..\..\obj\jquant2.obj ..\..\..\obj\jcapistd.obj \
+  ..\..\..\obj\jccoefct.obj ..\..\..\obj\jccolor.obj ..\..\..\obj\jcdctmgr.obj \
+  ..\..\..\obj\jchuff.obj ..\..\..\obj\jcinit.obj ..\..\..\obj\jcmainct.obj \
+  ..\..\..\obj\jcmarker.obj ..\..\..\obj\jcmaster.obj ..\..\..\obj\jcomapi.obj \
+  ..\..\..\obj\jcparam.obj ..\..\..\obj\jcphuff.obj ..\..\..\obj\jcprepct.obj \
+  ..\..\..\obj\jcsample.obj ..\..\..\obj\jctrans.obj ..\..\..\obj\jdapistd.obj \
+  ..\..\..\obj\jdatadst.obj ..\..\..\obj\jdatasrc.obj ..\..\..\obj\jdcoefct.obj \
+  ..\..\..\obj\jdcolor.obj ..\..\..\obj\jddctmgr.obj ..\..\..\obj\jdhuff.obj \
+  ..\..\..\obj\jdinput.obj ..\..\..\obj\jdmainct.obj ..\..\..\obj\jdmarker.obj \
+  ..\..\..\obj\jdmaster.obj ..\..\..\obj\jdmerge.obj ..\..\..\obj\jdphuff.obj \
+  ..\..\..\obj\jdpostct.obj ..\..\..\obj\jdsample.obj ..\..\..\obj\jdtrans.obj \
+  ..\..\..\obj\jerror.obj ..\..\..\obj\jfdctflt.obj ..\..\..\obj\jfdctfst.obj \
+  ..\..\..\obj\jfdctint.obj ..\..\..\obj\jidctflt.obj ..\..\..\obj\jidctfst.obj \
+  ..\..\..\obj\jidctint.obj ..\..\..\obj\jidctred.obj ..\..\..\obj\jmemmgr.obj \
+  ..\..\..\obj\jmemnobs.obj ..\..\..\obj\jquant1.obj ..\..\..\obj\jcapimin.obj \
+  ..\..\..\obj\jutils.obj ..\..\..\obj\jdapimin.obj
 RESFILES = libmng.res
 RESDEPEN = $(RESFILES)
 LIBFILES = ..\..\..\lcms\Projects\Bcc-5.5-static\lcmsstat.lib
@@ -96,7 +96,7 @@ AutoIncBuild=1
 MajorVer=1
 MinorVer=0
 Release=9
-Build=1289
+Build=1294
 Debug=0
 PreRelease=1
 Special=0
@@ -108,7 +108,7 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=G. Juyn
 FileDescription=libmng - THE MNG library
-FileVersion=1.0.9.1289
+FileVersion=1.0.9.1294
 InternalName=libmng
 LegalCopyright=Copyright © 2000-2004 G. Juyn
 LegalTrademarks=
@@ -197,8 +197,8 @@ Item1=..\..\..\..\obj
 
 [HistoryLists\hlHostApplication]
 Count=23
-Item0=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngview.exe
-Item1=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\MNGJNGportal.exe
+Item0=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\MNGJNGportal.exe
+Item1=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngview.exe
 Item2=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\gif2mng.exe
 Item3=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngview_push.exe
 Item4=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngtree.exe
@@ -232,7 +232,7 @@ DebugSourceDirs=..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\l
 
 [Parameters]
 RunParams=
-HostApplication=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngview.exe
+HostApplication=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\MNGJNGportal.exe
 
 !endif
 

@@ -72,6 +72,7 @@ USEUNIT("..\..\libmng_callback_xs.c");
 USEUNIT("..\..\libmng_prop_xs.c");
 USEUNIT("..\..\libmng_chunk_xs.c");
 USEUNIT("..\..\libmng_object_prc.c");
+USEUNIT("..\..\libmng_chunk_descr.c");
 USEUNIT("..\..\libmng_chunk_prc.c");
 USEUNIT("..\..\libmng_chunk_io.c");
 USEUNIT("..\..\libmng_read.c");
@@ -142,7 +143,6 @@ USEUNIT("..\..\..\jpgsrc6b\jcapimin.c");
 USEUNIT("..\..\..\jpgsrc6b\jutils.c");
 USEUNIT("..\..\..\jpgsrc6b\jdapimin.c");
 USELIB("..\..\..\lcms\Projects\Bcc-5.5-static\lcmsstat.lib");
-USEUNIT("..\..\libmng_chunk_descr.c");
 //---------------------------------------------------------------------------
 #pragma argsused
 int WINAPI DllEntryPoint(HINSTANCE hinst, unsigned long reason, void*)
