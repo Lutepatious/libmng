@@ -102,6 +102,9 @@ unit libmng;
 {*              0.9.2 - 08/05/2000 - G.Juyn                                 *}
 {*              - added function to set simplicity field                    *}
 {*                                                                          *}
+{*              0.9.3 - 10/21/2000 - G.Juyn                                 *}
+{*              - added several new HLAPI entry points                      *}
+{*                                                                          *}
 {****************************************************************************}
 
 interface
@@ -190,6 +193,18 @@ type mng_processtext   = function  (    hHandle      : mng_handle;
                                         zText        : mng_pchar;
                                         zLanguage    : mng_pchar;
                                         zTranslation : mng_pchar ) : mng_bool; stdcall;
+
+type mng_processsave   = function  (    hHandle      : mng_handle) : mng_bool; stdcall;
+type mng_processseek   = function  (    hHandle      : mng_handle;
+                                        zName        : mng_pchar ) : mng_bool; stdcall;
+
+type mng_processneed   = function  (    hHandle      : mng_handle;
+                                        zKeyword     : mng_pchar ) : mng_bool; stdcall;
+
+type mng_processunknown = function (    hHandle      : mng_handle;
+                                        iChunkid     : mng_chunkid;
+                                        iRawlen      : mng_uint32;
+                                        pRawdata     : mng_ptr   ) : mng_bool; stdcall;
 
 type mng_getcanvasline = function  (    hHandle      : mng_handle;
                                         iLinenr      : mng_uint32) : mng_ptr; stdcall;
@@ -369,6 +384,9 @@ function  mng_set_bgcolor         (    hHandle         : mng_handle;
                                        iGreen          : mng_uint16;
                                        iBlue           : mng_uint16       ) : mng_retcode;       stdcall;
 
+function  mng_set_usebkgd         (    hHandle         : mng_handle;
+                                       bUseBKGD        : mng_bool         ) : mng_retcode;       stdcall;
+
 function  mng_set_storechunks     (    hHandle         : mng_handle;
                                        bStorechunks    : mng_bool         ) : mng_retcode;       stdcall;
 
@@ -427,6 +445,8 @@ procedure mng_get_bgcolor         (    hHandle         : mng_handle;
                                    var iRed            : mng_uint16;
                                    var iGreen          : mng_uint16;
                                    var iBlue           : mng_uint16       );                     stdcall;
+
+function  mng_get_usebkgd         (    hHandle         : mng_handle       ) : mng_bool;          stdcall;
 
 function  mng_get_storechunks     (    hHandle         : mng_handle       ) : mng_bool;          stdcall;
 
@@ -1523,6 +1543,7 @@ function mng_set_canvasstyle;      external mngdll;
 function mng_set_bkgdstyle;        external mngdll;
 
 function mng_set_bgcolor;          external mngdll;
+function mng_set_usebkgd;          external mngdll;
 
 function mng_set_storechunks;      external mngdll;
 
@@ -1565,6 +1586,7 @@ function  mng_get_canvasstyle;     external mngdll;
 function  mng_get_bkgdstyle;       external mngdll;
 
 procedure mng_get_bgcolor;         external mngdll;
+function  mng_get_usebkgd;         external mngdll;
 
 function  mng_get_storechunks;     external mngdll;
 
