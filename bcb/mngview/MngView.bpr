@@ -32,18 +32,20 @@ DEBUGLIBPATH = $(BCB)\lib\debug
 RELEASELIBPATH = $(BCB)\lib\release
 # ---------------------------------------------------------------------------
 CFLAG1 = -Od -w -Ve -r- -k -y -v -vi- -c -b- -w-par -w-inl -Vx -tW
-CFLAG2 = -D_RTLDLL -I$(BCB)\include;$(BCB)\include\vcl
+CFLAG2 = -I$(BCB)\include;$(BCB)\include\vcl;..\..;..\..\..\zlib;..\..\..\jpgsrc6b
 CFLAG3 = -Tkh30000 -6
-PFLAGS = -D_RTLDLL -U$(BCB)\lib\obj;$(BCB)\lib;$(RELEASELIBPATH) \
-  -I$(BCB)\include;$(BCB)\include\vcl -$Y -$W -$O- -v -JPHN -M
-RFLAGS = -D_RTLDLL -i$(BCB)\include;$(BCB)\include\vcl
-AFLAGS = /i$(BCB)\include /i$(BCB)\include\vcl /d_RTLDLL /mx /w2 /zd
-LFLAGS = -L$(BCB)\lib\obj;$(BCB)\lib;$(RELEASELIBPATH) -aa -Tpe -x -Gn -v
+PFLAGS = -U$(BCB)\lib\obj;$(BCB)\lib;$(RELEASELIBPATH) \
+  -I$(BCB)\include;$(BCB)\include\vcl;..\..;..\..\..\zlib;..\..\..\jpgsrc6b -$Y \
+  -$W -$O- -v -JPHN -M
+RFLAGS = -i$(BCB)\include;$(BCB)\include\vcl;..\..;..\..\..\zlib;..\..\..\jpgsrc6b
+AFLAGS = /i$(BCB)\include /i$(BCB)\include\vcl /i..\.. /i..\..\..\zlib \
+  /i..\..\..\jpgsrc6b /mx /w2 /zd /dMNG_USE_DLL
+LFLAGS = -L$(BCB)\lib\obj;$(BCB)\lib;$(RELEASELIBPATH) -aa -Tpe -x -Gn
 IFLAGS =
 # ---------------------------------------------------------------------------
 ALLOBJ = c0w32.obj sysinit.obj $(OBJFILES)
 ALLRES = $(RESFILES)
-ALLLIB = $(LIBFILES) $(LIBRARIES) import32.lib cp32mti.lib
+ALLLIB = $(LIBFILES) $(LIBRARIES) import32.lib cp32mt.lib
 # ---------------------------------------------------------------------------
 !ifdef IDEOPTIONS
 
@@ -75,9 +77,15 @@ ProductVersion=1.0.0.0
 Comments=
 
 [HistoryLists\hlIncludePath]
-Count=2
-Item0=$(BCB)\include;$(BCB)\include\vcl
-Item1=..\..\delphi;$(BCB)\include;$(BCB)\include\vcl
+Count=8
+Item0=$(BCB)\include;$(BCB)\include\vcl;..\..;..\..\..\zlib;..\..\..\jpgsrc6b
+Item1=$(BCB)\include;$(BCB)\include\vcl;..\..;..\..\..\zlib;..\..\..\jpgsrc6b;..\win32dll
+Item2=$(BCB)\include;$(BCB)\include\vcl;..\..;..\..\..\zlib;..\..\..\ijgsrc6b
+Item3=$(BCB)\include;$(BCB)\include\vcl;..\..;..\..\..\zlib;..\..\..\libjpeg
+Item4=$(BCB)\include;$(BCB)\include\vcl;..\..;..\..\zlib
+Item5=$(BCB)\include;$(BCB)\include\vcl;..\..
+Item6=$(BCB)\include;$(BCB)\include\vcl
+Item7=..\..\delphi;$(BCB)\include;$(BCB)\include\vcl
 
 [HistoryLists\hlLibraryPath]
 Count=2
@@ -89,9 +97,10 @@ Count=1
 Item0=$(BCB)\source\vcl
 
 [HistoryLists\hlConditionals]
-Count=2
-Item0=_RTLDLL
-Item1=_RTLDLL;USEPACKAGES
+Count=3
+Item0=MNG_USE_DLL
+Item1=_RTLDLL
+Item2=_RTLDLL;USEPACKAGES
 
 [Debugging]
 DebugSourceDirs=$(BCB)\source\vcl

@@ -388,7 +388,7 @@ begin                                  { initialize }
                                        { no need to store chunk-info ! }
   mng_set_storechunks    (IFHandle, MNG_FALSE);
                                        { do not use suspension-buffer }
-  mng_set_suspensionmode (IFHandle, MNG_FALSE);
+  mng_set_suspensionmode (IFHandle, MNG_TRUE);
                                        { supply it with the sRGB profile }
   if (mng_set_srgb            (IFHandle, true          ) <> MNG_NOERROR) or
      (mng_set_outputprofile   (IFHandle, @SHProfileName) <> MNG_NOERROR) then

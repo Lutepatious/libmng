@@ -6,20 +6,59 @@
 
 /****************************************************************************}
 {*              For conditions of distribution and use,                     *}
-{*                 see copyright notice in libmng.h                         *}
+{*                 see copyright notice in libmng.pas                       *}
 {****************************************************************************}
 {*                                                                          *}
 {*  project   : libmng                                                      *}
-{*  file      : main.cpp                  copyright (c) 2000 Andy Protano   *}
+{*  file      : main.pas                  copyright (c) 2000 G.Juyn         *}
 {*  version   : 0.9.1                                                       *}
 {*                                                                          *}
 {*  purpose   : Main form for mngview application                           *}
 {*                                                                          *}
-{*  author    : Andy Protano (original pascal-source by G.Juyn)             *}
+{*  author    : G.Juyn                                                      *}
+{*  web       : http://www.3-t.com                                          *}
+{*  email     : mailto:info@3-t.com                                         *}
 {*                                                                          *}
-{*  comment   : this is the heart of the mngview application                *}
+{*  comment   : this is the heart of the mngview applciation                *}
 {*                                                                          *}
 {*  changes   : This project is a converted version of "mngview" - AP       *}
+{*              - AP - 15/9/2000 - revisions ...                            *}
+{*              - made the callbacks calling convention explicit            *}
+(*              - Moved the defines from "project options" to "main.h"      *}
+{*              - Added Readme.txt to the project - Please READ IT !        *}
+(*                                                                          *}
+{*              0.5.1 - 05/02/2000 - G.Juyn                                 *}
+{*              - added this version block                                  *}
+{*              - made the initialization part more robust                  *}
+{*                eg. program aborts on initialization errors               *}
+{*              - B002(105797) - added check for existence of default sRGB  *}
+{*                profile (now included in distribution)                    *}
+{*              - added mng_cleanup to program exit                         *}
+{*              0.5.1 - 05/08/2000 - G.Juyn                                 *}
+{*              - changed to stdcall convention                             *}
+{*              0.5.1 - 05/11/2000 - G.Juyn                                 *}
+{*              - changed callback function declarations                    *}
+{*                                                                          *}
+{*              0.5.3 - 06/16/2000 - G.Juyn                                 *}
+{*              - removed processmessages call from refresh callback        *}
+{*              0.5.3 - 06/17/2000 - G.Juyn                                 *}
+{*              - switched "storechunks" off                                *}
+{*              0.5.3 - 06/26/2000 - G.Juyn                                 *}
+{*              - changed definition of userdata to mng_ptr                 *}
+{*              0.5.3 - 06/28/2000 - G.Juyn                                 *}
+{*              - changed the default icon to something more appropriate    *}
+{*              - changed definition of memory alloc size to mng_size_t     *}
+{*              0.5.3 - 06/29/2000 - G.Juyn                                 *}
+{*              - changed order of refresh parameters                       *}
+{*                                                                          *}
+{*              0.9.0 - 06/30/2000 - G.Juyn                                 *}
+{*              - changed refresh parameters to 'x,y,width,height'          *}
+{*                                                                          *}
+{*              0.9.1 - 07/08/2000 - G.Juyn                                 *}
+{*              - fixed to use returncode constants                         *}
+{*              - changed to accomodate MNG_NEEDTIMERWAIT returncode        *}
+{*              0.9.1 - 07/10/2000 - G.Juyn                                 *}
+{*              - changed to use suspension-mode                            *}
 {*                                                                          *}
 {****************************************************************************/
 
@@ -35,13 +74,31 @@ TMainForm *MainForm;
 # define _NIL_    0
 # define _SHR_    >>
 # define _SHL_    <<
+
+// Prototypes for static functions - the LibMng Callbacks.
+static mng_ptr __stdcall Memalloc( mng_uint32 iLen );
+static void __stdcall Memfree( mng_ptr iPtr, mng_size_t iLen );
+static mng_bool __stdcall Openstream( mng_handle hHandle );
+static mng_bool __stdcall Closestream( mng_handle hHandle );
+static mng_bool __stdcall Readdata ( mng_handle hHandle, mng_ptr pBuf,
+                              mng_uint32 iBuflen, mng_uint32 *pRead );
+static mng_bool __stdcall ProcessHeader ( mng_handle hHandle,
+                                mng_uint32 iWidth, mng_uint32 iHeight );
+static mng_ptr __stdcall GetCanvasLine ( mng_handle hHandle,
+                                                    mng_uint32 iLinenr );
+static mng_ptr __stdcall GetAlphaLine( mng_handle hHandle, mng_uint32 iLinenr );
+static mng_bool __stdcall ImageRefresh ( mng_handle hHandle,
+  mng_uint32 iX, mng_uint32 iY, mng_uint32 iWidth, mng_uint32 iHeight );
+static mng_uint32 __stdcall GetTickCount( mng_handle hHandle );
+static mng_bool __stdcall SetTimer( mng_handle hHandle, mng_uint32 iMsecs );
+
 //---------------------------------------------------------------------------
 __fastcall TMainForm::TMainForm(TComponent* Owner)
   : TForm(Owner)
 {
 }
 //---------------------------------------------------------------------------
-static __stdcall mng_ptr Memalloc( mng_uint32 iLen )
+static mng_ptr __stdcall Memalloc( mng_uint32 iLen )
 {
 mng_ptr pResult =
 
@@ -53,13 +110,13 @@ mng_ptr pResult =
   return pResult;
 }
 //---------------------------------------------------------------------------
-static __stdcall void Memfree( mng_ptr iPtr, mng_size_t iLen )
+static void __stdcall Memfree( mng_ptr iPtr, mng_size_t iLen )
 {
   free( iPtr );   /* free the memory */
   (void)iLen;     // Kill compiler warning
 }
 //---------------------------------------------------------------------------
-static __stdcall mng_bool Openstream( mng_handle hHandle )
+static mng_bool __stdcall Openstream( mng_handle hHandle )
 {
 TMainForm  *OHForm;
 
@@ -76,7 +133,7 @@ TMainForm  *OHForm;
   OHForm->ProgressBar1->Position = 0;               /* Added */
   OHForm->ProgressBar1->Min =0;                     /* Added */
   OHForm->ProgressBar1->Max = OHForm->OFFile->Size; /* Added */
-  
+
   return MNG_TRUE;
 }
 //---------------------------------------------------------------------------
@@ -95,8 +152,8 @@ TMainForm  *OHForm;
   return MNG_TRUE;
 }
 //---------------------------------------------------------------------------
-mng_bool __stdcall Readdata ( mng_handle hHandle, mng_ptr pBuf,
-                              mng_uint32 iBuflen, mng_uint32 &pRead )
+static mng_bool __stdcall Readdata ( mng_handle hHandle, mng_ptr pBuf,
+                              mng_uint32 iBuflen, mng_uint32 *pRead )
 {
 TMainForm     *OHForm;
 unsigned int  IHTicks;
@@ -110,7 +167,7 @@ unsigned int  IHBytesPerSec ;
   /* are we at EOF ? */
   if( OHForm->OFFile->Position >= OHForm->OFFile->Size )
   {
-    pRead = 0;                      /* indicate so */
+    *pRead = 0;                      /* indicate so */
   }
   else
   {
@@ -130,16 +187,16 @@ unsigned int  IHBytesPerSec ;
     };
 
     /* read the requested data */
-    pRead   = OHForm->OFFile->Read( pBuf, iBuflen);
-    OHForm->IFBytes = OHForm->IFBytes + pRead;
-    
+    *pRead   = OHForm->OFFile->Read( pBuf, iBuflen);
+    OHForm->IFBytes = OHForm->IFBytes + *pRead;
+
     OHForm->ProgressBar1->Position = (int)OHForm->IFBytes;  /* Added */
   } // end else;
 
   return MNG_TRUE;
 }
 //---------------------------------------------------------------------------
-mng_bool __stdcall ProcessHeader ( mng_handle hHandle,
+static mng_bool __stdcall ProcessHeader ( mng_handle hHandle,
                                 mng_uint32 iWidth, mng_uint32 iHeight )
 {
 TMainForm  *OHForm;
@@ -173,26 +230,17 @@ TMainForm  *OHForm;
   OHForm->OFBitmap->Canvas->Pen->Style   = psSolid;
   OHForm->OFBitmap->Canvas->FrameRect( OHForm->OFBitmap->Canvas->ClipRect);
 
-# ifdef TEST_RGB8_A8
-  if( OFAlpha == 0 )
-    malloc( OHForm->OFAlpha, iWidth );
-# endif
-
   /* make sure it gets out there */
   OHForm->OFImage->Picture->Assign( OHForm->OFBitmap );
 
   /* tell the library we want funny windows-bgr*/
-# ifdef TEST_RGB8_A8
-  if( mng_set_canvasstyle( hHandle, MNG_CANVAS_RGB8_A8 ) )
-# else
   if( mng_set_canvasstyle( hHandle, MNG_CANVAS_BGR8 ) )
-# endif
     OHForm->MNGerror( "libmng reported an error setting the canvas style" );
 
   return MNG_TRUE;
 }
 //---------------------------------------------------------------------------
-mng_ptr __stdcall GetCanvasLine ( mng_handle hHandle,
+static mng_ptr __stdcall GetCanvasLine ( mng_handle hHandle,
                                                     mng_uint32 iLinenr )
 {
 TMainForm  *OHForm;
@@ -204,7 +252,7 @@ TMainForm  *OHForm;
   return OHForm->OFBitmap->ScanLine[ iLinenr ];
 }
 //---------------------------------------------------------------------------
-mng_bool __stdcall ImageRefresh ( mng_handle hHandle,
+static mng_bool __stdcall ImageRefresh ( mng_handle hHandle,
   mng_uint32 iX, mng_uint32 iY, mng_uint32 iWidth, mng_uint32 iHeight )
 {
 TMainForm  *OHForm;
@@ -218,12 +266,12 @@ TMainForm  *OHForm;
   return MNG_TRUE;
 }
 //---------------------------------------------------------------------------
-mng_uint32 __stdcall GetTickCount( mng_handle hHandle )
+static mng_uint32 __stdcall GetTickCount( mng_handle hHandle )
 {
   return GetTickCount();      /* windows knows that */
 }
 //---------------------------------------------------------------------------
-mng_bool __stdcall SetTimer( mng_handle hHandle, mng_uint32 iMsecs )
+static mng_bool __stdcall SetTimer( mng_handle hHandle, mng_uint32 iMsecs )
 {
 TMainForm  *OHForm;
 
@@ -330,7 +378,6 @@ mng_uint16      IHRed, IHGreen, IHBlue; /* word */
 
   if( mng_set_bgcolor (IFHandle, IHRed, IHGreen, IHBlue) != MNG_NOERROR )
     MNGerror( "libmng reported an error setting the background color!");
-
 }
 //---------------------------------------------------------------------------
 void __fastcall TMainForm::FormCloseQuery(TObject *Sender,
@@ -347,7 +394,7 @@ void __fastcall TMainForm::FormCloseQuery(TObject *Sender,
 
   OFTimer->Enabled = false;
 
-  mng_cleanup (IFHandle);
+  mng_cleanup( &IFHandle );
 
 }
 //---------------------------------------------------------------------------
@@ -415,6 +462,7 @@ void __fastcall TMainForm::OFMenuFileOpenClick(TObject *Sender)
 mng_retcode   IHRslt;
 
   OFOpenDialog->InitialDir = "";
+OFOpenDialog->InitialDir = GetCurrentDir(); //@@
   OFOpenDialog->FileName   = SFFileName;
 
   if( OFOpenDialog->Execute() )  /* get the filename */
@@ -470,7 +518,7 @@ char    SHProfileDir[ MAX_PATH ];
 //---------------------------------------------------------------------------
 void __fastcall TMainForm::OFMenuFileExitClick(TObject *Sender)
 {
-  if( mng_cleanup( IFHandle ) != MNG_NOERROR )
+  if( mng_cleanup( &IFHandle ) != MNG_NOERROR )
     MNGerror( "libmng cleanup error" );
 
   Close();
@@ -503,7 +551,7 @@ void __fastcall TMainForm::OFMenuOptionsModemSpeedClick(TObject *Sender)
   if( IFBytesPerSec == (unsigned int)OFMenuOptionsModemISDN128->Tag _DIV_ 10 )
     OFMenuOptionsModemISDN128->Checked   = true;
   else
-  /* Added - changed was the line below ! */
+  /* Added - changedit was the line below ! */
 //  if( IFBytesPerSec == (unsigned int)OFMenuOptionsModemUnlimited->Tag _DIV_ 10 )
   if( IFBytesPerSec == (unsigned int)OFMenuOptionsModemCable512->Tag _DIV_ 10 )
     OFMenuOptionsModemCable512->Checked  = true;
@@ -529,8 +577,9 @@ mng_int32   iExtra2;
 mng_pchar   zErrortext;
 char        szFormatStr[ 256 ];
 
-  iErrorcode = mng_getlasterror (IFHandle, iSeverity, iChunkname, iChunkseq,
-                                            iExtra1, iExtra2, zErrortext);
+  iErrorcode = mng_getlasterror (IFHandle, &iSeverity,
+                  &iChunkname, &iChunkseq, &iExtra1, &iExtra2,
+                  (mng_pchar*)&zErrortext);
 
   wsprintf( szFormatStr,
     "Error = %d; Severity = %d; Chunknr = %d; Extra1 = %d",

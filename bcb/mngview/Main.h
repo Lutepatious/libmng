@@ -10,7 +10,17 @@
 #include <ExtCtrls.hpp>
 #include <Menus.hpp>
 #include <ComCtrls.hpp>
-#include "libmng.hpp"
+//---------------------------------------------------------------------------
+// These MUST be defined before we include "Libmng.h
+# define MNG_SUPPORT_READ
+# define MNG_ACCESS_CHUNKS
+# define MNG_STORE_CHUNKS
+# define MNG_NO_CMS
+# define MNG_USE_DLL
+# define MNG_SUPPORT_DISPLAY
+# define MNG_SKIP_ZLIB          // we don't need the zlib definitions here
+# define MNG_SKIP_IJG6B         // we don't need the IJG definitions here
+#include "libmng.h"
 //---------------------------------------------------------------------------
 class TMainForm : public TForm
 {
