@@ -99,6 +99,8 @@ unit libmng;
 {*                                                                          *}
 {*              0.9.2 - 08/04/2000 - G.Juyn                                 *}
 {*              - fixed in line with libmng.h                               *}
+{*              0.9.2 - 08/05/2000 - G.Juyn                                 *}
+{*              - added function to set simplicity field                    *}
 {*                                                                          *}
 {****************************************************************************}
 
@@ -1250,6 +1252,9 @@ function  mng_updatemngheader     (    hHandle            : mng_handle;
                                        iLayercount        : mng_uint32;
                                        iPlaytime          : mng_uint32   ) : mng_retcode; stdcall;
                                        
+function  mng_updatemngsimplicity (    hHandle            : mng_handle;
+                                       iSimplicity        : mng_uint32   ) : mng_retcode; stdcall;
+
 {****************************************************************************}
 
 const MNG_NOERROR          = 0;
@@ -1704,6 +1709,7 @@ function  mng_putchunk_unknown;    external mngdll;
 {****************************************************************************}
 
 function  mng_updatemngheader;     external mngdll;
+function  mng_updatemngsimplicity; external mngdll;
 
 {****************************************************************************}
 
