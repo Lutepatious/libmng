@@ -580,7 +580,8 @@ begin                                  { get extended info }
   iErrorcode := mng_getlasterror (IFHandle, iSeverity, iChunkname, iChunkseq,
                                             iExtra1, iExtra2, zErrortext);
 
-  MessageDlg (SHMsg + #13#10#13#10 + mng_errorname (iErrorcode) + #13#10#13#10 +
+//  MessageDlg (SHMsg + #13#10#13#10 + mng_errorname (iErrorcode) + #13#10#13#10 +
+  MessageDlg (SHMsg + #13#10#13#10 + strpas (zErrortext) + #13#10#13#10 +
               Format ('Error = %d; Severity = %d; Chunknr = %d; Extra1 = %d',
                       [iErrorcode, iSeverity, iChunkseq, iExtra1]),
               mtError, [mbOK], 0);
