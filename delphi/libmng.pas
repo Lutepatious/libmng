@@ -44,7 +44,7 @@ unit libmng;
 {*                                                                          *}
 {*  project   : libmng                                                      *}
 {*  file      : libmng.pas                copyright (c) 2000 G.Juyn         *}
-{*  version   : 0.5.3                                                       *}
+{*  version   : 0.9.0                                                       *}
 {*                                                                          *}
 {*  purpose   : libmng.dll wrapper unit                                     *}
 {*                                                                          *}
@@ -84,6 +84,9 @@ unit libmng;
 {*              0.5.3 - 06/29/2000 - G.Juyn                                 *}
 {*              - changed order of refresh parameters                       *}
 {*              - changed definition of mng_handle                          *}
+{*                                                                          *}
+{*              0.9.0 - 06/30/2000 - G.Juyn                                 *}
+{*              - changed refresh parameters to 'x,y,width,height'          *}
 {*                                                                          *}
 {****************************************************************************}
 
@@ -181,10 +184,10 @@ type mng_getalphaline  = function  (    hHandle      : mng_handle;
 type mng_getbkgdline   = function  (    hHandle      : mng_handle;
                                         iLinenr      : mng_uint32) : mng_ptr; stdcall;
 type mng_refresh       = function  (    hHandle      : mng_handle;
-                                        iLeft        : mng_uint32;
-                                        iTop         : mng_uint32;
-                                        iRight       : mng_uint32;
-                                        iBottom      : mng_uint32) : mng_bool; stdcall;
+                                        iX           : mng_uint32;
+                                        iY           : mng_uint32;
+                                        iWidth       : mng_uint32;
+                                        iHeight      : mng_uint32) : mng_bool; stdcall;
 
 type mng_gettickcount  = function  (    hHandle      : mng_handle) : mng_uint32; stdcall;
 type mng_settimer      = function  (    hHandle      : mng_handle;

@@ -42,7 +42,7 @@
 /* *                                                                        * */
 /* * project   : bogus                                                      * */
 /* * file      : bogus.cpp                 copyright (c) 2000 G.Juyn        * */
-/* * version   : 0.5.3                                                      * */
+/* * version   : 0.9.0                                                      * */
 /* *                                                                        * */
 /* * purpose   : main project file                                          * */
 /* *                                                                        * */

@@ -88,9 +88,9 @@ ALLLIB = $(LIBFILES)  import32.lib cw32mt.lib
 IncludeVerInfo=1
 AutoIncBuild=1
 MajorVer=0
-MinorVer=5
-Release=3
-Build=452
+MinorVer=9
+Release=0
+Build=453
 Debug=0
 PreRelease=1
 Special=0
@@ -102,14 +102,14 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=
 FileDescription=libmng - THE MNG library
-FileVersion=0.5.3.452
+FileVersion=0.9.0.453
 InternalName=libmng
 LegalCopyright=Copyright 2000 G.Juyn
 LegalTrademarks=
 OriginalFilename=libmng.dll
 ProductName=libmng
-ProductVersion=0.5.3
-Comments=Developer-release
+ProductVersion=0.9.0
+Comments=Developer-beta1
 
 [HistoryLists\hlIncludePath]
 Count=8

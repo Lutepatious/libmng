@@ -14,7 +14,7 @@ uses
 {*                                                                          *}
 {*  project   : libmng                                                      *}
 {*  file      : main.pas                  copyright (c) 2000 G.Juyn         *}
-{*  version   : 0.5.3                                                       *}
+{*  version   : 0.9.0                                                       *}
 {*                                                                          *}
 {*  purpose   : Main form for mngview application                           *}
 {*                                                                          *}
@@ -47,6 +47,9 @@ uses
 {*              - changed definition of memory alloc size to mng_size_t     *}
 {*              0.5.3 - 06/29/2000 - G.Juyn                                 *}
 {*              - changed order of refresh parameters                       *}
+{*                                                                          *}
+{*              0.9.0 - 06/30/2000 - G.Juyn                                 *}
+{*              - changed refresh parameters to 'x,y,width,height'          *}
 {*                                                                          *}
 {****************************************************************************}
 
@@ -322,10 +325,10 @@ end;
 
 {$F+}
 function ImageRefresh (hHandle : mng_handle;
-                       iLeft   : mng_uint32;
-                       iTop    : mng_uint32;
-                       iRight  : mng_uint32;
-                       iBottom : mng_uint32) : mng_bool; stdcall;
+                       iX      : mng_uint32;
+                       iY      : mng_uint32;
+                       iWidth  : mng_uint32;
+                       iHeight : mng_uint32) : mng_bool; stdcall;
 {$F-}
 
 var OHForm : TMainForm;

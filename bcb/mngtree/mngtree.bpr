@@ -57,9 +57,9 @@ ALLLIB = $(LIBFILES)  import32.lib cw32mt.lib libmng.lib
 IncludeVerInfo=1
 AutoIncBuild=1
 MajorVer=0
-MinorVer=1
+MinorVer=9
 Release=0
-Build=11
+Build=12
 Debug=1
 PreRelease=1
 Special=0
@@ -71,13 +71,13 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=
 FileDescription=Executable (Console)
-FileVersion=0.1.0.11
+FileVersion=0.9.0.12
 InternalName=mngtree
 LegalCopyright=copyright (c) 2000 G.Juyn
 LegalTrademarks=
 OriginalFilename=mngtree.exe
 ProductName=mngtree
-ProductVersion=0.1.0
+ProductVersion=0.9.0
 Comments=
 
 [HistoryLists\hlIncludePath]

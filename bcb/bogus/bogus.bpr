@@ -57,9 +57,9 @@ ALLLIB = $(LIBFILES)  import32.lib cw32mt.lib
 IncludeVerInfo=1
 AutoIncBuild=1
 MajorVer=0
-MinorVer=1
+MinorVer=9
 Release=0
-Build=5
+Build=6
 Debug=1
 PreRelease=1
 Special=0
@@ -71,13 +71,13 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=
 FileDescription=Executable (Console)
-FileVersion=0.1.0.5
+FileVersion=0.9.0.6
 InternalName=bogus
 LegalCopyright=copyright (c) 2000 G. Juyn
 LegalTrademarks=
 OriginalFilename=bogus.exe
 ProductName=bogus
-ProductVersion=0.1.0
+ProductVersion=0.9.0
 Comments=
 
 [HistoryLists\hlIncludePath]
