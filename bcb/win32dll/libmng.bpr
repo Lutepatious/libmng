@@ -93,7 +93,7 @@ AutoIncBuild=1
 MajorVer=1
 MinorVer=0
 Release=8
-Build=1101
+Build=1112
 Debug=0
 PreRelease=1
 Special=0
@@ -105,7 +105,7 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=G. Juyn
 FileDescription=libmng - THE MNG library
-FileVersion=1.0.8.1101
+FileVersion=1.0.8.1112
 InternalName=libmng
 LegalCopyright=Copyright © 2000-2004 G. Juyn
 LegalTrademarks=
@@ -191,28 +191,29 @@ Item0=..\..\..\obj
 Item1=..\..\..\..\obj
 
 [HistoryLists\hlHostApplication]
-Count=21
-Item0=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\MNGJNGportal.exe
-Item1=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngview.exe
-Item2=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngtree.exe
-Item3=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngdump.exe
-Item4=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\lm_diag.exe
-Item5=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\eMNGma.exe
-Item6=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\bogus.exe
-Item7=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\TestNGImage.exe
-Item8=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngrepair.exe
-Item9=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\Test_lz.exe
-Item10=D:\Triple-T\Software\LossyPNG\Bin\Test_lz.exe
-Item11=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\SlowView.exe
-Item12=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\Bin\eMNGma.exe
-Item13=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngpromo.exe
-Item14=D:\Triple-T\Software\mnglib3t\libmng\bcb\win32dll\mngdump.exe
-Item15=D:\Triple-T\Software\mnglib3t\libmng\bcb\win32dll\mngview.exe
-Item16=D:\Triple-T\Software\mnglib3t\libmng\bcb\win32dll\bogus.exe
-Item17=D:\Triple-T\Software\mnglib3t\libmng\bcb\win32dll\mngtree.exe
-Item18=D:\Triple-T\Software\mnglib3t\libmng\samples\bcb\win32dll\mngview.exe
-Item19=D:\Triple-T\Software\mnglib3t\libmng\samples\bcb\win32dll\mngdump.exe
-Item20=D:\Triple-T\Software\mnglib3t\libmng\samples\Delphi3\mngdump\mngdump.exe
+Count=22
+Item0=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngview_push.exe
+Item1=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\MNGJNGportal.exe
+Item2=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngview.exe
+Item3=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngtree.exe
+Item4=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngdump.exe
+Item5=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\lm_diag.exe
+Item6=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\eMNGma.exe
+Item7=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\bogus.exe
+Item8=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\TestNGImage.exe
+Item9=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngrepair.exe
+Item10=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\Test_lz.exe
+Item11=D:\Triple-T\Software\LossyPNG\Bin\Test_lz.exe
+Item12=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\SlowView.exe
+Item13=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\Bin\eMNGma.exe
+Item14=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngpromo.exe
+Item15=D:\Triple-T\Software\mnglib3t\libmng\bcb\win32dll\mngdump.exe
+Item16=D:\Triple-T\Software\mnglib3t\libmng\bcb\win32dll\mngview.exe
+Item17=D:\Triple-T\Software\mnglib3t\libmng\bcb\win32dll\bogus.exe
+Item18=D:\Triple-T\Software\mnglib3t\libmng\bcb\win32dll\mngtree.exe
+Item19=D:\Triple-T\Software\mnglib3t\libmng\samples\bcb\win32dll\mngview.exe
+Item20=D:\Triple-T\Software\mnglib3t\libmng\samples\bcb\win32dll\mngdump.exe
+Item21=D:\Triple-T\Software\mnglib3t\libmng\samples\Delphi3\mngdump\mngdump.exe
 
 [HistoryLists\hlRunParameters]
 Count=3
@@ -225,7 +226,7 @@ DebugSourceDirs=..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\l
 
 [Parameters]
 RunParams=
-HostApplication=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\MNGJNGportal.exe
+HostApplication=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngview_push.exe
 
 !endif
 
