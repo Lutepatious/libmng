@@ -32,18 +32,19 @@ DEBUGLIBPATH = $(BCB)\lib\debug
 RELEASELIBPATH = $(BCB)\lib\release
 # ---------------------------------------------------------------------------
 CFLAG1 = -O2 -w -r- -k -y -v -vi- -c -tWC
-CFLAG2 = -D_NO_VCL;MNG_SUPPORT_WRITE;MNG_ACCESS_CHUNKS;MNG_STORE_CHUNKS;MNG_NO_CMS;MNG_USE_DLL \
-  -I..\..\..\libmng;..\..\..\zlib;$(BCB)\include
+CFLAG2 = -I..\win32dll;..\..\..\libmng-devel;..\..\..\zlib;$(BCB)\include \
+  -D_NO_VCL;MNG_SUPPORT_WRITE;MNG_ACCESS_CHUNKS;MNG_STORE_CHUNKS;MNG_NO_CMS;MNG_USE_DLL
 CFLAG3 = -Tkh30000
-PFLAGS = -D_NO_VCL;MNG_SUPPORT_WRITE;MNG_ACCESS_CHUNKS;MNG_STORE_CHUNKS;MNG_NO_CMS;MNG_USE_DLL \
-  -U$(BCB)\lib;$(DEBUGLIBPATH) -I..\..\..\libmng;..\..\..\zlib;$(BCB)\include -$Y \
-  -$W -$O- -v -JPHN -M
-RFLAGS = -D_NO_VCL;MNG_SUPPORT_WRITE;MNG_ACCESS_CHUNKS;MNG_STORE_CHUNKS;MNG_NO_CMS;MNG_USE_DLL \
-  -i..\..\..\libmng;..\..\..\zlib;$(BCB)\include
-AFLAGS = /i..\..\..\libmng /i..\..\..\zlib /i$(BCB)\include /d_NO_VCL \
+PFLAGS = -U..\win32dll;$(BCB)\lib;$(DEBUGLIBPATH) \
+  -I..\win32dll;..\..\..\libmng-devel;..\..\..\zlib;$(BCB)\include \
+  -D_NO_VCL;MNG_SUPPORT_WRITE;MNG_ACCESS_CHUNKS;MNG_STORE_CHUNKS;MNG_NO_CMS;MNG_USE_DLL \
+  -$Y -$W -$O- -v -JPHN -M
+RFLAGS = -i..\win32dll;..\..\..\libmng-devel;..\..\..\zlib;$(BCB)\include \
+  -D_NO_VCL;MNG_SUPPORT_WRITE;MNG_ACCESS_CHUNKS;MNG_STORE_CHUNKS;MNG_NO_CMS;MNG_USE_DLL
+AFLAGS = /i..\..\..\libmng-devel /i..\..\..\zlib /i$(BCB)\include /d_NO_VCL \
   /dMNG_SUPPORT_WRITE /dMNG_ACCESS_CHUNKS /dMNG_STORE_CHUNKS /dMNG_NO_CMS \
   /dMNG_USE_DLL /mx /w2 /zd
-LFLAGS = -L$(BCB)\lib;$(DEBUGLIBPATH) -ap -Tpe -x -Gn -v
+LFLAGS = -L..\win32dll;$(BCB)\lib;$(DEBUGLIBPATH) -ap -Tpe -x -Gn -v
 IFLAGS =
 # ---------------------------------------------------------------------------
 ALLOBJ = c0x32.obj $(OBJFILES)
@@ -58,7 +59,7 @@ AutoIncBuild=1
 MajorVer=0
 MinorVer=1
 Release=0
-Build=2
+Build=3
 Debug=1
 PreRelease=1
 Special=0
@@ -70,7 +71,7 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=
 FileDescription=Executable (Console)
-FileVersion=0.1.0.2
+FileVersion=0.1.0.3
 InternalName=bogus
 LegalCopyright=copyright (c) 2000 G. Juyn
 LegalTrademarks=
@@ -80,8 +81,9 @@ ProductVersion=0.1.0
 Comments=
 
 [HistoryLists\hlIncludePath]
-Count=1
-Item0=..\..\..\libmng;..\..\..\zlib;$(BCB)\include
+Count=2
+Item0=..\..\..\libmng-devel;..\..\..\zlib;$(BCB)\include
+Item1=..\..\..\libmng;..\..\..\zlib;$(BCB)\include
 
 [HistoryLists\hlLibraryPath]
 Count=1

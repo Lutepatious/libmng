@@ -64,25 +64,24 @@
 /* ************************************************************************** */
 
 USERES("libmng.res");
-USEDEF("..\libmng.def");
-USEUNIT("..\..\mng_hlapi.c");
-USEUNIT("..\..\mng_callback_xs.c");
-USEUNIT("..\..\mng_prop_xs.c");
-USEUNIT("..\..\mng_chunk_xs.c");
-USEUNIT("..\..\mng_object_prc.c");
-USEUNIT("..\..\mng_chunk_prc.c");
-USEUNIT("..\..\mng_chunk_io.c");
-USEUNIT("..\..\mng_read.c");
-USEUNIT("..\..\mng_write.c");
-USEUNIT("..\..\mng_display.c");
-USEUNIT("..\..\mng_dither.c");
-USEUNIT("..\..\mng_pixels.c");
-USEUNIT("..\..\mng_filter.c");
-USEUNIT("..\..\mng_error.c");
-USEUNIT("..\..\mng_trace.c");
-USEUNIT("..\..\mng_cms.c");
-USEUNIT("..\..\mng_zlib.c");
-USEUNIT("..\..\mng_jpeg.c");
+USEUNIT("..\..\..\libmng-devel\mng_hlapi.c");
+USEUNIT("..\..\..\libmng-devel\mng_callback_xs.c");
+USEUNIT("..\..\..\libmng-devel\mng_prop_xs.c");
+USEUNIT("..\..\..\libmng-devel\mng_chunk_xs.c");
+USEUNIT("..\..\..\libmng-devel\mng_object_prc.c");
+USEUNIT("..\..\..\libmng-devel\mng_chunk_prc.c");
+USEUNIT("..\..\..\libmng-devel\mng_chunk_io.c");
+USEUNIT("..\..\..\libmng-devel\mng_read.c");
+USEUNIT("..\..\..\libmng-devel\mng_write.c");
+USEUNIT("..\..\..\libmng-devel\mng_display.c");
+USEUNIT("..\..\..\libmng-devel\mng_dither.c");
+USEUNIT("..\..\..\libmng-devel\mng_pixels.c");
+USEUNIT("..\..\..\libmng-devel\mng_filter.c");
+USEUNIT("..\..\..\libmng-devel\mng_error.c");
+USEUNIT("..\..\..\libmng-devel\mng_trace.c");
+USEUNIT("..\..\..\libmng-devel\mng_cms.c");
+USEUNIT("..\..\..\libmng-devel\mng_zlib.c");
+USEUNIT("..\..\..\libmng-devel\mng_jpeg.c");
 USEUNIT("..\..\..\zlib\adler32.c");
 USEUNIT("..\..\..\zlib\compress.c");
 USEUNIT("..\..\..\zlib\crc32.c");
@@ -143,8 +142,7 @@ USEUNIT("..\..\..\jpgsrc6b\jquant1.c");
 USEUNIT("..\..\..\jpgsrc6b\jcapimin.c");
 USEUNIT("..\..\..\jpgsrc6b\jutils.c");
 USEUNIT("..\..\..\jpgsrc6b\jdapimin.c");
-
-/* ************************************************************************** */
+//---------------------------------------------------------------------------
 #pragma argsused
 int WINAPI DllEntryPoint(HINSTANCE hinst, unsigned long reason, void*)
 {

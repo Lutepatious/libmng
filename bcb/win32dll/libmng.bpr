@@ -50,7 +50,7 @@ LIBRARIES = VCL35.lib
 SPARELIBS = VCL35.lib
 PACKAGES = vclx35.bpi VCL35.bpi vcldb35.bpi vcldbx35.bpi bcbsmp35.bpi dclocx35.bpi \
   Qrpt35.bpi
-DEFFILE = ..\libmng.def
+DEFFILE =
 # ---------------------------------------------------------------------------
 PATHCPP = .;..\..;..\..\..\zlib;..\..\..\jpgsrc6b
 PATHASM = .;
@@ -61,23 +61,23 @@ RELEASELIBPATH = $(BCB)\lib\release
 # ---------------------------------------------------------------------------
 CFLAG1 = -WD -O2 -Hc -w-par -k -y -v -vi -c -tWD
 CFLAG2 = -D_NO_VCL;MNG_SUPPORT_FULL;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_FULL_CMS;MNG_STORE_CHUNKS;MNG_SUPPORT_TRACE;MNG_BUILD_DLL \
-  -I..\..\..\libmng;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\include;$(BCB)\include;$(BCB)\bin \
+  -I..\..\..\libmng;..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\include;$(BCB)\include;$(BCB)\bin \
   -H=$(BCB)\lib\vcl35.csm
 CFLAG3 = -wuse -wucp -wstv -wstu -wsig -wpin -wnod -wnak -wdef -wcln -wbbf -wasm -wamp \
   -wamb -Tkh30000 -ff -5
 PFLAGS = -D_NO_VCL;MNG_SUPPORT_FULL;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_FULL_CMS;MNG_STORE_CHUNKS;MNG_SUPPORT_TRACE;MNG_BUILD_DLL \
   -N2..\..\..\obj -N0..\..\..\obj \
-  -U..\..\..\libmng;..\..\..\jpgsrc6b;..\..\..\zlib;$(BCB)\lib;$(BCB)\bin;$(DEBUGLIBPATH) \
-  -I..\..\..\libmng;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\include;$(BCB)\include;$(BCB)\bin \
+  -U..\..\..\libmng;..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;$(BCB)\lib;$(BCB)\bin;$(DEBUGLIBPATH) \
+  -I..\..\..\libmng;..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\include;$(BCB)\include;$(BCB)\bin \
   -H -W -$Y -$W -$O- -v -JPHN -M
 RFLAGS = -D_NO_VCL;MNG_SUPPORT_FULL;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_FULL_CMS;MNG_STORE_CHUNKS;MNG_SUPPORT_TRACE;MNG_BUILD_DLL \
-  -i..\..\..\libmng;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\include;$(BCB)\include;$(BCB)\bin
-AFLAGS = /i..\..\..\libmng /i..\..\..\zlib /i..\..\..\jpgsrc6b /i..\..\..\lcms\include \
-  /i$(BCB)\include /i$(BCB)\bin /d_NO_VCL /dMNG_SUPPORT_FULL /dMNG_SUPPORT_IJG6B \
-  /dMNG_SUPPORT_JPEG8 /dMNG_SUPPORT_READ /dMNG_SUPPORT_WRITE \
-  /dMNG_SUPPORT_DISPLAY /dMNG_ACCESS_CHUNKS /dMNG_FULL_CMS /dMNG_STORE_CHUNKS \
-  /dMNG_SUPPORT_TRACE /dMNG_BUILD_DLL /mx /w2 /zd
-LFLAGS = -L..\..\..\libmng;..\..\..\jpgsrc6b;..\..\..\zlib;$(BCB)\lib;$(BCB)\bin;$(DEBUGLIBPATH) \
+  -i..\..\..\libmng;..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\include;$(BCB)\include;$(BCB)\bin
+AFLAGS = /i..\..\..\libmng /i..\..\..\libmng-devel /i..\..\..\zlib /i..\..\..\jpgsrc6b \
+  /i..\..\..\lcms\include /i$(BCB)\include /i$(BCB)\bin /d_NO_VCL \
+  /dMNG_SUPPORT_FULL /dMNG_SUPPORT_IJG6B /dMNG_SUPPORT_JPEG8 /dMNG_SUPPORT_READ \
+  /dMNG_SUPPORT_WRITE /dMNG_SUPPORT_DISPLAY /dMNG_ACCESS_CHUNKS /dMNG_FULL_CMS \
+  /dMNG_STORE_CHUNKS /dMNG_SUPPORT_TRACE /dMNG_BUILD_DLL /mx /w2 /zd
+LFLAGS = -L..\..\..\libmng;..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;$(BCB)\lib;$(BCB)\bin;$(DEBUGLIBPATH) \
   -aa -Tpd -x -Gn -Gi -wdef -wdpl -v
 IFLAGS =
 # ---------------------------------------------------------------------------
@@ -92,8 +92,8 @@ IncludeVerInfo=1
 AutoIncBuild=1
 MajorVer=0
 MinorVer=5
-Release=1
-Build=268
+Release=2
+Build=275
 Debug=1
 PreRelease=1
 Special=0
@@ -105,52 +105,60 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=
 FileDescription=libmng - THE MNG library
-FileVersion=0.5.1.268
+FileVersion=0.5.2.275
 InternalName=libmng
 LegalCopyright=Copyright 2000 G.Juyn
 LegalTrademarks=
 OriginalFilename=libmng.dll
 ProductName=libmng
-ProductVersion=0.5.1
+ProductVersion=0.5.2
 Comments=Developer-release
 
 [HistoryLists\hlIncludePath]
-Count=6
-Item0=..\..\..\libmng;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\include;$(BCB)\include;$(BCB)\bin
-Item1=..\..\..\..\jpgsrc6b;..\..\..\..\lcms\include;..\..\..\..\lcms\source;..\..\..\..\zlib;..\..\..\..\libmng;$(BCB)\include;$(BCB)\bin
-Item2=..\..\..\..\lcms\include;..\..\..\..\lcms\source;..\..\..\..\zlib;..\..\..\..\libmng;$(BCB)\include;$(BCB)\bin
-Item3=..\..\..\..\zlib;..\..\..\..\libmng;$(BCB)\include;$(BCB)\bin
-Item4=..\..\libmng;$(BCB)\include;$(BCB)\bin
-Item5=..\..\libmng;$(BCB)\include
+Count=8
+Item0=..\..\..\libmng;..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\include;$(BCB)\include;$(BCB)\bin
+Item1=..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\include;$(BCB)\include;$(BCB)\bin
+Item2=..\..\..\libmng;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\include;$(BCB)\include;$(BCB)\bin
+Item3=..\..\..\..\jpgsrc6b;..\..\..\..\lcms\include;..\..\..\..\lcms\source;..\..\..\..\zlib;..\..\..\..\libmng;$(BCB)\include;$(BCB)\bin
+Item4=..\..\..\..\lcms\include;..\..\..\..\lcms\source;..\..\..\..\zlib;..\..\..\..\libmng;$(BCB)\include;$(BCB)\bin
+Item5=..\..\..\..\zlib;..\..\..\..\libmng;$(BCB)\include;$(BCB)\bin
+Item6=..\..\libmng;$(BCB)\include;$(BCB)\bin
+Item7=..\..\libmng;$(BCB)\include
 
 [HistoryLists\hlLibraryPath]
-Count=6
-Item0=..\..\..\libmng;..\..\..\jpgsrc6b;..\..\..\zlib;$(BCB)\lib;$(BCB)\bin
-Item1=..\..\..\..\jpgsrc6b;..\..\..\..\lcms\source;..\..\..\..\zlib;..\..\..\..\libmng;$(BCB)\lib;$(BCB)\bin
-Item2=..\..\..\..\lcms\source;..\..\..\..\zlib;..\..\..\..\libmng;$(BCB)\lib;$(BCB)\bin
-Item3=..\..\..\..\zlib;..\..\..\..\libmng;$(BCB)\lib;$(BCB)\bin
-Item4=..\..\libmng;$(BCB)\lib;$(BCB)\bin
-Item5=..\..\libmng;$(BCB)\lib
+Count=8
+Item0=..\..\..\libmng;..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;$(BCB)\lib;$(BCB)\bin
+Item1=..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;$(BCB)\lib;$(BCB)\bin
+Item2=..\..\..\libmng;..\..\..\jpgsrc6b;..\..\..\zlib;$(BCB)\lib;$(BCB)\bin
+Item3=..\..\..\..\jpgsrc6b;..\..\..\..\lcms\source;..\..\..\..\zlib;..\..\..\..\libmng;$(BCB)\lib;$(BCB)\bin
+Item4=..\..\..\..\lcms\source;..\..\..\..\zlib;..\..\..\..\libmng;$(BCB)\lib;$(BCB)\bin
+Item5=..\..\..\..\zlib;..\..\..\..\libmng;$(BCB)\lib;$(BCB)\bin
+Item6=..\..\libmng;$(BCB)\lib;$(BCB)\bin
+Item7=..\..\libmng;$(BCB)\lib
 
 [HistoryLists\hlDebugSourcePath]
-Count=4
-Item0=..\..\..\jpgsrc6b;..\..\..\lcms\source;..\..\..\zlib;..\..\..\libmng
-Item1=..\..\..\..\jpgsrc6b;..\..\..\..\lcms\source;..\..\..\..\zlib;..\..\..\..\libmng
-Item2=..\..\..\..\libmng
-Item3=..\..\libmng
+Count=5
+Item0=..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\source
+Item1=..\..\..\jpgsrc6b;..\..\..\lcms\source;..\..\..\zlib;..\..\..\libmng
+Item2=..\..\..\..\jpgsrc6b;..\..\..\..\lcms\source;..\..\..\..\zlib;..\..\..\..\libmng
+Item3=..\..\..\..\libmng
+Item4=..\..\libmng
 
 [HistoryLists\hlConditionals]
-Count=10
+Count=13
 Item0=_NO_VCL;MNG_SUPPORT_FULL;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_FULL_CMS;MNG_STORE_CHUNKS;MNG_SUPPORT_TRACE;MNG_BUILD_DLL
-Item1=_NO_VCL;MNG_SUPPORT_FULL;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_FULL_CMS;MNG_STORE_CHUNKS;MNG_SUPPORT_TRACE;MNG_BUILD_DLL;MNG_ALWAYS_DELAY
-Item2=_NO_VCL;MNG_SUPPORT_FULL;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_APP_CMS;MNG_STORE_CHUNKS;MNG_SUPPORT_TRACE;MNG_BUILD_DLL
-Item3=_NO_VCL;MNG_SUPPORT_FULL;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_FULL_CMS;MNG_STORE_CHUNKS;MNG_SUPPORT_TRACE
-Item4=_NO_VCL;MNG_SUPPORT_FULL;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_FULL_CMS
-Item5=_NO_VCL;MNG_SUPPORT_FULL;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8
-Item6=_NO_VCL
-Item7=_NO_VCL;MNG_DLL
-Item8=_NO_VCL;MNG_USE_STDCALL
-Item9=_NO_VCL;MNG_STDCALL
+Item1=_NO_VCL;MNG_SUPPORT_FULL;XMNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;XMNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_FULL_CMS;MNG_STORE_CHUNKS;MNG_SUPPORT_TRACE;MNG_BUILD_DLL
+Item2=_NO_VCL;MNG_SUPPORT_FULL;XMNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_FULL_CMS;MNG_STORE_CHUNKS;MNG_SUPPORT_TRACE;MNG_BUILD_DLL
+Item3=_NO_VCL;MNG_SUPPORT_FULL;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;XMNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_FULL_CMS;MNG_STORE_CHUNKS;MNG_SUPPORT_TRACE;MNG_BUILD_DLL
+Item4=_NO_VCL;MNG_SUPPORT_FULL;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_FULL_CMS;MNG_STORE_CHUNKS;MNG_SUPPORT_TRACE;MNG_BUILD_DLL;MNG_ALWAYS_DELAY
+Item5=_NO_VCL;MNG_SUPPORT_FULL;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_APP_CMS;MNG_STORE_CHUNKS;MNG_SUPPORT_TRACE;MNG_BUILD_DLL
+Item6=_NO_VCL;MNG_SUPPORT_FULL;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_FULL_CMS;MNG_STORE_CHUNKS;MNG_SUPPORT_TRACE
+Item7=_NO_VCL;MNG_SUPPORT_FULL;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8;MNG_SUPPORT_READ;MNG_SUPPORT_WRITE;MNG_SUPPORT_DISPLAY;MNG_ACCESS_CHUNKS;MNG_FULL_CMS
+Item8=_NO_VCL;MNG_SUPPORT_FULL;MNG_SUPPORT_IJG6B;MNG_SUPPORT_JPEG8
+Item9=_NO_VCL
+Item10=_NO_VCL;MNG_DLL
+Item11=_NO_VCL;MNG_USE_STDCALL
+Item12=_NO_VCL;MNG_STDCALL
 
 [HistoryLists\hlIntOutputDir]
 Count=2
@@ -172,7 +180,7 @@ Count=1
 Item0=usflag-lc-d63.mng
 
 [Debugging]
-DebugSourceDirs=..\..\..\jpgsrc6b;..\..\..\lcms\source;..\..\..\zlib;..\..\..\libmng
+DebugSourceDirs=..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms\source
 
 [Parameters]
 RunParams=

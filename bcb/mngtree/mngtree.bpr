@@ -17,7 +17,7 @@ PROJECT = mngtree.exe
 OBJFILES = mngtree.obj
 RESFILES = mngtree.res
 RESDEPEN = $(RESFILES)
-LIBFILES =
+LIBFILES = ..\win32dll\libmng.lib
 LIBRARIES = VCL35.lib
 SPARELIBS = VCL35.lib
 PACKAGES = vclx35.bpi VCL35.bpi vcldb35.bpi vcldbx35.bpi bcbsmp35.bpi dclocx35.bpi \
@@ -32,14 +32,15 @@ DEBUGLIBPATH = $(BCB)\lib\debug
 RELEASELIBPATH = $(BCB)\lib\release
 # ---------------------------------------------------------------------------
 CFLAG1 = -Od -w -r- -k -y -v -vi- -c -tWC
-CFLAG2 = -D_NO_VCL;MNG_SUPPORT_READ;MNG_ACCESS_CHUNKS;MNG_STORE_CHUNKS;MNG_NO_CMS;MNG_USE_DLL \
-  -I..\..\..\libmng;..\..\..\zlib;$(BCB)\include
+CFLAG2 = -I..\..\..\libmng;..\..\..\zlib;$(BCB)\include \
+  -D_NO_VCL;MNG_SUPPORT_READ;MNG_ACCESS_CHUNKS;MNG_STORE_CHUNKS;MNG_NO_CMS;MNG_USE_DLL
 CFLAG3 = -Tkh30000
-PFLAGS = -D_NO_VCL;MNG_SUPPORT_READ;MNG_ACCESS_CHUNKS;MNG_STORE_CHUNKS;MNG_NO_CMS;MNG_USE_DLL \
-  -U..\..\..\libmng\bcb\win32dll;$(BCB)\lib;$(DEBUGLIBPATH) \
-  -I..\..\..\libmng;..\..\..\zlib;$(BCB)\include -$Y -$W -$O- -v -JPHN -M
-RFLAGS = -D_NO_VCL;MNG_SUPPORT_READ;MNG_ACCESS_CHUNKS;MNG_STORE_CHUNKS;MNG_NO_CMS;MNG_USE_DLL \
-  -i..\..\..\libmng;..\..\..\zlib;$(BCB)\include
+PFLAGS = -U..\..\..\libmng\bcb\win32dll;$(BCB)\lib;$(DEBUGLIBPATH) \
+  -I..\..\..\libmng;..\..\..\zlib;$(BCB)\include \
+  -D_NO_VCL;MNG_SUPPORT_READ;MNG_ACCESS_CHUNKS;MNG_STORE_CHUNKS;MNG_NO_CMS;MNG_USE_DLL \
+  -$Y -$W -$O- -v -JPHN -M
+RFLAGS = -i..\..\..\libmng;..\..\..\zlib;$(BCB)\include \
+  -D_NO_VCL;MNG_SUPPORT_READ;MNG_ACCESS_CHUNKS;MNG_STORE_CHUNKS;MNG_NO_CMS;MNG_USE_DLL
 AFLAGS = /i..\..\..\libmng /i..\..\..\zlib /i$(BCB)\include /d_NO_VCL /dMNG_SUPPORT_READ \
   /dMNG_ACCESS_CHUNKS /dMNG_STORE_CHUNKS /dMNG_NO_CMS /dMNG_USE_DLL /mx /w2 /zd
 LFLAGS = -L..\..\..\libmng\bcb\win32dll;$(BCB)\lib;$(DEBUGLIBPATH) -ap -Tpe -x -Gn -v
