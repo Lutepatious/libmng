@@ -96,7 +96,7 @@ AutoIncBuild=1
 MajorVer=1
 MinorVer=0
 Release=9
-Build=1180
+Build=1238
 Debug=0
 PreRelease=1
 Special=0
@@ -108,7 +108,7 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=G. Juyn
 FileDescription=libmng - THE MNG library
-FileVersion=1.0.9.1180
+FileVersion=1.0.9.1238
 InternalName=libmng
 LegalCopyright=Copyright © 2000-2004 G. Juyn
 LegalTrademarks=
@@ -197,8 +197,8 @@ Item1=..\..\..\..\obj
 
 [HistoryLists\hlHostApplication]
 Count=23
-Item0=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\gif2mng.exe
-Item1=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngview.exe
+Item0=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngview.exe
+Item1=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\gif2mng.exe
 Item2=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\MNGJNGportal.exe
 Item3=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngview_push.exe
 Item4=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngtree.exe
@@ -232,7 +232,7 @@ DebugSourceDirs=..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\l
 
 [Parameters]
 RunParams=
-HostApplication=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\gif2mng.exe
+HostApplication=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngview.exe
 
 !endif
 
