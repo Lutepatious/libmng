@@ -89,8 +89,8 @@ IncludeVerInfo=1
 AutoIncBuild=1
 MajorVer=0
 MinorVer=9
-Release=1
-Build=491
+Release=2
+Build=497
 Debug=0
 PreRelease=1
 Special=0
@@ -102,14 +102,14 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=
 FileDescription=libmng - THE MNG library
-FileVersion=0.9.1.491
+FileVersion=0.9.2.497
 InternalName=libmng
 LegalCopyright=Copyright 2000 G.Juyn
 LegalTrademarks=
 OriginalFilename=libmng.dll
 ProductName=libmng
-ProductVersion=0.9.1
-Comments=Developer-beta2
+ProductVersion=0.9.2
+Comments=Developer-beta3
 
 [HistoryLists\hlIncludePath]
 Count=8
@@ -173,10 +173,10 @@ Item1=..\..\..\..\obj
 
 [HistoryLists\hlHostApplication]
 Count=11
-Item0=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngdump.exe
-Item1=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\eMNGma.exe
-Item2=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngpromo.exe
-Item3=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngview.exe
+Item0=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\eMNGma.exe
+Item1=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngview.exe
+Item2=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngdump.exe
+Item3=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngpromo.exe
 Item4=D:\Triple-T\Software\mnglib3t\libmng\bcb\win32dll\mngdump.exe
 Item5=D:\Triple-T\Software\mnglib3t\libmng\bcb\win32dll\mngview.exe
 Item6=D:\Triple-T\Software\mnglib3t\libmng\bcb\win32dll\bogus.exe
@@ -194,7 +194,7 @@ DebugSourceDirs=..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\l
 
 [Parameters]
 RunParams=
-HostApplication=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngdump.exe
+HostApplication=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\eMNGma.exe
 
 !endif
 
