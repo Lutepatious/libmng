@@ -14,35 +14,35 @@ BCB = $(MAKEDIR)\..
 VERSION = BCB.03
 # ---------------------------------------------------------------------------
 PROJECT = libmng.dll
-OBJFILES = ..\..\..\obj\libmng.obj ..\..\..\obj\mng_hlapi.obj \
-  ..\..\..\obj\mng_callback_xs.obj ..\..\..\obj\mng_prop_xs.obj \
-  ..\..\..\obj\mng_chunk_xs.obj ..\..\..\obj\mng_object_prc.obj \
-  ..\..\..\obj\mng_chunk_prc.obj ..\..\..\obj\mng_chunk_io.obj \
-  ..\..\..\obj\mng_read.obj ..\..\..\obj\mng_write.obj \
-  ..\..\..\obj\mng_display.obj ..\..\..\obj\mng_dither.obj \
-  ..\..\..\obj\mng_pixels.obj ..\..\..\obj\mng_filter.obj \
-  ..\..\..\obj\mng_error.obj ..\..\..\obj\mng_trace.obj ..\..\..\obj\mng_cms.obj \
-  ..\..\..\obj\mng_zlib.obj ..\..\..\obj\mng_jpeg.obj ..\..\..\obj\adler32.obj \
-  ..\..\..\obj\compress.obj ..\..\..\obj\crc32.obj ..\..\..\obj\deflate.obj \
-  ..\..\..\obj\infblock.obj ..\..\..\obj\infcodes.obj ..\..\..\obj\inffast.obj \
-  ..\..\..\obj\inflate.obj ..\..\..\obj\inftrees.obj ..\..\..\obj\infutil.obj \
-  ..\..\..\obj\trees.obj ..\..\..\obj\uncompr.obj ..\..\..\obj\zutil.obj \
-  ..\..\..\obj\jquant2.obj ..\..\..\obj\jcapistd.obj ..\..\..\obj\jccoefct.obj \
-  ..\..\..\obj\jccolor.obj ..\..\..\obj\jcdctmgr.obj ..\..\..\obj\jchuff.obj \
-  ..\..\..\obj\jcinit.obj ..\..\..\obj\jcmainct.obj ..\..\..\obj\jcmarker.obj \
-  ..\..\..\obj\jcmaster.obj ..\..\..\obj\jcomapi.obj ..\..\..\obj\jcparam.obj \
-  ..\..\..\obj\jcphuff.obj ..\..\..\obj\jcprepct.obj ..\..\..\obj\jcsample.obj \
-  ..\..\..\obj\jctrans.obj ..\..\..\obj\jdapistd.obj ..\..\..\obj\jdatadst.obj \
-  ..\..\..\obj\jdatasrc.obj ..\..\..\obj\jdcoefct.obj ..\..\..\obj\jdcolor.obj \
-  ..\..\..\obj\jddctmgr.obj ..\..\..\obj\jdhuff.obj ..\..\..\obj\jdinput.obj \
-  ..\..\..\obj\jdmainct.obj ..\..\..\obj\jdmarker.obj ..\..\..\obj\jdmaster.obj \
-  ..\..\..\obj\jdmerge.obj ..\..\..\obj\jdphuff.obj ..\..\..\obj\jdpostct.obj \
-  ..\..\..\obj\jdsample.obj ..\..\..\obj\jdtrans.obj ..\..\..\obj\jerror.obj \
-  ..\..\..\obj\jfdctflt.obj ..\..\..\obj\jfdctfst.obj ..\..\..\obj\jfdctint.obj \
-  ..\..\..\obj\jidctflt.obj ..\..\..\obj\jidctfst.obj ..\..\..\obj\jidctint.obj \
-  ..\..\..\obj\jidctred.obj ..\..\..\obj\jmemmgr.obj ..\..\..\obj\jmemnobs.obj \
-  ..\..\..\obj\jquant1.obj ..\..\..\obj\jcapimin.obj ..\..\..\obj\jutils.obj \
-  ..\..\..\obj\jdapimin.obj
+OBJFILES = ..\..\..\obj\libmng.obj ..\..\..\obj\libmng_hlapi.obj \
+  ..\..\..\obj\libmng_callback_xs.obj ..\..\..\obj\libmng_prop_xs.obj \
+  ..\..\..\obj\libmng_chunk_xs.obj ..\..\..\obj\libmng_object_prc.obj \
+  ..\..\..\obj\libmng_chunk_prc.obj ..\..\..\obj\libmng_chunk_io.obj \
+  ..\..\..\obj\libmng_read.obj ..\..\..\obj\libmng_write.obj \
+  ..\..\..\obj\libmng_display.obj ..\..\..\obj\libmng_dither.obj \
+  ..\..\..\obj\libmng_pixels.obj ..\..\..\obj\libmng_filter.obj \
+  ..\..\..\obj\libmng_error.obj ..\..\..\obj\libmng_trace.obj \
+  ..\..\..\obj\libmng_cms.obj ..\..\..\obj\libmng_zlib.obj \
+  ..\..\..\obj\libmng_jpeg.obj ..\..\..\obj\adler32.obj ..\..\..\obj\compress.obj \
+  ..\..\..\obj\crc32.obj ..\..\..\obj\deflate.obj ..\..\..\obj\infblock.obj \
+  ..\..\..\obj\infcodes.obj ..\..\..\obj\inffast.obj ..\..\..\obj\inflate.obj \
+  ..\..\..\obj\inftrees.obj ..\..\..\obj\infutil.obj ..\..\..\obj\trees.obj \
+  ..\..\..\obj\uncompr.obj ..\..\..\obj\zutil.obj ..\..\..\obj\jquant2.obj \
+  ..\..\..\obj\jcapistd.obj ..\..\..\obj\jccoefct.obj ..\..\..\obj\jccolor.obj \
+  ..\..\..\obj\jcdctmgr.obj ..\..\..\obj\jchuff.obj ..\..\..\obj\jcinit.obj \
+  ..\..\..\obj\jcmainct.obj ..\..\..\obj\jcmarker.obj ..\..\..\obj\jcmaster.obj \
+  ..\..\..\obj\jcomapi.obj ..\..\..\obj\jcparam.obj ..\..\..\obj\jcphuff.obj \
+  ..\..\..\obj\jcprepct.obj ..\..\..\obj\jcsample.obj ..\..\..\obj\jctrans.obj \
+  ..\..\..\obj\jdapistd.obj ..\..\..\obj\jdatadst.obj ..\..\..\obj\jdatasrc.obj \
+  ..\..\..\obj\jdcoefct.obj ..\..\..\obj\jdcolor.obj ..\..\..\obj\jddctmgr.obj \
+  ..\..\..\obj\jdhuff.obj ..\..\..\obj\jdinput.obj ..\..\..\obj\jdmainct.obj \
+  ..\..\..\obj\jdmarker.obj ..\..\..\obj\jdmaster.obj ..\..\..\obj\jdmerge.obj \
+  ..\..\..\obj\jdphuff.obj ..\..\..\obj\jdpostct.obj ..\..\..\obj\jdsample.obj \
+  ..\..\..\obj\jdtrans.obj ..\..\..\obj\jerror.obj ..\..\..\obj\jfdctflt.obj \
+  ..\..\..\obj\jfdctfst.obj ..\..\..\obj\jfdctint.obj ..\..\..\obj\jidctflt.obj \
+  ..\..\..\obj\jidctfst.obj ..\..\..\obj\jidctint.obj ..\..\..\obj\jidctred.obj \
+  ..\..\..\obj\jmemmgr.obj ..\..\..\obj\jmemnobs.obj ..\..\..\obj\jquant1.obj \
+  ..\..\..\obj\jcapimin.obj ..\..\..\obj\jutils.obj ..\..\..\obj\jdapimin.obj
 RESFILES = libmng.res
 RESDEPEN = $(RESFILES)
 LIBFILES = ..\..\..\lcms\lib\bc\lcmsstat.lib
@@ -90,7 +90,7 @@ AutoIncBuild=1
 MajorVer=0
 MinorVer=9
 Release=2
-Build=513
+Build=514
 Debug=0
 PreRelease=1
 Special=0
@@ -102,7 +102,7 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=
 FileDescription=libmng - THE MNG library
-FileVersion=0.9.2.513
+FileVersion=0.9.2.514
 InternalName=libmng
 LegalCopyright=Copyright 2000 G.Juyn
 LegalTrademarks=
@@ -173,8 +173,8 @@ Item1=..\..\..\..\obj
 
 [HistoryLists\hlHostApplication]
 Count=11
-Item0=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngdump.exe
-Item1=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngview.exe
+Item0=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngview.exe
+Item1=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngdump.exe
 Item2=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\eMNGma.exe
 Item3=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngpromo.exe
 Item4=D:\Triple-T\Software\mnglib3t\libmng\bcb\win32dll\mngdump.exe
@@ -194,7 +194,7 @@ DebugSourceDirs=..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\l
 
 [Parameters]
 RunParams=
-HostApplication=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngdump.exe
+HostApplication=D:\Triple-T\Software\mnglib3t\libmng-devel\bcb\win32dll\mngview.exe
 
 !endif
 
