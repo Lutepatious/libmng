@@ -92,7 +92,7 @@ AutoIncBuild=1
 MajorVer=1
 MinorVer=0
 Release=5
-Build=942
+Build=945
 Debug=0
 PreRelease=1
 Special=0
@@ -102,16 +102,16 @@ Locale=1033
 CodePage=1252
 
 [Version Info Keys]
-CompanyName=
+CompanyName=G. Juyn
 FileDescription=libmng - THE MNG library
-FileVersion=1.0.5.942
+FileVersion=1.0.5.945
 InternalName=libmng
-LegalCopyright=Copyright 2000-2002 G.Juyn
+LegalCopyright=Copyright © 2000-2002 G. Juyn
 LegalTrademarks=
 OriginalFilename=libmng.dll
 ProductName=libmng
-ProductVersion=1.0.5-b2
-Comments=beta-2
+ProductVersion=1.0.5-b3
+Comments=beta-3
 
 [Excluded Packages]
 C:\Program Files\Borland\CBuilder3\Bin\DbX35.bpl=(untitled)
