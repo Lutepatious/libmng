@@ -142,6 +142,7 @@ USEUNIT("..\..\..\jpgsrc6b\jcapimin.c");
 USEUNIT("..\..\..\jpgsrc6b\jutils.c");
 USEUNIT("..\..\..\jpgsrc6b\jdapimin.c");
 USELIB("..\..\..\lcms\Projects\Bcc-5.5-static\lcmsstat.lib");
+USEUNIT("..\..\libmng_chunk_descr.c");
 //---------------------------------------------------------------------------
 #pragma argsused
 int WINAPI DllEntryPoint(HINSTANCE hinst, unsigned long reason, void*)
