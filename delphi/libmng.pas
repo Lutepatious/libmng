@@ -158,6 +158,8 @@ type mng_processtext   = function  (    hHandle      : mng_handle;
 
 type mng_getcanvasline = function  (    hHandle      : mng_handle;
                                         iLinenr      : mng_uint32) : mng_ptr; stdcall;
+type mng_getalphaline  = function  (    hHandle      : mng_handle;
+                                        iLinenr      : mng_uint32) : mng_ptr; stdcall;
 type mng_getbkgdline   = function  (    hHandle      : mng_handle;
                                         iLinenr      : mng_uint32) : mng_ptr; stdcall;
 type mng_refresh       = function  (    hHandle      : mng_handle;
@@ -261,6 +263,8 @@ function  mng_setcb_processtext   (    hHandle      : mng_handle;
 
 function  mng_setcb_getcanvasline (    hHandle      : mng_handle;
                                        fProc        : mng_getcanvasline) : mng_retcode;       stdcall;
+function  mng_setcb_getalphaline  (    hHandle      : mng_handle;
+                                       fProc        : mng_getalphaline ) : mng_retcode;       stdcall;
 function  mng_setcb_getbkgdline   (    hHandle      : mng_handle;
                                        fProc        : mng_getbkgdline  ) : mng_retcode;       stdcall;
 function  mng_setcb_refresh       (    hHandle      : mng_handle;
@@ -301,6 +305,7 @@ function  mng_getcb_processheader (    hHandle      : mng_handle       ) : mng_p
 function  mng_getcb_processtext   (    hHandle      : mng_handle       ) : mng_processtext;   stdcall;
 
 function  mng_getcb_getcanvasline (    hHandle      : mng_handle       ) : mng_getcanvasline; stdcall;
+function  mng_getcb_getalphaline  (    hHandle      : mng_handle       ) : mng_getalphaline;  stdcall;
 function  mng_getcb_getbkgdline   (    hHandle      : mng_handle       ) : mng_getbkgdline;   stdcall;
 function  mng_getcb_refresh       (    hHandle      : mng_handle       ) : mng_refresh;       stdcall;
 
@@ -1181,16 +1186,17 @@ function  mng_putchunk_unknown    (    hHandle            : mng_handle;
 {****************************************************************************}
 
 const MNG_CANVAS_RGB8      = $00000000;
-      MNG_CANVAS_RGB16     = $00000100;          { not supported yet }
       MNG_CANVAS_RGBA8     = $00001000;
-      MNG_CANVAS_RGBA16    = $00001100;          { not supported yet }
       MNG_CANVAS_ARGB8     = $00003000;
-      MNG_CANVAS_ARGB16    = $00003100;          { not supported yet }
+      MNG_CANVAS_RGB8_A8   = $00005000;
       MNG_CANVAS_BGR8      = $00000001;
-      MNG_CANVAS_BGR16     = $00000101;          { not supported yet }
       MNG_CANVAS_BGRA8     = $00001001;
-      MNG_CANVAS_BGRA16    = $00001101;          { not supported yet }
       MNG_CANVAS_ABGR8     = $00003001;
+      MNG_CANVAS_RGB16     = $00000100;          { not supported yet }
+      MNG_CANVAS_RGBA16    = $00001100;          { not supported yet }
+      MNG_CANVAS_ARGB16    = $00003100;          { not supported yet }
+      MNG_CANVAS_BGR16     = $00000101;          { not supported yet }
+      MNG_CANVAS_BGRA16    = $00001101;          { not supported yet }
       MNG_CANVAS_ABGR16    = $00003101;          { not supported yet }
       MNG_CANVAS_GRAY8     = $00000002;          { not supported yet }
       MNG_CANVAS_GRAY16    = $00000102;          { not supported yet }
@@ -1307,6 +1313,7 @@ function mng_setcb_processheader;  external mngdll;
 function mng_setcb_processtext;    external mngdll;
 
 function mng_setcb_getcanvasline;  external mngdll;
+function mng_setcb_getalphaline;   external mngdll;
 function mng_setcb_getbkgdline;    external mngdll;
 function mng_setcb_refresh;        external mngdll;
 
@@ -1338,6 +1345,7 @@ function mng_getcb_processheader;  external mngdll;
 function mng_getcb_processtext;    external mngdll;
 
 function mng_getcb_getcanvasline;  external mngdll;
+function mng_getcb_getalphaline;   external mngdll;
 function mng_getcb_getbkgdline;    external mngdll;
 function mng_getcb_refresh;        external mngdll;
 

@@ -88,6 +88,9 @@ type
     OFFile        : TFileStream;       { input stream }
     IFHandle      : mng_handle;        { the libray handle }
     OFBitmap      : TBitmap;           { drawing canvas }
+{$IFDEF TEST_RGB8_A8}
+    OFAlpha       : pointer;
+{$ENDIF}     
     BFCancelled   : boolean;           { <esc> or app-exit }
 
     IFTicks       : cardinal;          { used to fake slow connections }
@@ -253,9 +256,18 @@ begin                                  { get a fix on our form }
     OFBitmap.Canvas.Pen.Style   := psSolid;
     OFBitmap.Canvas.FrameRect (OFBitmap.Canvas.ClipRect);
 
+{$IFDEF TEST_RGB8_A8}
+    if OFAlpha = nil then
+      GetMem (OFAlpha, iWidth);
+{$ENDIF}
+
     OFImage.Picture.Assign (OFBitmap); { make sure it gets out there }
                                        { tell the library we want funny windows-bgr}
+{$IFDEF TEST_RGB8_A8}
+    if mng_set_canvasstyle (hHandle, MNG_CANVAS_RGB8_A8) <> 0 then
+{$ELSE}
     if mng_set_canvasstyle (hHandle, MNG_CANVAS_BGR8) <> 0 then
+{$ENDIF}
       MNGerror ('libmng reported an error setting the canvas style');
 
   end;
@@ -277,6 +289,22 @@ begin                                  { get a fix on our form }
                                        { easy with these bitmap objects ! }
   Result := OHForm.OFBitmap.ScanLine [iLinenr];
 end;
+
+{****************************************************************************}
+
+{$IFDEF TEST_RGB8_A8}
+{$F+}
+function GetAlphaLine (hHandle : mng_handle;
+                       iLinenr : mng_uint32) : mng_ptr; stdcall;
+{$F-}
+
+var OHForm : TMainForm;
+
+begin                                  { get a fix on our form }
+  OHForm := TMainForm (mng_get_userdata (hHandle));
+  Result := OHForm.OFAlpha;
+end;
+{$ENDIF}
 
 {****************************************************************************}
 
@@ -337,6 +365,9 @@ begin
   OFBitmap      := TBitmap.Create;     { initialize }
   IFBytesPerSec := 10000000;
   OFFile        := nil;
+{$IFDEF TEST_RGB8_A8}
+  OFAlpha       := nil;
+{$ENDIF}
 
   OFOpenDialog.Initialdir := '';
   OFBitmap.HandleType     := bmDIB;    { make it a 24-bit DIB }
@@ -378,6 +409,9 @@ begin
      (mng_setcb_readdata      (IFHandle, Readdata     ) <> 0) or
      (mng_setcb_processheader (IFHandle, ProcessHeader) <> 0) or
      (mng_setcb_getcanvasline (IFHandle, GetCanvasLine) <> 0) or
+{$IFDEF TEST_RGB8_A8}
+     (mng_setcb_getalphaline  (IFHandle, GetAlphaLine ) <> 0) or
+{$ENDIF}
      (mng_setcb_refresh       (IFHandle, ImageRefresh ) <> 0) or
      (mng_setcb_gettickcount  (IFHandle, GetTickCount ) <> 0) or
      (mng_setcb_settimer      (IFHandle, SetTimer     ) <> 0) then
@@ -580,7 +614,6 @@ begin                                  { get extended info }
   iErrorcode := mng_getlasterror (IFHandle, iSeverity, iChunkname, iChunkseq,
                                             iExtra1, iExtra2, zErrortext);
 
-//  MessageDlg (SHMsg + #13#10#13#10 + mng_errorname (iErrorcode) + #13#10#13#10 +
   MessageDlg (SHMsg + #13#10#13#10 + strpas (zErrortext) + #13#10#13#10 +
               Format ('Error = %d; Severity = %d; Chunknr = %d; Extra1 = %d',
                       [iErrorcode, iSeverity, iChunkseq, iExtra1]),
