@@ -44,7 +44,7 @@ unit libmng;
 {*                                                                          *}
 {*  project   : libmng                                                      *}
 {*  file      : libmng.pas                copyright (c) 2000 G.Juyn         *}
-{*  version   : 0.9.0                                                       *}
+{*  version   : 0.9.1                                                       *}
 {*                                                                          *}
 {*  purpose   : libmng.dll wrapper unit                                     *}
 {*                                                                          *}
@@ -88,6 +88,11 @@ unit libmng;
 {*              0.9.0 - 06/30/2000 - G.Juyn                                 *}
 {*              - changed refresh parameters to 'x,y,width,height'          *}
 {*                                                                          *}
+{*              0.9.1 - 07/08/2000 - G.Juyn                                 *}
+{*              - added libmng errorcode constants                          *}
+{*              0.9.1 - 07/10/2000 - G.Juyn                                 *}
+{*              - added new libmng functions                                *}
+{*                                                                          *}
 {****************************************************************************}
 
 interface
@@ -96,7 +101,7 @@ interface
 
 const MNG_TRUE       = TRUE;
       MNG_FALSE      = FALSE;
-      MNG_NULL       = 0;
+      MNG_NULL       = nil;
 
 type  mng_uint32     = cardinal;
       mng_int32      = integer;
@@ -221,214 +226,225 @@ type mng_iteratechunk  = function  (    hHandle      : mng_handle;
 
 {****************************************************************************}
 
-function  mng_initialize          (    pUserdata    : mng_ptr;
-                                       fMemalloc    : mng_memalloc;
-                                       fMemfree     : mng_memfree;
-                                       fTraceproc   : mng_traceproc    ) : mng_handle;        stdcall;
+function  mng_initialize          (    pUserdata       : mng_ptr;
+                                       fMemalloc       : mng_memalloc;
+                                       fMemfree        : mng_memfree;
+                                       fTraceproc      : mng_traceproc    ) : mng_handle;        stdcall;
 
-function  mng_reset               (    hHandle      : mng_handle       ) : mng_retcode;       stdcall;
+function  mng_reset               (    hHandle         : mng_handle       ) : mng_retcode;       stdcall;
 
-function  mng_cleanup             (var hHandle      : mng_handle       ) : mng_retcode;       stdcall;
+function  mng_cleanup             (var hHandle         : mng_handle       ) : mng_retcode;       stdcall;
 
-function  mng_read                (    hHandle      : mng_handle       ) : mng_retcode;       stdcall;
-function  mng_write               (    hHandle      : mng_handle       ) : mng_retcode;       stdcall;
-function  mng_create              (    hHandle      : mng_handle       ) : mng_retcode;       stdcall;
+function  mng_read                (    hHandle         : mng_handle       ) : mng_retcode;       stdcall;
+function  mng_write               (    hHandle         : mng_handle       ) : mng_retcode;       stdcall;
+function  mng_create              (    hHandle         : mng_handle       ) : mng_retcode;       stdcall;
 
-function  mng_readdisplay         (    hHandle      : mng_handle       ) : mng_retcode;       stdcall;
-function  mng_display             (    hHandle      : mng_handle       ) : mng_retcode;       stdcall;
-function  mng_display_resume      (    hHandle      : mng_handle       ) : mng_retcode;       stdcall;
-function  mng_display_freeze      (    hHandle      : mng_handle       ) : mng_retcode;       stdcall;
-function  mng_display_reset       (    hHandle      : mng_handle       ) : mng_retcode;       stdcall;
-function  mng_display_goframe     (    hHandle      : mng_handle;
-                                       iFramenr     : mng_uint32       ) : mng_retcode;       stdcall;
-function  mng_display_golayer     (    hHandle      : mng_handle;
-                                       iLayernr     : mng_uint32       ) : mng_retcode;       stdcall;
-function  mng_display_gotime      (    hHandle      : mng_handle;
-                                       iPlaytime    : mng_uint32       ) : mng_retcode;       stdcall;
+function  mng_readdisplay         (    hHandle         : mng_handle       ) : mng_retcode;       stdcall;
+function  mng_display             (    hHandle         : mng_handle       ) : mng_retcode;       stdcall;
+function  mng_display_resume      (    hHandle         : mng_handle       ) : mng_retcode;       stdcall;
+function  mng_display_freeze      (    hHandle         : mng_handle       ) : mng_retcode;       stdcall;
+function  mng_display_reset       (    hHandle         : mng_handle       ) : mng_retcode;       stdcall;
+function  mng_display_goframe     (    hHandle         : mng_handle;
+                                       iFramenr        : mng_uint32       ) : mng_retcode;       stdcall;
+function  mng_display_golayer     (    hHandle         : mng_handle;
+                                       iLayernr        : mng_uint32       ) : mng_retcode;       stdcall;
+function  mng_display_gotime      (    hHandle         : mng_handle;
+                                       iPlaytime       : mng_uint32       ) : mng_retcode;       stdcall;
 
-function  mng_getlasterror        (    hHandle      : mng_handle;
-                                   var iSeverity    : mng_uint8;
-                                   var iChunkname   : mng_chunkid;
-                                   var iChunkseq    : mng_uint32;
-                                   var iExtra1      : mng_int32;
-                                   var iExtra2      : mng_int32;
-                                   var zErrortext   : mng_pchar        ) : mng_retcode;       stdcall;
-
-{****************************************************************************}
-
-function  mng_setcb_memalloc      (    hHandle      : mng_handle;
-                                       fProc        : mng_memalloc     ) : mng_retcode;       stdcall;
-function  mng_setcb_memfree       (    hHandle      : mng_handle;
-                                       fProc        : mng_memfree      ) : mng_retcode;       stdcall;
-
-function  mng_setcb_openstream    (    hHandle      : mng_handle;
-                                       fProc        : mng_openstream   ) : mng_retcode;       stdcall;
-function  mng_setcb_closestream   (    hHandle      : mng_handle;
-                                       fProc        : mng_closestream  ) : mng_retcode;       stdcall;
-
-function  mng_setcb_readdata      (    hHandle      : mng_handle;
-                                       fProc        : mng_readdata     ) : mng_retcode;       stdcall;
-
-function  mng_setcb_writedata     (    hHandle      : mng_handle;
-                                       fProc        : mng_writedata    ) : mng_retcode;       stdcall;
-
-function  mng_setcb_errorproc     (    hHandle      : mng_handle;
-                                       fProc        : mng_errorproc    ) : mng_retcode;       stdcall;
-function  mng_setcb_traceproc     (    hHandle      : mng_handle;
-                                       fProc        : mng_traceproc    ) : mng_retcode;       stdcall;
-
-function  mng_setcb_processheader (    hHandle      : mng_handle;
-                                       fProc        : mng_processheader) : mng_retcode;       stdcall;
-function  mng_setcb_processtext   (    hHandle      : mng_handle;
-                                       fProc        : mng_processtext  ) : mng_retcode;       stdcall;
-
-function  mng_setcb_getcanvasline (    hHandle      : mng_handle;
-                                       fProc        : mng_getcanvasline) : mng_retcode;       stdcall;
-function  mng_setcb_getalphaline  (    hHandle      : mng_handle;
-                                       fProc        : mng_getalphaline ) : mng_retcode;       stdcall;
-function  mng_setcb_getbkgdline   (    hHandle      : mng_handle;
-                                       fProc        : mng_getbkgdline  ) : mng_retcode;       stdcall;
-function  mng_setcb_refresh       (    hHandle      : mng_handle;
-                                       fProc        : mng_refresh      ) : mng_retcode;       stdcall;
-
-function  mng_setcb_gettickcount  (    hHandle      : mng_handle;
-                                       fProc        : mng_gettickcount ) : mng_retcode;       stdcall;
-function  mng_setcb_settimer      (    hHandle      : mng_handle;
-                                       fProc        : mng_settimer     ) : mng_retcode;       stdcall;
-
-function  mng_setcb_processgamma  (    hHandle      : mng_handle;
-                                       fProc        : mng_processgamma ) : mng_retcode;       stdcall;
-function  mng_setcb_processchroma (    hHandle      : mng_handle;
-                                       fProc        : mng_processchroma) : mng_retcode;       stdcall;
-function  mng_setcb_processsrgb   (    hHandle      : mng_handle;
-                                       fProc        : mng_processsrgb  ) : mng_retcode;       stdcall;
-function  mng_setcb_processiccp   (    hHandle      : mng_handle;
-                                       fProc        : mng_processiccp  ) : mng_retcode;       stdcall;
-function  mng_setcb_processarow   (    hHandle      : mng_handle;
-                                       fProc        : mng_processarow  ) : mng_retcode;       stdcall;
+function  mng_getlasterror        (    hHandle         : mng_handle;
+                                   var iSeverity       : mng_uint8;
+                                   var iChunkname      : mng_chunkid;
+                                   var iChunkseq       : mng_uint32;
+                                   var iExtra1         : mng_int32;
+                                   var iExtra2         : mng_int32;
+                                   var zErrortext      : mng_pchar        ) : mng_retcode;       stdcall;
 
 {****************************************************************************}
 
-function  mng_getcb_memalloc      (    hHandle      : mng_handle       ) : mng_memalloc;      stdcall;
-function  mng_getcb_memfree       (    hHandle      : mng_handle       ) : mng_memfree;       stdcall;
+function  mng_setcb_memalloc      (    hHandle         : mng_handle;
+                                       fProc           : mng_memalloc     ) : mng_retcode;       stdcall;
+function  mng_setcb_memfree       (    hHandle         : mng_handle;
+                                       fProc           : mng_memfree      ) : mng_retcode;       stdcall;
 
-function  mng_getcb_openstream    (    hHandle      : mng_handle       ) : mng_openstream;    stdcall;
-function  mng_getcb_closestream   (    hHandle      : mng_handle       ) : mng_closestream;   stdcall;
+function  mng_setcb_openstream    (    hHandle         : mng_handle;
+                                       fProc           : mng_openstream   ) : mng_retcode;       stdcall;
+function  mng_setcb_closestream   (    hHandle         : mng_handle;
+                                       fProc           : mng_closestream  ) : mng_retcode;       stdcall;
 
-function  mng_getcb_readdata      (    hHandle      : mng_handle       ) : mng_readdata;      stdcall;
+function  mng_setcb_readdata      (    hHandle         : mng_handle;
+                                       fProc           : mng_readdata     ) : mng_retcode;       stdcall;
 
-function  mng_getcb_writedata     (    hHandle      : mng_handle       ) : mng_writedata;     stdcall;
+function  mng_setcb_writedata     (    hHandle         : mng_handle;
+                                       fProc           : mng_writedata    ) : mng_retcode;       stdcall;
 
-function  mng_getcb_errorproc     (    hHandle      : mng_handle       ) : mng_errorproc;     stdcall;
-function  mng_getcb_traceproc     (    hHandle      : mng_handle       ) : mng_traceproc;     stdcall;
+function  mng_setcb_errorproc     (    hHandle         : mng_handle;
+                                       fProc           : mng_errorproc    ) : mng_retcode;       stdcall;
+function  mng_setcb_traceproc     (    hHandle         : mng_handle;
+                                       fProc           : mng_traceproc    ) : mng_retcode;       stdcall;
 
-function  mng_getcb_processheader (    hHandle      : mng_handle       ) : mng_processheader; stdcall;
-function  mng_getcb_processtext   (    hHandle      : mng_handle       ) : mng_processtext;   stdcall;
+function  mng_setcb_processheader (    hHandle         : mng_handle;
+                                       fProc           : mng_processheader) : mng_retcode;       stdcall;
+function  mng_setcb_processtext   (    hHandle         : mng_handle;
+                                       fProc           : mng_processtext  ) : mng_retcode;       stdcall;
 
-function  mng_getcb_getcanvasline (    hHandle      : mng_handle       ) : mng_getcanvasline; stdcall;
-function  mng_getcb_getalphaline  (    hHandle      : mng_handle       ) : mng_getalphaline;  stdcall;
-function  mng_getcb_getbkgdline   (    hHandle      : mng_handle       ) : mng_getbkgdline;   stdcall;
-function  mng_getcb_refresh       (    hHandle      : mng_handle       ) : mng_refresh;       stdcall;
+function  mng_setcb_getcanvasline (    hHandle         : mng_handle;
+                                       fProc           : mng_getcanvasline) : mng_retcode;       stdcall;
+function  mng_setcb_getalphaline  (    hHandle         : mng_handle;
+                                       fProc           : mng_getalphaline ) : mng_retcode;       stdcall;
+function  mng_setcb_getbkgdline   (    hHandle         : mng_handle;
+                                       fProc           : mng_getbkgdline  ) : mng_retcode;       stdcall;
+function  mng_setcb_refresh       (    hHandle         : mng_handle;
+                                       fProc           : mng_refresh      ) : mng_retcode;       stdcall;
 
-function  mng_getcb_gettickcount  (    hHandle      : mng_handle       ) : mng_gettickcount;  stdcall;
-function  mng_getcb_settimer      (    hHandle      : mng_handle       ) : mng_settimer;      stdcall;
+function  mng_setcb_gettickcount  (    hHandle         : mng_handle;
+                                       fProc           : mng_gettickcount ) : mng_retcode;       stdcall;
+function  mng_setcb_settimer      (    hHandle         : mng_handle;
+                                       fProc           : mng_settimer     ) : mng_retcode;       stdcall;
 
-function  mng_getcb_processgamma  (    hHandle      : mng_handle       ) : mng_processgamma;  stdcall;
-function  mng_getcb_processchroma (    hHandle      : mng_handle       ) : mng_processchroma; stdcall;
-function  mng_getcb_processsrgb   (    hHandle      : mng_handle       ) : mng_processsrgb;   stdcall;
-function  mng_getcb_processiccp   (    hHandle      : mng_handle       ) : mng_processiccp;   stdcall;
-function  mng_getcb_processarow   (    hHandle      : mng_handle       ) : mng_processarow;   stdcall;
-
-{****************************************************************************}
-
-function  mng_set_userdata        (    hHandle      : mng_handle;
-                                       pUserdata    : mng_ptr          ) : mng_retcode;       stdcall;
-
-function  mng_set_canvasstyle     (    hHandle      : mng_handle;
-                                       iStyle       : mng_uint32       ) : mng_retcode;       stdcall;
-function  mng_set_bkgdstyle       (    hHandle      : mng_handle;
-                                       iStyle       : mng_uint32       ) : mng_retcode;       stdcall;
-
-function  mng_set_bgcolor         (    hHandle      : mng_handle;
-                                       iRed         : mng_uint16;
-                                       iGreen       : mng_uint16;
-                                       iBlue        : mng_uint16       ) : mng_retcode;       stdcall;
-
-function  mng_set_storechunks     (    hHandle      : mng_handle;
-                                       bStorechunks : mng_bool         ) : mng_retcode;       stdcall;
-
-function  mng_set_viewgammaint    (    hHandle      : mng_handle;
-                                       iGamma       : mng_uint32       ) : mng_retcode;       stdcall;
-function  mng_set_displaygammaint (    hHandle      : mng_handle;
-                                       iGamma       : mng_uint32       ) : mng_retcode;       stdcall;
-function  mng_set_dfltimggammaint (    hHandle      : mng_handle;
-                                       iGamma       : mng_uint32       ) : mng_retcode;       stdcall;
-
-function  mng_set_srgb            (    hHandle      : mng_handle;
-                                       bIssRGB      : mng_bool         ) : mng_retcode;       stdcall;
-function  mng_set_outputprofile   (    hHandle      : mng_handle;
-                                       zFilename    : mng_pchar        ) : mng_retcode;       stdcall;
-function  mng_set_outputprofile2  (    hHandle      : mng_handle;
-                                       iProfilesize : mng_uint32;
-                                       pProfile     : mng_ptr          ) : mng_retcode;       stdcall;
-function  mng_set_srgbprofile     (    hHandle      : mng_handle;
-                                       zFilename    : mng_pchar        ) : mng_retcode;       stdcall;
-function  mng_set_srgbprofile2    (    hHandle      : mng_handle;
-                                       iProfilesize : mng_uint32;
-                                       pProfile     : mng_ptr          ) : mng_retcode;       stdcall;
-
-function  mng_set_maxcanvaswidth  (    hHandle      : mng_handle;
-                                       iMaxwidth    : mng_uint32       ) : mng_retcode;       stdcall;
-function  mng_set_maxcanvasheight (    hHandle      : mng_handle;
-                                       iMaxheight   : mng_uint32       ) : mng_retcode;       stdcall;
-function  mng_set_maxcanvassize   (    hHandle      : mng_handle;
-                                       iMaxwidth    : mng_uint32;
-                                       iMaxheight   : mng_uint32       ) : mng_retcode;       stdcall;
-
-function  mng_set_speed           (    hHandle      : mng_handle;
-                                       iSpeed       : mng_speedtype    ) : mng_retcode;       stdcall;
+function  mng_setcb_processgamma  (    hHandle         : mng_handle;
+                                       fProc           : mng_processgamma ) : mng_retcode;       stdcall;
+function  mng_setcb_processchroma (    hHandle         : mng_handle;
+                                       fProc           : mng_processchroma) : mng_retcode;       stdcall;
+function  mng_setcb_processsrgb   (    hHandle         : mng_handle;
+                                       fProc           : mng_processsrgb  ) : mng_retcode;       stdcall;
+function  mng_setcb_processiccp   (    hHandle         : mng_handle;
+                                       fProc           : mng_processiccp  ) : mng_retcode;       stdcall;
+function  mng_setcb_processarow   (    hHandle         : mng_handle;
+                                       fProc           : mng_processarow  ) : mng_retcode;       stdcall;
 
 {****************************************************************************}
 
-function  mng_get_userdata        (    hHandle      : mng_handle       ) : mng_ptr;           stdcall;
+function  mng_getcb_memalloc      (    hHandle         : mng_handle       ) : mng_memalloc;      stdcall;
+function  mng_getcb_memfree       (    hHandle         : mng_handle       ) : mng_memfree;       stdcall;
 
-function  mng_get_sigtype         (    hHandle      : mng_handle       ) : mng_imgtype;       stdcall;
-function  mng_get_imagetype       (    hHandle      : mng_handle       ) : mng_imgtype;       stdcall;
-function  mng_get_imagewidth      (    hHandle      : mng_handle       ) : mng_uint32;        stdcall;
-function  mng_get_imageheight     (    hHandle      : mng_handle       ) : mng_uint32;        stdcall;
-function  mng_get_ticks           (    hHandle      : mng_handle       ) : mng_uint32;        stdcall;
-function  mng_get_framecount      (    hHandle      : mng_handle       ) : mng_uint32;        stdcall;
-function  mng_get_layercount      (    hHandle      : mng_handle       ) : mng_uint32;        stdcall;
-function  mng_get_playtime        (    hHandle      : mng_handle       ) : mng_uint32;        stdcall;
-function  mng_get_simplicity      (    hHandle      : mng_handle       ) : mng_uint32;        stdcall;
+function  mng_getcb_openstream    (    hHandle         : mng_handle       ) : mng_openstream;    stdcall;
+function  mng_getcb_closestream   (    hHandle         : mng_handle       ) : mng_closestream;   stdcall;
 
-function  mng_get_canvasstyle     (    hHandle      : mng_handle       ) : mng_uint32;        stdcall;
-function  mng_get_bkgdstyle       (    hHandle      : mng_handle       ) : mng_uint32;        stdcall;
+function  mng_getcb_readdata      (    hHandle         : mng_handle       ) : mng_readdata;      stdcall;
 
-procedure mng_get_bgcolor         (    hHandle      : mng_handle;
-                                   var iRed         : mng_uint16;
-                                   var iGreen       : mng_uint16;
-                                   var iBlue        : mng_uint16       );                     stdcall;
+function  mng_getcb_writedata     (    hHandle         : mng_handle       ) : mng_writedata;     stdcall;
 
-function  mng_get_storechunks     (    hHandle      : mng_handle       ) : mng_bool;          stdcall;
+function  mng_getcb_errorproc     (    hHandle         : mng_handle       ) : mng_errorproc;     stdcall;
+function  mng_getcb_traceproc     (    hHandle         : mng_handle       ) : mng_traceproc;     stdcall;
 
-function  mng_get_viewgammaint    (    hHandle      : mng_handle       ) : mng_uint32;        stdcall;
-function  mng_get_displaygammaint (    hHandle      : mng_handle       ) : mng_uint32;        stdcall;
-function  mng_get_dfltimggammaint (    hHandle      : mng_handle       ) : mng_uint32;        stdcall;
+function  mng_getcb_processheader (    hHandle         : mng_handle       ) : mng_processheader; stdcall;
+function  mng_getcb_processtext   (    hHandle         : mng_handle       ) : mng_processtext;   stdcall;
 
-function  mng_get_srgb            (    hHandle      : mng_handle       ) : mng_bool;          stdcall;
+function  mng_getcb_getcanvasline (    hHandle         : mng_handle       ) : mng_getcanvasline; stdcall;
+function  mng_getcb_getalphaline  (    hHandle         : mng_handle       ) : mng_getalphaline;  stdcall;
+function  mng_getcb_getbkgdline   (    hHandle         : mng_handle       ) : mng_getbkgdline;   stdcall;
+function  mng_getcb_refresh       (    hHandle         : mng_handle       ) : mng_refresh;       stdcall;
 
-function  mng_get_maxcanvaswidth  (    hHandle      : mng_handle       ) : mng_uint32;        stdcall;
-function  mng_get_maxcanvasheight (    hHandle      : mng_handle       ) : mng_uint32;        stdcall;
+function  mng_getcb_gettickcount  (    hHandle         : mng_handle       ) : mng_gettickcount;  stdcall;
+function  mng_getcb_settimer      (    hHandle         : mng_handle       ) : mng_settimer;      stdcall;
 
-function  mng_get_speed           (    hHandle      : mng_handle       ) : mng_speedtype;     stdcall;
-function  mng_get_imagelevel      (    hHandle      : mng_handle       ) : mng_uint32;        stdcall;
+function  mng_getcb_processgamma  (    hHandle         : mng_handle       ) : mng_processgamma;  stdcall;
+function  mng_getcb_processchroma (    hHandle         : mng_handle       ) : mng_processchroma; stdcall;
+function  mng_getcb_processsrgb   (    hHandle         : mng_handle       ) : mng_processsrgb;   stdcall;
+function  mng_getcb_processiccp   (    hHandle         : mng_handle       ) : mng_processiccp;   stdcall;
+function  mng_getcb_processarow   (    hHandle         : mng_handle       ) : mng_processarow;   stdcall;
 
 {****************************************************************************}
 
-function  mng_iterate_chunks      (    hHandle      : mng_handle;
-                                       iChunkseq    : mng_uint32;
-                                       fProc        : mng_iteratechunk ) : mng_retcode;       stdcall;
+function  mng_set_userdata        (    hHandle         : mng_handle;
+                                       pUserdata       : mng_ptr          ) : mng_retcode;       stdcall;
+
+function  mng_set_canvasstyle     (    hHandle         : mng_handle;
+                                       iStyle          : mng_uint32       ) : mng_retcode;       stdcall;
+function  mng_set_bkgdstyle       (    hHandle         : mng_handle;
+                                       iStyle          : mng_uint32       ) : mng_retcode;       stdcall;
+
+function  mng_set_bgcolor         (    hHandle         : mng_handle;
+                                       iRed            : mng_uint16;
+                                       iGreen          : mng_uint16;
+                                       iBlue           : mng_uint16       ) : mng_retcode;       stdcall;
+
+function  mng_set_storechunks     (    hHandle         : mng_handle;
+                                       bStorechunks    : mng_bool         ) : mng_retcode;       stdcall;
+
+function  mng_set_viewgammaint    (    hHandle         : mng_handle;
+                                       iGamma          : mng_uint32       ) : mng_retcode;       stdcall;
+function  mng_set_displaygammaint (    hHandle         : mng_handle;
+                                       iGamma          : mng_uint32       ) : mng_retcode;       stdcall;
+function  mng_set_dfltimggammaint (    hHandle         : mng_handle;
+                                       iGamma          : mng_uint32       ) : mng_retcode;       stdcall;
+
+function  mng_set_srgb            (    hHandle         : mng_handle;
+                                       bIssRGB         : mng_bool         ) : mng_retcode;       stdcall;
+function  mng_set_outputprofile   (    hHandle         : mng_handle;
+                                       zFilename       : mng_pchar        ) : mng_retcode;       stdcall;
+function  mng_set_outputprofile2  (    hHandle         : mng_handle;
+                                       iProfilesize    : mng_uint32;
+                                       pProfile        : mng_ptr          ) : mng_retcode;       stdcall;
+function  mng_set_srgbprofile     (    hHandle         : mng_handle;
+                                       zFilename       : mng_pchar        ) : mng_retcode;       stdcall;
+function  mng_set_srgbprofile2    (    hHandle         : mng_handle;
+                                       iProfilesize    : mng_uint32;
+                                       pProfile        : mng_ptr          ) : mng_retcode;       stdcall;
+
+function  mng_set_maxcanvaswidth  (    hHandle         : mng_handle;
+                                       iMaxwidth       : mng_uint32       ) : mng_retcode;       stdcall;
+function  mng_set_maxcanvasheight (    hHandle         : mng_handle;
+                                       iMaxheight      : mng_uint32       ) : mng_retcode;       stdcall;
+function  mng_set_maxcanvassize   (    hHandle         : mng_handle;
+                                       iMaxwidth       : mng_uint32;
+                                       iMaxheight      : mng_uint32       ) : mng_retcode;       stdcall;
+
+function  mng_set_suspensionmode  (    hHandle         : mng_handle;
+                                       bSuspensionmode : mng_bool         ) : mng_retcode;       stdcall;
+
+function  mng_set_speed           (    hHandle         : mng_handle;
+                                       iSpeed          : mng_speedtype    ) : mng_retcode;       stdcall;
+
+{****************************************************************************}
+
+function  mng_get_userdata        (    hHandle         : mng_handle       ) : mng_ptr;           stdcall;
+
+function  mng_get_sigtype         (    hHandle         : mng_handle       ) : mng_imgtype;       stdcall;
+function  mng_get_imagetype       (    hHandle         : mng_handle       ) : mng_imgtype;       stdcall;
+function  mng_get_imagewidth      (    hHandle         : mng_handle       ) : mng_uint32;        stdcall;
+function  mng_get_imageheight     (    hHandle         : mng_handle       ) : mng_uint32;        stdcall;
+function  mng_get_ticks           (    hHandle         : mng_handle       ) : mng_uint32;        stdcall;
+function  mng_get_framecount      (    hHandle         : mng_handle       ) : mng_uint32;        stdcall;
+function  mng_get_layercount      (    hHandle         : mng_handle       ) : mng_uint32;        stdcall;
+function  mng_get_playtime        (    hHandle         : mng_handle       ) : mng_uint32;        stdcall;
+function  mng_get_simplicity      (    hHandle         : mng_handle       ) : mng_uint32;        stdcall;
+
+function  mng_get_canvasstyle     (    hHandle         : mng_handle       ) : mng_uint32;        stdcall;
+function  mng_get_bkgdstyle       (    hHandle         : mng_handle       ) : mng_uint32;        stdcall;
+
+procedure mng_get_bgcolor         (    hHandle         : mng_handle;
+                                   var iRed            : mng_uint16;
+                                   var iGreen          : mng_uint16;
+                                   var iBlue           : mng_uint16       );                     stdcall;
+
+function  mng_get_storechunks     (    hHandle         : mng_handle       ) : mng_bool;          stdcall;
+
+function  mng_get_viewgammaint    (    hHandle         : mng_handle       ) : mng_uint32;        stdcall;
+function  mng_get_displaygammaint (    hHandle         : mng_handle       ) : mng_uint32;        stdcall;
+function  mng_get_dfltimggammaint (    hHandle         : mng_handle       ) : mng_uint32;        stdcall;
+
+function  mng_get_srgb            (    hHandle         : mng_handle       ) : mng_bool;          stdcall;
+
+function  mng_get_maxcanvaswidth  (    hHandle         : mng_handle       ) : mng_uint32;        stdcall;
+function  mng_get_maxcanvasheight (    hHandle         : mng_handle       ) : mng_uint32;        stdcall;
+
+function  mng_get_suspensionmode  (    hHandle         : mng_handle       ) : mng_bool;          stdcall;
+
+function  mng_get_speed           (    hHandle         : mng_handle       ) : mng_speedtype;     stdcall;
+function  mng_get_imagelevel      (    hHandle         : mng_handle       ) : mng_uint32;        stdcall;
+
+function  mng_get_starttime       (    hHandle         : mng_handle       ) : mng_uint32;        stdcall;
+function  mng_get_runtime         (    hHandle         : mng_handle       ) : mng_uint32;        stdcall;
+function  mng_get_currentframe    (    hHandle         : mng_handle       ) : mng_uint32;        stdcall;
+function  mng_get_currentlayer    (    hHandle         : mng_handle       ) : mng_uint32;        stdcall;
+function  mng_get_currentplaytime (    hHandle         : mng_handle       ) : mng_uint32;        stdcall;
+
+{****************************************************************************}
+
+function  mng_iterate_chunks      (    hHandle         : mng_handle;
+                                       iChunkseq       : mng_uint32;
+                                       fProc           : mng_iteratechunk ) : mng_retcode;       stdcall;
 
 {****************************************************************************}
 
@@ -1212,6 +1228,84 @@ function  mng_putchunk_unknown    (    hHandle            : mng_handle;
 
 {****************************************************************************}
 
+const MNG_NOERROR          = 0;    
+
+      MNG_OUTOFMEMORY      = 1;
+      MNG_INVALIDHANDLE    = 2;
+      MNG_NOCALLBACK       = 3;
+      MNG_UNEXPECTEDEOF    = 4;
+      MNG_ZLIBERROR        = 5;
+      MNG_JPEGERROR        = 6;
+      MNG_LCMSERROR        = 7;
+      MNG_NOOUTPUTPROFILE  = 8;
+      MNG_NOSRGBPROFILE    = 9;
+      MNG_BUFOVERFLOW      = 10;
+      MNG_FUNCTIONINVALID  = 11;
+      MNG_OUTPUTERROR      = 12;
+      MNG_JPEGBUFTOOSMALL  = 13;
+      MNG_NEEDMOREDATA     = 14;
+      MNG_NEEDTIMERWAIT    = 15;
+
+      MNG_APPIOERROR       = 901;
+      MNG_APPTIMERERROR    = 902;
+      MNG_APPCMSERROR      = 903;
+      MNG_APPMISCERROR     = 904;
+      MNG_APPTRACEABORT    = 905;
+
+      MNG_INTERNALERROR    = 999;
+
+      MNG_INVALIDSIG       = 1025;
+      MNG_INVALIDCRC       = 1027;
+      MNG_INVALIDLENGTH    = 1028;
+      MNG_SEQUENCEERROR    = 1029;
+      MNG_CHUNKNOTALLOWED  = 1030;
+      MNG_MULTIPLEERROR    = 1031;
+      MNG_PLTEMISSING      = 1032;
+      MNG_IDATMISSING      = 1033;
+      MNG_CANNOTBEEMPTY    = 1034;
+      MNG_GLOBALLENGTHERR  = 1035;
+      MNG_INVALIDBITDEPTH  = 1036;
+      MNG_INVALIDCOLORTYPE = 1037;
+      MNG_INVALIDCOMPRESS  = 1038;
+      MNG_INVALIDFILTER    = 1039;
+      MNG_INVALIDINTERLACE = 1040;
+      MNG_NOTENOUGHIDAT    = 1041;
+      MNG_PLTEINDEXERROR   = 1042;
+      MNG_NULLNOTFOUND     = 1043;
+      MNG_KEYWORDNULL      = 1044;
+      MNG_OBJECTUNKNOWN    = 1045;
+      MNG_OBJECTEXISTS     = 1046;
+      MNG_TOOMUCHIDAT      = 1047;
+      MNG_INVSAMPLEDEPTH   = 1048;
+      MNG_INVOFFSETSIZE    = 1049;
+      MNG_INVENTRYTYPE     = 1050;
+      MNG_ENDWITHNULL      = 1051;
+      MNG_INVIMAGETYPE     = 1052;
+      MNG_INVDELTATYPE     = 1053;
+      MNG_INVALIDINDEX     = 1054;
+      MNG_TOOMUCHJDAT      = 1055;
+      MNG_JPEGPARMSERR     = 1056;
+      MNG_INVFILLMETHOD    = 1057;
+      MNG_OBJNOTCONCRETE   = 1058;
+      MNG_TARGETNOALPHA    = 1059;
+
+      MNG_INVALIDCNVSTYLE  = 2049;
+      MNG_WRONGCHUNK       = 2050;
+      MNG_INVALIDENTRYIX   = 2051;
+      MNG_NOHEADER         = 2052;
+      MNG_NOCORRCHUNK      = 2053;
+
+      MNG_IMAGETOOLARGE    = 4097;
+      MNG_NOTANANIMATION   = 4098;
+      MNG_FRAMENRTOOHIGH   = 4099;
+      MNG_LAYERNRTOOHIGH   = 4100;
+      MNG_PLAYTIMETOOHIGH  = 4101;
+      MNG_FNNOTIMPLEMENTED = 4102;
+
+      MNG_IMAGEFROZEN      = 8193;
+
+{****************************************************************************}
+
 const MNG_CANVAS_RGB8      = $00000000;
       MNG_CANVAS_RGBA8     = $00001000;
       MNG_CANVAS_ARGB8     = $00003000;
@@ -1413,6 +1507,8 @@ function mng_set_maxcanvaswidth;   external mngdll;
 function mng_set_maxcanvasheight;  external mngdll;
 function mng_set_maxcanvassize;    external mngdll;
 
+function mng_set_suspensionmode;   external mngdll;
+
 function mng_set_speed;            external mngdll;
 
 {****************************************************************************}
@@ -1448,8 +1544,16 @@ function  mng_get_srgb;            external mngdll;
 function  mng_get_maxcanvaswidth;  external mngdll;
 function  mng_get_maxcanvasheight; external mngdll;
 
+function  mng_get_suspensionmode;  external mngdll;
+
 function  mng_get_speed;           external mngdll;
 function  mng_get_imagelevel;      external mngdll;
+
+function  mng_get_starttime;       external mngdll;
+function  mng_get_runtime;         external mngdll;
+function  mng_get_currentframe;    external mngdll;
+function  mng_get_currentlayer;    external mngdll;
+function  mng_get_currentplaytime; external mngdll;
 
 {****************************************************************************}
 

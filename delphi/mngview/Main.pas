@@ -14,7 +14,7 @@ uses
 {*                                                                          *}
 {*  project   : libmng                                                      *}
 {*  file      : main.pas                  copyright (c) 2000 G.Juyn         *}
-{*  version   : 0.9.0                                                       *}
+{*  version   : 0.9.1                                                       *}
 {*                                                                          *}
 {*  purpose   : Main form for mngview application                           *}
 {*                                                                          *}
@@ -50,6 +50,12 @@ uses
 {*                                                                          *}
 {*              0.9.0 - 06/30/2000 - G.Juyn                                 *}
 {*              - changed refresh parameters to 'x,y,width,height'          *}
+{*                                                                          *}
+{*              0.9.1 - 07/08/2000 - G.Juyn                                 *}
+{*              - fixed to use returncode constants                         *}
+{*              - changed to accomodate MNG_NEEDTIMERWAIT returncode        *}
+{*              0.9.1 - 07/10/2000 - G.Juyn                                 *}
+{*              - changed to use suspension-mode                            *}
 {*                                                                          *}
 {****************************************************************************}
 
@@ -397,7 +403,7 @@ begin
     Windows.Postmessage (handle, WM_Close, 0, 0);
     Exit;
   end;
-{* B002 *}  
+{* B002 *}
                                        { now initialize the library }
   IFHandle := mng_initialize (mng_ptr(self), Memalloc, Memfree, nil);
 
@@ -409,10 +415,12 @@ begin
     Exit;
   end;
                                        { no need to store chunk-info ! }
-  mng_set_storechunks (IFHandle, MNG_FALSE);
+  mng_set_storechunks    (IFHandle, MNG_FALSE);
+                                       { use suspension-buffer }
+  mng_set_suspensionmode (IFHandle, MNG_TRUE);
                                        { supply it with the sRGB profile }
-  if (mng_set_srgb            (IFHandle, true          ) <> 0) or
-     (mng_set_outputprofile   (IFHandle, @SHProfileName) <> 0) then
+  if (mng_set_srgb            (IFHandle, true          ) <> MNG_NOERROR) or
+     (mng_set_outputprofile   (IFHandle, @SHProfileName) <> MNG_NOERROR) then
   begin
     MNGerror ('libmng reported an error setting the CMS conditions!' + #13#10 +
               'Program aborted');
@@ -420,17 +428,17 @@ begin
     Exit;
   end;
                                        { set all the callbacks }
-  if (mng_setcb_openstream    (IFHandle, Openstream   ) <> 0) or
-     (mng_setcb_closestream   (IFHandle, Closestream  ) <> 0) or
-     (mng_setcb_readdata      (IFHandle, Readdata     ) <> 0) or
-     (mng_setcb_processheader (IFHandle, ProcessHeader) <> 0) or
-     (mng_setcb_getcanvasline (IFHandle, GetCanvasLine) <> 0) or
+  if (mng_setcb_openstream    (IFHandle, Openstream   ) <> MNG_NOERROR) or
+     (mng_setcb_closestream   (IFHandle, Closestream  ) <> MNG_NOERROR) or
+     (mng_setcb_readdata      (IFHandle, Readdata     ) <> MNG_NOERROR) or
+     (mng_setcb_processheader (IFHandle, ProcessHeader) <> MNG_NOERROR) or
+     (mng_setcb_getcanvasline (IFHandle, GetCanvasLine) <> MNG_NOERROR) or
 {$IFDEF TEST_RGB8_A8}
-     (mng_setcb_getalphaline  (IFHandle, GetAlphaLine ) <> 0) or
+     (mng_setcb_getalphaline  (IFHandle, GetAlphaLine ) <> MNG_NOERROR) or
 {$ENDIF}
-     (mng_setcb_refresh       (IFHandle, ImageRefresh ) <> 0) or
-     (mng_setcb_gettickcount  (IFHandle, GetTickCount ) <> 0) or
-     (mng_setcb_settimer      (IFHandle, SetTimer     ) <> 0) then
+     (mng_setcb_refresh       (IFHandle, ImageRefresh ) <> MNG_NOERROR) or
+     (mng_setcb_gettickcount  (IFHandle, GetTickCount ) <> MNG_NOERROR) or
+     (mng_setcb_settimer      (IFHandle, SetTimer     ) <> MNG_NOERROR) then
   begin
     MNGerror ('libmng reported an error setting a callback function!' + #13#10 +
               'Program aborted');
@@ -446,7 +454,7 @@ begin
   IHGreen := (IHGreen shl 8) + IHGreen;
   IHBlue  := (IHBlue  shl 8) + IHBlue;
 
-  if mng_set_bgcolor (IFHandle, IHRed, IHGreen, IHBlue) <> 0 then
+  if mng_set_bgcolor (IFHandle, IHRed, IHGreen, IHBlue) <> MNG_NOERROR then
     MNGerror ('libmng reported an error setting the background color!');
 
 end;
@@ -458,7 +466,7 @@ begin
   BFCancelled := true;
 
   if OFTimer.Enabled then              { if we're still animating then stop it }
-    if mng_display_freeze (IFHandle) <> 0 then
+    if mng_display_freeze (IFHandle) <> MNG_NOERROR then
       MNGerror ('libmng reported an error during display_freeze!');
 
   OFTimer.Enabled := false;
@@ -497,7 +505,7 @@ begin
   if Key = vk_Escape then              { pressing <esc> will freeze an animation }
   begin
     if OFTimer.Enabled then
-      if mng_display_freeze (IFHandle) <> 0 then
+      if mng_display_freeze (IFHandle) <> MNG_NOERROR then
         MNGerror ('libmng reported an error during display_freeze!');
 
     OFTimer.Enabled := false;          { don't let that timer go off then ! }
@@ -508,18 +516,28 @@ end;
 {****************************************************************************}
 
 procedure TMainForm.OFTimerTimer(Sender: TObject);
+
+var IHRslt : mng_retcode;
+
 begin
   OFTimer.Enabled := false;            { only once ! }
 
-  if not BFCancelled then              { and inform the library }
-    if mng_display_resume (IFHandle) <> 0 then
+  if not BFCancelled then
+  begin                                { and inform the library }
+    IHRslt := mng_display_resume (IFHandle);
+
+    if (IHRslt <> MNG_NOERROR) and (IHRslt <> MNG_NEEDTIMERWAIT) then
       MNGerror ('libmng reported an error during display_resume!');
 
+  end;
 end;
 
 {****************************************************************************}
 
 procedure TMainForm.OFMenuFileOpenClick(Sender: TObject);
+
+var IHRslt : mng_retcode;
+
 begin
   OFOpenDialog.InitialDir := '';
   OFOpenDialog.FileName   := SFFileName;
@@ -527,21 +545,30 @@ begin
   if OFOpenDialog.Execute then         { get the filename }
   begin
     if OFTimer.Enabled then            { if the lib was active; stop it }
-      if mng_display_freeze (IFHandle) <> 0 then
-        MNGerror ('libmng reported an error during display_freeze!');
+    begin
+      OFTimer.Enabled := false;
 
-    OFTimer.Enabled := false;          { save interesting fields }
+      Application.ProcessMessages;     { process any timer requests (for safety) }
+                                       { now freeze the animation }
+      if mng_display_freeze (IFHandle) <> MNG_NOERROR then
+        MNGerror ('libmng reported an error during display_freeze!');
+    end;
+                                       { save interesting fields }
     SFFileName      := OFOpenDialog.FileName;
     IFTicks         := Windows.GetTickCount;
     IFBytes         := 0;
     BFCancelled     := false;
-
-    if mng_reset (IFHandle) <> 0 then  { always reset (just in case) }
+                                       { always reset (just in case) }
+    if mng_reset (IFHandle) <> MNG_NOERROR then
       MNGerror ('libmng reported an error during reset!')
-    else                               { and let the lib do it's job ! }
-    if mng_readdisplay (IFHandle) <> 0 then
-      MNGerror ('libmng reported an error reading the input file!');
+    else
+    begin                              { and let the lib do it's job ! }
+      IHRslt := mng_readdisplay (IFHandle);
 
+      if (IHRslt <> MNG_NOERROR) and (IHRSLT <> MNG_NEEDTIMERWAIT) then
+        MNGerror ('libmng reported an error reading the input file!');
+
+    end;
   end;
 end;
 
@@ -567,7 +594,7 @@ end;
 
 procedure TMainForm.OFMenuFileExitClick(Sender: TObject);
 begin
-  if mng_cleanup (IFHandle) <> 0 then
+  if mng_cleanup (IFHandle) <> MNG_NOERROR then
     MNGerror ('libmng cleanup error');
 
   Close;
