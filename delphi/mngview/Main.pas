@@ -42,6 +42,11 @@ uses
 {*              - switched "storechunks" off                                *}
 {*              0.5.3 - 06/26/2000 - G.Juyn                                 *}
 {*              - changed definition of userdata to mng_ptr                 *}
+{*              0.5.3 - 06/28/2000 - G.Juyn                                 *}
+{*              - changed the default icon to something more appropriate    *}
+{*              - changed definition of memory alloc size to mng_size_t     *}
+{*              0.5.3 - 06/29/2000 - G.Juyn                                 *}
+{*              - changed order of refresh parameters                       *}
 {*                                                                          *}
 {****************************************************************************}
 
@@ -134,7 +139,7 @@ end;
 
 {$F+}
 procedure Memfree (iPtr : mng_ptr;
-                   iLen : mng_uint32); stdcall;
+                   iLen : mng_size_t); stdcall;
 {$F-}
 begin
   freemem (iPtr, iLen);                { free the memory }
@@ -179,7 +184,7 @@ begin                                  { get a fix on our form }
     OFFile := nil;                     { don't use it again ! }
   end;
 
-  Result := MNG_TRUE;  
+  Result := MNG_TRUE;
 end;
 
 {****************************************************************************}
@@ -317,10 +322,10 @@ end;
 
 {$F+}
 function ImageRefresh (hHandle : mng_handle;
-                       iTop    : mng_uint32;
                        iLeft   : mng_uint32;
-                       iBottom : mng_uint32;
-                       iRight  : mng_uint32) : mng_bool; stdcall;
+                       iTop    : mng_uint32;
+                       iRight  : mng_uint32;
+                       iBottom : mng_uint32) : mng_bool; stdcall;
 {$F-}
 
 var OHForm : TMainForm;
@@ -393,7 +398,7 @@ begin
                                        { now initialize the library }
   IFHandle := mng_initialize (mng_ptr(self), Memalloc, Memfree, nil);
 
-  if IFHandle = 0 then
+  if IFHandle = NIL then
   begin
     MNGerror ('libmng initializiation error' + #13#10 +
               'Program aborted');

@@ -55,6 +55,8 @@
 /* *                                                                        * */
 /* * changes   : 0.5.3 - 06/26/2000 - G.Juyn                                * */
 /* *             - changed userdata variable to mng_ptr                     * */
+/* *             0.5.3 - 06/28/2000 - G.Juyn                                * */
+/* *             - changed memory allocation size parameters to mng_size_t  * */
 /* *                                                                        * */
 /* ************************************************************************** */
 
@@ -85,7 +87,7 @@ typedef userdata * userdatap;
 
 /* ************************************************************************** */
 
-mng_ptr MY_DECL myalloc (mng_uint32 iSize)
+mng_ptr MY_DECL myalloc (mng_size_t iSize)
 {
   return (mng_ptr)calloc (1, iSize);   /* duh! */
 }
@@ -93,7 +95,7 @@ mng_ptr MY_DECL myalloc (mng_uint32 iSize)
 /* ************************************************************************** */
 
 #pragma argsused
-void MY_DECL myfree (mng_ptr pPtr, mng_uint32 iSize)
+void MY_DECL myfree (mng_ptr pPtr, mng_size_t iSize)
 {
   free (pPtr);                         /* duh! */
   return;

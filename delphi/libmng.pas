@@ -78,6 +78,12 @@ unit libmng;
 {*              - added get imagelevel parameter                            *}
 {*              0.5.3 - 06/26/2000 - G.Juyn                                 *}
 {*              - changed definition of userdata to mng_ptr                 *}
+{*              0.5.3 - 06/28/2000 - G.Juyn                                 *}
+{*              - added mng_size_t definition                               *}
+{*              - changed definition of memory alloc size to mng_size_t     *}
+{*              0.5.3 - 06/29/2000 - G.Juyn                                 *}
+{*              - changed order of refresh parameters                       *}
+{*              - changed definition of mng_handle                          *}
 {*                                                                          *}
 {****************************************************************************}
 
@@ -99,15 +105,18 @@ type  mng_uint32     = cardinal;
       mng_ptr        = pointer;
       mng_pchar      = pchar;
 
-      mng_handle     = mng_uint32;
+      mng_handle     = pointer;
       mng_retcode    = mng_int32;
       mng_chunkid    = mng_uint32;
+
+      mng_size_t     = cardinal;
 
       mng_imgtype    = (mng_it_unknown, mng_it_png, mng_it_jng, mng_it_mng);
       mng_speedtype  = (mng_st_normal, mng_st_fast, mng_st_slow, mng_st_slowest);
 
       mng_uint32p    = ^mng_uint32;
       mng_uint16p    = ^mng_uint16;
+      mng_uint8p     = ^mng_uint8;
       mng_chunkidp   = ^mng_chunkid;
 
       mng_palette8e  = record                    { 8-bit palette element }
@@ -125,9 +134,9 @@ type  mng_uint32     = cardinal;
 
 {****************************************************************************}
 
-type mng_memalloc      = function  (    iLen         : mng_uint32) : mng_ptr; stdcall;
+type mng_memalloc      = function  (    iLen         : mng_size_t) : mng_ptr; stdcall;
      mng_memfree       = procedure (    iPtr         : mng_ptr;
-                                        iLen         : mng_uint32); stdcall;
+                                        iLen         : mng_size_t); stdcall;
 
 type mng_openstream    = function  (    hHandle      : mng_handle) : mng_bool; stdcall;
 type mng_closestream   = function  (    hHandle      : mng_handle) : mng_bool; stdcall;
@@ -172,10 +181,10 @@ type mng_getalphaline  = function  (    hHandle      : mng_handle;
 type mng_getbkgdline   = function  (    hHandle      : mng_handle;
                                         iLinenr      : mng_uint32) : mng_ptr; stdcall;
 type mng_refresh       = function  (    hHandle      : mng_handle;
-                                        iTop         : mng_uint32;
                                         iLeft        : mng_uint32;
-                                        iBottom      : mng_uint32;
-                                        iRight       : mng_uint32) : mng_bool; stdcall;
+                                        iTop         : mng_uint32;
+                                        iRight       : mng_uint32;
+                                        iBottom      : mng_uint32) : mng_bool; stdcall;
 
 type mng_gettickcount  = function  (    hHandle      : mng_handle) : mng_uint32; stdcall;
 type mng_settimer      = function  (    hHandle      : mng_handle;
@@ -212,7 +221,7 @@ type mng_iteratechunk  = function  (    hHandle      : mng_handle;
 function  mng_initialize          (    pUserdata    : mng_ptr;
                                        fMemalloc    : mng_memalloc;
                                        fMemfree     : mng_memfree;
-                                       fTraceproc   : mng_traceproc    ) : mng_retcode;       stdcall;
+                                       fTraceproc   : mng_traceproc    ) : mng_handle;        stdcall;
 
 function  mng_reset               (    hHandle      : mng_handle       ) : mng_retcode;       stdcall;
 
