@@ -94,6 +94,8 @@ unit libmng;
 {*              - added new libmng functions                                *}
 {*              0.9.1 - 07/19/2000 - G.Juyn                                 *}
 {*              - fixed several type definitions                            *}
+{*              0.9.1 - 07/25/2000 - G.Juyn                                 *}
+{*              - fixed definition of mng_imgtype                           *}
 {*                                                                          *}
 {****************************************************************************}
 
@@ -121,7 +123,7 @@ type  mng_uint32     = cardinal;
 
       mng_size_t     = cardinal;
 
-      mng_imgtype    = (mng_it_unknown, mng_it_png, mng_it_jng, mng_it_mng);
+      mng_imgtype    = (mng_it_unknown, mng_it_png, mng_it_mng, mng_it_jng);
       mng_speedtype  = (mng_st_normal, mng_st_fast, mng_st_slow, mng_st_slowest);
 
       mng_uint32p    = ^mng_uint32;
