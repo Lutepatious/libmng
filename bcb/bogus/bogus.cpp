@@ -2,7 +2,7 @@
 /* *                                                                        * */
 /* * COPYRIGHT NOTICE:                                                      * */
 /* *                                                                        * */
-/* * Copyright (c) 2000 Gerard Juyn (gerard@libmng.com)                     * */
+/* * Copyright (c) 2000,2002 Gerard Juyn (gerard@libmng.com)                * */
 /* * [You may insert additional notices after this sentence if you modify   * */
 /* *  this source]                                                          * */
 /* *                                                                        * */
@@ -41,8 +41,8 @@
 /* ************************************************************************** */
 /* *                                                                        * */
 /* * project   : bogus                                                      * */
-/* * file      : bogus.cpp                 copyright (c) 2000 G.Juyn        * */
-/* * version   : 1.0.0                                                      * */
+/* * file      : bogus.cpp                 copyright (c) 2000,2002 G.Juyn   * */
+/* * version   : 1.0.1                                                      * */
 /* *                                                                        * */
 /* * purpose   : main project file                                          * */
 /* *                                                                        * */
@@ -50,13 +50,17 @@
 /* * web       : http://www.3-t.com                                         * */
 /* * email     : mailto:info@3-t.com                                        * */
 /* *                                                                        * */
-/* * comment   : bogus is a bogus sample which creates and writes a         * */
-/* *             totally valid, be it somewhat trivial, MNG-file            * */
+/* * comment   : bogus is (quite literally) a bogus sample which creates and* */
+/* *             writes a totally valid, be it somewhat trivial, MNG-file   * */
 /* *                                                                        * */
 /* * changes   : 0.5.3 - 06/26/2000 - G.Juyn                                * */
 /* *             - changed userdata variable to mng_ptr                     * */
 /* *             0.5.3 - 06/28/2000 - G.Juyn                                * */
 /* *             - changed memory allocation size parameters to mng_size_t  * */
+/* *                                                                        * */
+/* *             1.0.1 - 10/07/2002 - G.Juyn                                * */
+/* *             - fixed copyright notice                                   * */
+/* *             - updated MHDR simplicity flag                             * */
 /* *                                                                        * */
 /* ************************************************************************** */
 
@@ -169,7 +173,7 @@ int makeimage (char * zFilename)
     else
     {                                  /* create the file in memory */
       if ( ((iRC = mng_create        (hMNG)                                                    ) != 0) ||
-           ((iRC = mng_putchunk_mhdr (hMNG, 640, 480, 1000, 3, 1, 3, 0x0007)                   ) != 0) ||
+           ((iRC = mng_putchunk_mhdr (hMNG, 640, 480, 1000, 3, 1, 3, 0x0047)                   ) != 0) ||
            ((iRC = mng_putchunk_basi (hMNG, 640, 160, 8, 2, 0, 0, 0, 0xFF, 0x00, 0x00, 0xFF, 1)) != 0) ||
            ((iRC = mng_putchunk_iend (hMNG)                                                    ) != 0) ||
            ((iRC = mng_putchunk_defi (hMNG, 0, 0, 0, MNG_TRUE, 0, 160, MNG_FALSE, 0, 0, 0, 0  )) != 0) ||

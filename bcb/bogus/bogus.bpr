@@ -56,12 +56,12 @@ ALLLIB = $(LIBFILES)  import32.lib cw32mt.lib
 [Version Info]
 IncludeVerInfo=1
 AutoIncBuild=1
-MajorVer=0
-MinorVer=9
-Release=0
-Build=6
-Debug=1
-PreRelease=1
+MajorVer=1
+MinorVer=0
+Release=1
+Build=9
+Debug=0
+PreRelease=0
 Special=0
 Private=0
 DLL=0
@@ -71,14 +71,17 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=
 FileDescription=Executable (Console)
-FileVersion=0.9.0.6
+FileVersion=1.0.1.9
 InternalName=bogus
-LegalCopyright=copyright (c) 2000 G. Juyn
+LegalCopyright=copyright (c) 2000,2002 G. Juyn
 LegalTrademarks=
 OriginalFilename=bogus.exe
 ProductName=bogus
-ProductVersion=0.9.0
+ProductVersion=1.0.1
 Comments=
+
+[Excluded Packages]
+C:\Program Files\Borland\CBuilder3\Bin\DbX35.bpl=(untitled)
 
 [HistoryLists\hlIncludePath]
 Count=3
