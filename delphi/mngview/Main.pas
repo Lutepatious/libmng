@@ -14,7 +14,7 @@ uses
 {*                                                                          *}
 {*  project   : libmng                                                      *}
 {*  file      : main.pas                  copyright (c) 2000 G.Juyn         *}
-{*  version   : 0.5.1                                                       *}
+{*  version   : 0.5.3                                                       *}
 {*                                                                          *}
 {*  purpose   : Main form for mngview application                           *}
 {*                                                                          *}
@@ -35,6 +35,9 @@ uses
 {*              - changed to stdcall convention                             *}
 {*              0.5.1 - 05/11/2000 - G.Juyn                                 *}
 {*              - changed callback function declarations                    *}
+{*                                                                          *}
+{*              0.5.3 - 06/16/2000 - G.Juyn                                 *}
+{*              - removed processmessages call from refresh callback        *}
 {*                                                                          *}
 {****************************************************************************}
 
@@ -322,7 +325,6 @@ begin                                  { get a fix on our form }
   OHForm := TMainForm (mng_get_userdata (hHandle));
                                        { force redraw }
   OHForm.OFImage.Picture.Assign (OHForm.OFBitmap);
-  Application.ProcessMessages;
 
   Result := MNG_TRUE;
 end;
