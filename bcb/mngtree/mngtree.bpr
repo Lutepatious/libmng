@@ -32,18 +32,19 @@ DEBUGLIBPATH = $(BCB)\lib\debug
 RELEASELIBPATH = $(BCB)\lib\release
 # ---------------------------------------------------------------------------
 CFLAG1 = -Od -w -r- -k -y -v -vi- -c -tWC
-CFLAG2 = -I..\..\..\libmng;..\..\..\zlib;$(BCB)\include \
-  -D_NO_VCL;MNG_SUPPORT_READ;MNG_ACCESS_CHUNKS;MNG_STORE_CHUNKS;MNG_NO_CMS;MNG_USE_DLL
+CFLAG2 = -D_NO_VCL;MNG_SUPPORT_READ;MNG_ACCESS_CHUNKS;MNG_STORE_CHUNKS;MNG_NO_CMS;MNG_USE_DLL \
+  -I..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms;$(BCB)\include
 CFLAG3 = -Tkh30000
-PFLAGS = -U..\..\..\libmng\bcb\win32dll;$(BCB)\lib;$(DEBUGLIBPATH) \
-  -I..\..\..\libmng;..\..\..\zlib;$(BCB)\include \
-  -D_NO_VCL;MNG_SUPPORT_READ;MNG_ACCESS_CHUNKS;MNG_STORE_CHUNKS;MNG_NO_CMS;MNG_USE_DLL \
+PFLAGS = -D_NO_VCL;MNG_SUPPORT_READ;MNG_ACCESS_CHUNKS;MNG_STORE_CHUNKS;MNG_NO_CMS;MNG_USE_DLL \
+  -U..\win32dll;$(BCB)\lib;$(DEBUGLIBPATH) \
+  -I..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms;$(BCB)\include \
   -$Y -$W -$O- -v -JPHN -M
-RFLAGS = -i..\..\..\libmng;..\..\..\zlib;$(BCB)\include \
-  -D_NO_VCL;MNG_SUPPORT_READ;MNG_ACCESS_CHUNKS;MNG_STORE_CHUNKS;MNG_NO_CMS;MNG_USE_DLL
-AFLAGS = /i..\..\..\libmng /i..\..\..\zlib /i$(BCB)\include /d_NO_VCL /dMNG_SUPPORT_READ \
-  /dMNG_ACCESS_CHUNKS /dMNG_STORE_CHUNKS /dMNG_NO_CMS /dMNG_USE_DLL /mx /w2 /zd
-LFLAGS = -L..\..\..\libmng\bcb\win32dll;$(BCB)\lib;$(DEBUGLIBPATH) -ap -Tpe -x -Gn -v
+RFLAGS = -D_NO_VCL;MNG_SUPPORT_READ;MNG_ACCESS_CHUNKS;MNG_STORE_CHUNKS;MNG_NO_CMS;MNG_USE_DLL \
+  -i..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms;$(BCB)\include
+AFLAGS = /i..\..\..\libmng-devel /i..\..\..\zlib /i..\..\..\jpgsrc6b /i..\..\..\lcms \
+  /i$(BCB)\include /d_NO_VCL /dMNG_SUPPORT_READ /dMNG_ACCESS_CHUNKS \
+  /dMNG_STORE_CHUNKS /dMNG_NO_CMS /dMNG_USE_DLL /mx /w2 /zd
+LFLAGS = -L..\win32dll;$(BCB)\lib;$(DEBUGLIBPATH) -ap -Tpe -x -Gn -v
 IFLAGS =
 # ---------------------------------------------------------------------------
 ALLOBJ = c0x32.obj $(OBJFILES)
@@ -58,7 +59,7 @@ AutoIncBuild=1
 MajorVer=0
 MinorVer=1
 Release=0
-Build=10
+Build=11
 Debug=1
 PreRelease=1
 Special=0
@@ -70,7 +71,7 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=
 FileDescription=Executable (Console)
-FileVersion=0.1.0.10
+FileVersion=0.1.0.11
 InternalName=mngtree
 LegalCopyright=copyright (c) 2000 G.Juyn
 LegalTrademarks=
@@ -80,14 +81,17 @@ ProductVersion=0.1.0
 Comments=
 
 [HistoryLists\hlIncludePath]
-Count=2
-Item0=..\..\..\libmng;..\..\..\zlib;$(BCB)\include
-Item1=..\..\..\libmng;$(BCB)\include
+Count=4
+Item0=..\..\..\libmng-devel;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms;$(BCB)\include
+Item1=..\..\..\libmng;..\..\..\zlib;..\..\..\jpgsrc6b;..\..\..\lcms;$(BCB)\include
+Item2=..\..\..\libmng;..\..\..\zlib;$(BCB)\include
+Item3=..\..\..\libmng;$(BCB)\include
 
 [HistoryLists\hlLibraryPath]
-Count=2
-Item0=..\..\..\libmng\bcb\win32dll;$(BCB)\lib
-Item1=..\..\..\libmng;$(BCB)\lib
+Count=3
+Item0=..\win32dll;$(BCB)\lib
+Item1=..\..\..\libmng\bcb\win32dll;$(BCB)\lib
+Item2=..\..\..\libmng;$(BCB)\lib
 
 [HistoryLists\hlConditionals]
 Count=2

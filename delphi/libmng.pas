@@ -76,6 +76,8 @@ unit libmng;
 {*              - added definition of speedtype                             *}
 {*              - added get/set speed parameter                             *}
 {*              - added get imagelevel parameter                            *}
+{*              0.5.3 - 06/26/2000 - G.Juyn                                 *}
+{*              - changed definition of userdata to mng_ptr                 *}
 {*                                                                          *}
 {****************************************************************************}
 
@@ -207,7 +209,7 @@ type mng_iteratechunk  = function  (    hHandle      : mng_handle;
 
 {****************************************************************************}
 
-function  mng_initialize          (    iUserdata    : mng_int32;
+function  mng_initialize          (    pUserdata    : mng_ptr;
                                        fMemalloc    : mng_memalloc;
                                        fMemfree     : mng_memfree;
                                        fTraceproc   : mng_traceproc    ) : mng_retcode;       stdcall;
@@ -328,7 +330,7 @@ function  mng_getcb_processarow   (    hHandle      : mng_handle       ) : mng_p
 {****************************************************************************}
 
 function  mng_set_userdata        (    hHandle      : mng_handle;
-                                       iUserdata    : mng_int32        ) : mng_retcode;       stdcall;
+                                       pUserdata    : mng_ptr          ) : mng_retcode;       stdcall;
 
 function  mng_set_canvasstyle     (    hHandle      : mng_handle;
                                        iStyle       : mng_uint32       ) : mng_retcode;       stdcall;
@@ -376,7 +378,7 @@ function  mng_set_speed           (    hHandle      : mng_handle;
 
 {****************************************************************************}
 
-function  mng_get_userdata        (    hHandle      : mng_handle       ) : mng_int32;         stdcall;
+function  mng_get_userdata        (    hHandle      : mng_handle       ) : mng_ptr;           stdcall;
 
 function  mng_get_sigtype         (    hHandle      : mng_handle       ) : mng_imgtype;       stdcall;
 function  mng_get_imagetype       (    hHandle      : mng_handle       ) : mng_imgtype;       stdcall;

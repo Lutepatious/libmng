@@ -40,6 +40,8 @@ uses
 {*              - removed processmessages call from refresh callback        *}
 {*              0.5.3 - 06/17/2000 - G.Juyn                                 *}
 {*              - switched "storechunks" off                                *}
+{*              0.5.3 - 06/26/2000 - G.Juyn                                 *}
+{*              - changed definition of userdata to mng_ptr                 *}
 {*                                                                          *}
 {****************************************************************************}
 
@@ -389,7 +391,7 @@ begin
   end;
 {* B002 *}  
                                        { now initialize the library }
-  IFHandle := mng_initialize (mng_int32(self), Memalloc, Memfree, nil);
+  IFHandle := mng_initialize (mng_ptr(self), Memalloc, Memfree, nil);
 
   if IFHandle = 0 then
   begin

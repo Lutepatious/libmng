@@ -42,7 +42,7 @@
 /* *                                                                        * */
 /* * project   : mngtree                                                    * */
 /* * file      : mngtree.cpp               copyright (c) 2000 G.Juyn        * */
-/* * version   : 0.1.0                                                      * */
+/* * version   : 0.5.3                                                      * */
 /* *                                                                        * */
 /* * purpose   : main project file                                          * */
 /* *                                                                        * */
@@ -53,7 +53,8 @@
 /* * comment   : mngtree simply dumps the chunk-structure of the supplied   * */
 /* *             first parameter to stdout (should be a xNG-file)           * */
 /* *                                                                        * */
-/* * changes   : x.y.z - ../../.... - ......                                * */
+/* * changes   : 0.5.3 - 06/26/2000 - G.Juyn                                * */
+/* *             - changed userdata variable to mng_ptr                     * */
 /* *                                                                        * */
 /* ************************************************************************** */
 
@@ -191,7 +192,7 @@ int dumptree (char * zFilename)
     return 1;
   }
                                        /* let's initialize the library */
-  hMNG = mng_initialize ((mng_uint32)pMydata, myalloc, myfree, MNG_NULL);
+  hMNG = mng_initialize ((mng_ptr)pMydata, myalloc, myfree, MNG_NULL);
 
   if (!hMNG)                           /* did that work out ? */
   {
