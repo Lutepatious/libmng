@@ -8,6 +8,35 @@ uses
   libmng;
 
 {****************************************************************************}
+{*              For conditions of distribution and use,                     *}
+{*                 see copyright notice in libmng.pas                       *}
+{****************************************************************************}
+{*                                                                          *}
+{*  project   : libmng                                                      *}
+{*  file      : main.pas                  copyright (c) 2000 G.Juyn         *}
+{*  version   : 0.5.1                                                       *}
+{*                                                                          *}
+{*  purpose   : Main form for mngview application                           *}
+{*                                                                          *}
+{*  author    : G.Juyn                                                      *}
+{*  web       : http://www.3-t.com                                          *}
+{*  email     : mailto:info@3-t.com                                         *}
+{*                                                                          *}
+{*  comment   : this is the heart of the mngview applciation                *}
+{*                                                                          *}
+{*  changes   : 0.5.1 - 05/02/2000 - G.Juyn                                 *}
+{*              - added this version block                                  *}
+{*              - made the initialization part more robust                  *}
+{*                eg. program aborts on initialization errors               *}
+{*              - B002(105797) - added check for existence of default sRGB  *}
+{*                profile (now included in distribution)                    *}
+{*              - added mng_cleanup to program exit                         *}
+{*              0.5.1 - 05/08/2000 - G.Juyn                                 *}
+{*              - changed to stdcall convention                             *}
+{*              0.5.1 - 05/11/2000 - G.Juyn                                 *}
+{*              - changed callback function declarations                    *}
+{*                                                                          *}
+{****************************************************************************}
 
 type
   TMainForm = class(TForm)
@@ -84,7 +113,7 @@ implementation
 {****************************************************************************}
 
 {$F+}
-function  Memalloc (iLen : mng_uint32) : mng_ptr; cdecl;
+function  Memalloc (iLen : mng_uint32) : mng_ptr; stdcall;
 {$F-}
 begin
   getmem   (Result, iLen);             { get memory from the heap }
@@ -95,7 +124,7 @@ end;
 
 {$F+}
 procedure Memfree (iPtr : mng_ptr;
-                   iLen : mng_uint32); cdecl;
+                   iLen : mng_uint32); stdcall;
 {$F-}
 begin
   freemem (iPtr, iLen);                { free the memory }
@@ -104,7 +133,7 @@ end;
 {****************************************************************************}
 
 {$F+}
-procedure Openstream (hHandle : mng_handle); cdecl;
+function Openstream (hHandle : mng_handle) : mng_bool; stdcall;
 {$F-}
 
 var OHForm : TMainForm;
@@ -119,12 +148,14 @@ begin                                  { get a fix on our form }
                                        { open a new stream }
     OFFile := TFileStream.Create (SFFileName, fmOpenRead or fmShareDenyWrite);
   end;
+
+  Result := MNG_TRUE;  
 end;
 
 {****************************************************************************}
 
 {$F+}
-procedure Closestream (hHandle : mng_handle); cdecl;
+function Closestream (hHandle : mng_handle) : mng_bool; stdcall;
 {$F-}
 
 var OHForm : TMainForm;
@@ -137,6 +168,8 @@ begin                                  { get a fix on our form }
     OFFile.Free;                       { cleanup the stream }
     OFFile := nil;                     { don't use it again ! }
   end;
+
+  Result := MNG_TRUE;  
 end;
 
 {****************************************************************************}
@@ -145,7 +178,7 @@ end;
 function Readdata (    hHandle : mng_handle;
                        pBuf    : mng_ptr;
                        iBuflen : mng_uint32;
-                   var pRead   : mng_uint32) : mng_retcode; cdecl;
+                   var pRead   : mng_uint32) : mng_bool; stdcall;
 {$F-}
 
 var OHForm        : TMainForm;
@@ -155,7 +188,7 @@ var OHForm        : TMainForm;
     IHBytesPerSec : cardinal;
 
 begin
-  Result := 0;                         { get a fix on our form }
+                                       { get a fix on our form }
   OHForm := TMainForm (mng_get_userdata (hHandle));
 
   with OHForm do
@@ -183,14 +216,16 @@ begin
       IFBytes := IFBytes + pRead;
     end;
   end;
+
+  Result := MNG_TRUE;  
 end;
 
 {****************************************************************************}
 
 {$F+}
-procedure ProcessHeader (hHandle : mng_handle;
-                         iWidth  : mng_uint32;
-                         iHeight : mng_uint32); cdecl;
+function ProcessHeader (hHandle : mng_handle;
+                        iWidth  : mng_uint32;
+                        iHeight : mng_uint32) : mng_bool; stdcall;
 {$F-}
 
 var OHForm : TMainForm;
@@ -218,19 +253,21 @@ begin                                  { get a fix on our form }
     OFBitmap.Canvas.Pen.Style   := psSolid;
     OFBitmap.Canvas.FrameRect (OFBitmap.Canvas.ClipRect);
 
-    OFImage.Picture.Assign (OFBitmap); { make sure it's gets out there }
+    OFImage.Picture.Assign (OFBitmap); { make sure it gets out there }
                                        { tell the library we want funny windows-bgr}
     if mng_set_canvasstyle (hHandle, MNG_CANVAS_BGR8) <> 0 then
       MNGerror ('libmng reported an error setting the canvas style');
 
   end;
+
+  Result := MNG_TRUE;
 end;
 
 {****************************************************************************}
 
 {$F+}
 function GetCanvasLine (hHandle : mng_handle;
-                        iLinenr : mng_uint32) : mng_ptr; cdecl;
+                        iLinenr : mng_uint32) : mng_ptr; stdcall;
 {$F-}
 
 var OHForm : TMainForm;
@@ -244,11 +281,11 @@ end;
 {****************************************************************************}
 
 {$F+}
-procedure ImageRefresh (hHandle : mng_handle;
-                        iTop    : mng_uint32;
-                        iLeft   : mng_uint32;
-                        iBottom : mng_uint32;
-                        iRight  : mng_uint32); cdecl;
+function ImageRefresh (hHandle : mng_handle;
+                       iTop    : mng_uint32;
+                       iLeft   : mng_uint32;
+                       iBottom : mng_uint32;
+                       iRight  : mng_uint32) : mng_bool; stdcall;
 {$F-}
 
 var OHForm : TMainForm;
@@ -258,13 +295,15 @@ begin                                  { get a fix on our form }
                                        { force redraw }
   OHForm.OFImage.Picture.Assign (OHForm.OFBitmap);
   Application.ProcessMessages;
+
+  Result := MNG_TRUE;
 end;
 
 
 {****************************************************************************}
 
 {$F+}
-function GetTickCount (hHandle : mng_handle) : mng_uint32; cdecl;
+function GetTickCount (hHandle : mng_handle) : mng_uint32; stdcall;
 {$F-}
 begin
   Result := Windows.GetTickCount;      { windows knows that }
@@ -273,8 +312,8 @@ end;
 {****************************************************************************}
 
 {$F+}
-procedure SetTimer (hHandle : mng_handle;
-                    iMsecs  : mng_uint32); cdecl;
+function SetTimer (hHandle : mng_handle;
+                   iMsecs  : mng_uint32) : mng_bool; stdcall;
 {$F-}
 
 var OHForm : TMainForm;
@@ -283,6 +322,8 @@ begin                                  { get a fix on our form }
   OHForm := TMainForm (mng_get_userdata (hHandle));
   OHForm.OFTimer.Interval := iMsecs;   { and set the timer }
   OHForm.OFTimer.Enabled  := true;
+
+  Result := MNG_TRUE;  
 end;
 
 {****************************************************************************}
@@ -300,20 +341,36 @@ begin
   OFOpenDialog.Initialdir := '';
   OFBitmap.HandleType     := bmDIB;    { make it a 24-bit DIB }
   OFBitmap.PixelFormat    := pf24bit;
-                                       { try to locate the "standard" sRGB profile }
-  GetSystemDirectory (@SHProfileName, MAX_PATH);
-  strcat (@SHProfileName, '\Color\sRGB Color Space Profile.ICM');
+{* B002 *]                             { try to locate the "standard" sRGB profile }
+  SHProfileName := 'sRGB Color Space Profile.ICM';
+
+  if not FileExists (StrPas (@SHProfileName)) then
+  begin
+    MessageDlg ('Standard sRGB profile not found!' + #13#10 +
+                'File "' + strpas (@SHProfileName) + '" missing' + #13#10#13#10 +
+                'Program aborted', mtError, [mbOK], 0);
+    Windows.Postmessage (handle, WM_Close, 0, 0);
+    Exit;
+  end;
+{* B002 *}  
                                        { now initialize the library }
   IFHandle := mng_initialize (mng_int32(self), Memalloc, Memfree, nil);
 
   if IFHandle = 0 then
-    MNGerror ('libmng initializiation error');
+  begin
+    MNGerror ('libmng initializiation error' + #13#10 +
+              'Program aborted');
+    Windows.Postmessage (handle, WM_Close, 0, 0);
+    Exit;
+  end;
                                        { supply it with the sRGB profile }
   if (mng_set_srgb            (IFHandle, true          ) <> 0) or
      (mng_set_outputprofile   (IFHandle, @SHProfileName) <> 0) then
   begin
-    MNGerror ('libmng reported an error setting the CMS conditions!');
-    exit;
+    MNGerror ('libmng reported an error setting the CMS conditions!' + #13#10 +
+              'Program aborted');
+    Windows.Postmessage (handle, WM_Close, 0, 0);
+    Exit;
   end;
                                        { set all the callbacks }
   if (mng_setcb_openstream    (IFHandle, Openstream   ) <> 0) or
@@ -325,8 +382,10 @@ begin
      (mng_setcb_gettickcount  (IFHandle, GetTickCount ) <> 0) or
      (mng_setcb_settimer      (IFHandle, SetTimer     ) <> 0) then
   begin
-    MNGerror ('libmng reported an error setting a callback function!');
-    exit;
+    MNGerror ('libmng reported an error setting a callback function!' + #13#10 +
+              'Program aborted');
+    Windows.Postmessage (handle, WM_Close, 0, 0);
+    Exit;
   end;
 
   IHRed   := (Color       ) and $FF;   { supply our own bg-color }
@@ -353,6 +412,8 @@ begin
       MNGerror ('libmng reported an error during display_freeze!');
 
   OFTimer.Enabled := false;
+
+  mng_cleanup (IFHandle);
 end;
 
 {****************************************************************************}
