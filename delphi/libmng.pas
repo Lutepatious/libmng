@@ -44,7 +44,7 @@ unit libmng;
 {*                                                                          *}
 {*  project   : libmng                                                      *}
 {*  file      : libmng.pas                copyright (c) 2000 G.Juyn         *}
-{*  version   : 0.9.1                                                       *}
+{*  version   : 0.9.2                                                       *}
 {*                                                                          *}
 {*  purpose   : libmng.dll wrapper unit                                     *}
 {*                                                                          *}
@@ -96,6 +96,9 @@ unit libmng;
 {*              - fixed several type definitions                            *}
 {*              0.9.1 - 07/25/2000 - G.Juyn                                 *}
 {*              - fixed definition of mng_imgtype                           *}
+{*                                                                          *}
+{*              0.9.2 - 08/04/2000 - G.Juyn                                 *}
+{*              - fixed in line with libmng.h                               *}
 {*                                                                          *}
 {****************************************************************************}
 
@@ -240,6 +243,7 @@ function  mng_reset               (    hHandle         : mng_handle       ) : mn
 function  mng_cleanup             (var hHandle         : mng_handle       ) : mng_retcode;       stdcall;
 
 function  mng_read                (    hHandle         : mng_handle       ) : mng_retcode;       stdcall;
+function  mng_read_resume         (    hHandle         : mng_handle       ) : mng_retcode;       stdcall;
 function  mng_write               (    hHandle         : mng_handle       ) : mng_retcode;       stdcall;
 function  mng_create              (    hHandle         : mng_handle       ) : mng_retcode;       stdcall;
 
@@ -443,6 +447,15 @@ function  mng_get_runtime         (    hHandle         : mng_handle       ) : mn
 function  mng_get_currentframe    (    hHandle         : mng_handle       ) : mng_uint32;        stdcall;
 function  mng_get_currentlayer    (    hHandle         : mng_handle       ) : mng_uint32;        stdcall;
 function  mng_get_currentplaytime (    hHandle         : mng_handle       ) : mng_uint32;        stdcall;
+
+function  mng_status_error        (    hHandle         : mng_handle       ) : mng_bool;          stdcall;
+function  mng_status_reading      (    hHandle         : mng_handle       ) : mng_bool;          stdcall;
+function  mng_status_suspendbreak (    hHandle         : mng_handle       ) : mng_bool;          stdcall;
+function  mng_status_creating     (    hHandle         : mng_handle       ) : mng_bool;          stdcall;
+function  mng_status_writing      (    hHandle         : mng_handle       ) : mng_bool;          stdcall;
+function  mng_status_displaying   (    hHandle         : mng_handle       ) : mng_bool;          stdcall;
+function  mng_status_running      (    hHandle         : mng_handle       ) : mng_bool;          stdcall;
+function  mng_status_timerbreak   (    hHandle         : mng_handle       ) : mng_bool;          stdcall;
 
 {****************************************************************************}
 
@@ -1232,7 +1245,14 @@ function  mng_putchunk_unknown    (    hHandle            : mng_handle;
 
 {****************************************************************************}
 
-const MNG_NOERROR          = 0;    
+function  mng_updatemngheader     (    hHandle            : mng_handle;
+                                       iFramecount        : mng_uint32;
+                                       iLayercount        : mng_uint32;
+                                       iPlaytime          : mng_uint32   ) : mng_retcode; stdcall;
+                                       
+{****************************************************************************}
+
+const MNG_NOERROR          = 0;
 
       MNG_OUTOFMEMORY      = 1;
       MNG_INVALIDHANDLE    = 2;
@@ -1249,6 +1269,7 @@ const MNG_NOERROR          = 0;
       MNG_JPEGBUFTOOSMALL  = 13;
       MNG_NEEDMOREDATA     = 14;
       MNG_NEEDTIMERWAIT    = 15;
+      MNG_NEEDSECTIONWAIT  = 16;
 
       MNG_APPIOERROR       = 901;
       MNG_APPTIMERERROR    = 902;
@@ -1298,6 +1319,7 @@ const MNG_NOERROR          = 0;
       MNG_INVALIDENTRYIX   = 2051;
       MNG_NOHEADER         = 2052;
       MNG_NOCORRCHUNK      = 2053;
+      MNG_NOMHDR           = 2054;
 
       MNG_IMAGETOOLARGE    = 4097;
       MNG_NOTANANIMATION   = 4098;
@@ -1405,6 +1427,7 @@ function mng_reset;                external mngdll;
 function mng_cleanup;              external mngdll;
 
 function mng_read;                 external mngdll;
+function mng_read_resume;          external mngdll;
 function mng_write;                external mngdll;
 function mng_create;               external mngdll;
 
@@ -1559,6 +1582,15 @@ function  mng_get_currentframe;    external mngdll;
 function  mng_get_currentlayer;    external mngdll;
 function  mng_get_currentplaytime; external mngdll;
 
+function  mng_status_error;        external mngdll;
+function  mng_status_reading;      external mngdll;
+function  mng_status_suspendbreak; external mngdll;
+function  mng_status_creating;     external mngdll;
+function  mng_status_writing;      external mngdll;
+function  mng_status_displaying;   external mngdll;
+function  mng_status_running;      external mngdll;
+function  mng_status_timerbreak;   external mngdll;
+
 {****************************************************************************}
 
 function  mng_iterate_chunks;      external mngdll;
@@ -1668,6 +1700,10 @@ function  mng_putchunk_dbyk;       external mngdll;
 function  mng_putchunk_ordr;       external mngdll;
 function  mng_putchunk_ordr_entry; external mngdll;
 function  mng_putchunk_unknown;    external mngdll;
+
+{****************************************************************************}
+
+function  mng_updatemngheader;     external mngdll;
 
 {****************************************************************************}
 
