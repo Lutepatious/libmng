@@ -1541,11 +1541,13 @@ begin
       10 : Result := 'BufferOverflow';
       11 : Result := 'FunctionInvalid';
       12 : Result := 'OutputError';
+      13 : Result := 'JPEGBufTooSmall';
 
      901 : Result := 'ApplicationIOError';
      902 : Result := 'ApplicationTimingError';
      903 : Result := 'ApplicationCMSError';
      904 : Result := 'ApplicationMiscError';
+     905 : Result := 'ApplicationTraceAbort';
 
      999 : Result := 'InternalError';
 
@@ -1578,6 +1580,8 @@ begin
     1052 : Result := 'InvalidImageType';
     1053 : Result := 'InvalidDeltaType';
     1054 : Result := 'InvalidIndex';
+    1055 : Result := 'TooMuchJDAT';
+    1056 : Result := 'JPEGParmsError';
 
     2049 : Result := 'InvalidCanvasStyle';
     2050 : Result := 'WrongChunk';
@@ -1592,7 +1596,7 @@ begin
     4101 : Result := 'PlayTimeTooHigh';
     4102 : Result := 'FunctionNotImplemented';
 
-    8097 : Result := 'ImageFrozen';
+    8193 : Result := 'ImageFrozen';
 
   else     Result := '?????';
   end;     
@@ -1813,6 +1817,15 @@ begin
      883 : Result := 'PutChunkPPLTentry';
      884 : Result := 'PutChunkORDRentry';
 
+     901 : Result := 'GetImgDataSeq';
+     902 : Result := 'GetImgDataChunkSeq';
+     903 : Result := 'GetImgDataChunk';
+
+     951 : Result := 'PutImgDataIHDR';
+     952 : Result := 'PutImgDataJHDR';
+     953 : Result := 'PutImgDataBASI';
+     954 : Result := 'PutImgDataDHDR';
+
     1001 : Result := 'Process_Raw_Chunk';
     1002 : Result := 'Read_Graphic';
     1003 : Result := 'Drop_Chunks';
@@ -1830,6 +1843,10 @@ begin
     1015 : Result := 'Inflate_Buffer';
     1016 : Result := 'Deflate_Buffer';
     1017 : Result := 'Write_Raw_Chunk';
+    1018 : Result := 'Write_Graphic';
+    1019 : Result := 'Save_State';
+    1020 : Result := 'Restore_State';
+    1021 : Result := 'Drop_SaveData';
 
     1101 : Result := 'Display_RGB8';
     1102 : Result := 'Display_RGBA8';
@@ -2283,6 +2300,54 @@ begin
     3244 : Result := 'Process_Display_DROP';
     3245 : Result := 'Process_Display_DBYK';
     3246 : Result := 'Process_Display_ORDR';
+
+    3401 : Result := 'JPEG_Initialize';
+    3402 : Result := 'JPEG_Cleanup';
+    3403 : Result := 'JPEG_DecompressInit';
+    3404 : Result := 'JPEG_DecompressData';
+    3405 : Result := 'JPEG_DecompressFree';
+
+    3501 : Result := 'Store_JPEG_G8';
+    3502 : Result := 'Store_JPEG_RGB8';
+    3503 : Result := 'Store_JPEG_G12';
+    3504 : Result := 'Store_JPEG_RGB12';
+    3505 : Result := 'Store_JPEG_GA8';
+    3506 : Result := 'Store_JPEG_RGBA8';
+    3507 : Result := 'Store_JPEG_GA12';
+    3508 : Result := 'Store_JPEG_RGBA12';
+
+    3511 : Result := 'Init_JPEG_A1_NI';
+    3512 : Result := 'Init_JPEG_A2_NI';
+    3513 : Result := 'Init_JPEG_A4_NI';
+    3514 : Result := 'Init_JPEG_A8_NI';
+    3515 : Result := 'Init_JPEG_A16_NI';
+
+    3521 : Result := 'Store_JPEG_G8_A1';
+    3522 : Result := 'Store_JPEG_G8_A2';
+    3523 : Result := 'Store_JPEG_G8_A4';
+    3524 : Result := 'Store_JPEG_G8_A8';
+    3525 : Result := 'Store_JPEG_G8_A16';
+
+    3531 : Result := 'Store_JPEG_RGB8_A1';
+    3532 : Result := 'Store_JPEG_RGB8_A2';
+    3533 : Result := 'Store_JPEG_RGB8_A4';
+    3534 : Result := 'Store_JPEG_RGB8_A8';
+    3535 : Result := 'Store_JPEG_RGB8_A16';
+
+    3541 : Result := 'Store_JPEG_G12_A1';
+    3542 : Result := 'Store_JPEG_G12_A2';
+    3543 : Result := 'Store_JPEG_G12_A4';
+    3544 : Result := 'Store_JPEG_G12_A8';
+    3545 : Result := 'Store_JPEG_G12_A16';
+
+    3551 : Result := 'Store_JPEG_RGB12_A1';
+    3552 : Result := 'Store_JPEG_RGB12_A2';
+    3553 : Result := 'Store_JPEG_RGB12_A4';
+    3554 : Result := 'Store_JPEG_RGB12_A8';
+    3555 : Result := 'Store_JPEG_RGB12_A16';
+
+    3591 : Result := 'Next_JPEG_AlphaRow';
+    3592 : Result := 'Next_JPEG_Row';
 
   else     Result := '?????';
   end;
