@@ -2,7 +2,7 @@
 /* *                                                                        * */
 /* * COPYRIGHT NOTICE:                                                      * */
 /* *                                                                        * */
-/* * Copyright (c) 2000-2002 Gerard Juyn (gerard@libmng.com)                * */
+/* * Copyright (c) 2000-2007 Gerard Juyn (gerard@libmng.com)                * */
 /* * [You may insert additional notices after this sentence if you modify   * */
 /* *  this source]                                                          * */
 /* *                                                                        * */
