@@ -99,27 +99,26 @@ AutoIncBuild=1
 MajorVer=1
 MinorVer=0
 Release=10
-Build=1431
+Build=1440
 Debug=0
-PreRelease=1
-Special=1
+PreRelease=0
+Special=0
 Private=0
 DLL=1
 Locale=1033
 CodePage=1252
 
 [Version Info Keys]
-CompanyName=G. Juyn
+CompanyName=PNG/MNG Group
 FileDescription=libmng - THE MNG library
-FileVersion=1.0.10.1431
+FileVersion=1.0.10.1440
 InternalName=libmng
-LegalCopyright=Copyright © 2000-2007 G. Juyn
+LegalCopyright=Copyright © 2000-2007 G. Juyn, 2007 G.Randers-Pherson
 LegalTrademarks=
 OriginalFilename=libmng.dll
 ProductName=libmng
-ProductVersion=1.0.10-cvs
+ProductVersion=1.0.10
 Comments=
-SpecialBuild=intermediate CVS
 
 [HistoryLists\hlIncludePath]
 Count=12
